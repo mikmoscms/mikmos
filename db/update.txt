@@ -1,0 +1,15 @@
+
+012|19/10/18|KulubDangdeur|0.1.2|[!]Support PHP 7.2 (Tested on VPS Ubuntu) [!]Posisi Menu di Susun Ulang [!]Perbaikan Profile [!]Perbaikan Users [!]Perbaikan Input Masa Aktif dari Users ke Profile [!]Perbaikan Get Valid Kostum [!]Perbaikan Installer [!]Perbaikan Fungsi [+]Style CSS Theme Dark (Premium) [+]Show Lock User/Kunci User [+]Reboot Router (Menu -> Pengaturan) [-]Multi Bahasa disable
+012|14/10/18|Jojorong|0.1.1|[!]Perubahan Profile [!]Perubahan Users [!]Perubahan Input Masa Aktif dari Users ke Profile [!]Perbaikan Script Vouchers [!]Get Valid Kostum [!]Perubahan Nama Seri [+]Javascript MikmosScript [-]Hidden Lock User/Kunci User
+012|06/10/18|Ngareuyeh|0.1.0|[!]Perbaikan Info Notif [!]Perubahan Posisi Pengaturan [!]Perubahan Input Ether [+]Menu Monitoring Interface [+]Bahasa [+]Fungsi 
+011|03/10/18|SantayBro|0.0.9|[!]Perbaikan Warna Font [!]Perbaikan Users [!]Perbaikan Voucher [!]Perbaikan Billing [!]Ganti Status -cek-expire-online [+]Info Notif [+]Voucher Style simple4 
+010|17/09/18|GeberBro|0.0.8|[!]Perubahan Domain mikmos.tk >> mikmos.my.id [!]Perbaikan Profile & Users [!]Perbaikan Status -index-expire-online [!]Ganti Voucher Default [!]Fungsi Error Curl jadi info versi
+009|15/09/18|MikirKeras|0.0.7|[!]Perbaikan Nginx+PHP ext CURL Aktif [!]Perbaikan System [+]Update Online (Syarat CURL aktif) & Offline [+]Menu Netwatch [+]Select Profil di User [+]Migrasi Ke MIKMOScms Sisa Billing dari [+]Lupa Kata Sandi
+008|12/09/18|IsengKita|0.0.6|[+]Menu Upload Update Packing
+007|11/09/18|KopiPagi|0.0.5|[!]Perbaikan Installer[!]Perbaikan Upload Logo[!]Session
+006|09/09/18|KopiPahit|0.0.4|[!]Perbaikan Installer
+005|08/09/18|Pusing|0.0.3|[-]Tested BucketAdmin Dashboard [+]ElaAdmin [+]Tested Menu Cookies [+]Ganti sistem Pengaturan Router & Admin[!]Ganti Icon Lang
+004|04/09/18|3GelasKopi|0.0.2|[-]Folder administrator [+]Folder adm [+]Tested Menu Walled Garden
+003|17/08/18|IsengKu|0.0.1|[+]Tested BucketAdmin Dashboard [-]Themes Admin LTE 3 [+]Tested Multi Bahasa
+002|10/08/18|Iseng2Melanda|Beta|[-]Themes klorofil [+]Themes Admin LTE 3 [+]Tested Menu Hosts [+]Tested Menu IP Binding
+001|01/08/18|IsengIseng|Alpha|[+]Themes klorofil
