@@ -502,8 +502,9 @@ if(!empty($_GET['id'])){ ?>
 <td>Domain Login</td><td><input placeholder="hotspot.net" class="form-control" type="text" autocomplete="off" name="dns" value="<?php echo $_RDNS1;?>" required="1"></td>
 </tr>
 <tr>
-<td>Ether</td><td>
+<td>Interface</td><td>
 <select class="form-control" name="etr">
+<option <?php if($_RETR1==0){ echo 'selected';} ?> style="text-transform:uppercase" value="0">Non Aktif</option>
 <option <?php if($_RETR1==1){ echo 'selected';} ?> style="text-transform:uppercase" value="1">Ether 1</option>
 <option <?php if($_RETR1==2){ echo 'selected';} ?> style="text-transform:uppercase" value="2">Ether 2</option>
 <option <?php if($_RETR1==3){ echo 'selected';} ?> style="text-transform:uppercase" value="3">Ether 3</option>
@@ -706,7 +707,7 @@ include("load/t_bawah.php");
 break;
 case'themecss':
 $_SESSION['css'] = $_GET['css'];
-echo "<script>window.history.go(-1)</script>";
+_e('<script>window.history.go(-1)</script>');
 ?>
 <?php
 break;

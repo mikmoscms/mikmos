@@ -32,7 +32,8 @@ $mikmosCount = $API->comm("/ip/hotspot/user/profile/print", array("count-only" =
 <th class="align-middle text-center">Masa<br/>Aktif</th>
 <th class="align-middle text-center">Masa<br/>Tenggang</th>
 <th class="align-middle text-center">Masa<br/>Hapus</th>
-<th class="align-middle">Harga <?php echo $curency;?></th>
+<th class="align-middle">Harga</th>
+<th class="align-middle">Kunci</th>
 <th class="align-middle text-center">Total<br/>User</th>
 </tr>
 </thead>
@@ -106,6 +107,11 @@ echo number_format($price);
 }
 }
 
+echo "</td>";
+echo "<td class='text-center'>";
+
+$getgracep= explode(",",$ponlogin);
+echo $getgracep[6];
 echo "</td>";
 echo "<td class='text-center'>";
 
@@ -548,7 +554,7 @@ case'del':
 $removeuserprofile = $_GET['id'];
 $API->comm("/ip/hotspot/user/profile/remove", array(
 ".id"=> "$removeuserprofile",));
-echo Loading('./?load=profile','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>

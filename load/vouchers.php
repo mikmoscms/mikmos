@@ -135,7 +135,7 @@ if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
 if(!is_dir($file)){ 
 ?>
 
-<div class="col-md-3"><a style="cursor:pointer" onclick="window.open('./vouchers/views.php?id=demo&styles=<?php echo substr($file, 0, -4);?>&pilihan=up&qrcode=qr', 'newwindow', 'width=300,height=250'); return false;" title="Lihat Voucher">
+<div class="col-md-4 p-5"><a style="cursor:pointer" onclick="window.open('./vouchers/views.php?id=demo&styles=<?php echo substr($file, 0, -4);?>&pilihan=up&qrcode=qr', 'newwindow', 'width=300,height=250'); return false;" title="Lihat Voucher <?php echo substr($file, 0, -4);?>">
 <div class="p-10" style="background-color:<?php echo $bg_array[rand(0,8)];?>">
 <div class="media widget-ten">
 <div class="media-left meida media-middle">

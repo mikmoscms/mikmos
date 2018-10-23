@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 @session_start();
 @ob_start("ob_gzhandler");
 @date_default_timezone_set("Asia/Bangkok");
@@ -351,8 +352,9 @@ Step 2 - Membuat Akses Router
 <td>Domain Login</td><td><input placeholder="hotspot.net" class="form-control" type="text" autocomplete="off" name="dns" required="1"></td>
 </tr>
 <tr>
-<td>Ether</td><td>
+<td>Interface</td><td>
 <select class="form-control" name="etr">
+<option style="text-transform:uppercase" value="0">Non Aktif</option>
 <option style="text-transform:uppercase" value="1">Ether 1</option>
 <option style="text-transform:uppercase" value="2">Ether 2</option>
 <option style="text-transform:uppercase" value="3">Ether 3</option>

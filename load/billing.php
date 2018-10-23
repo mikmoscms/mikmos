@@ -27,7 +27,7 @@ $API->write('/system/script/remove', false);
 $API->write('=.id=' . $ARREMD[$i]['.id']);
 $READ = $API->read();
 }}}
-echo Loading('./?load=billing','0');
+_e('<script>window.history.go(-1)</script>');
 }
 if(strlen($idhr) > "0"){
 if($_SESSION['connect']=='connect') {
@@ -156,7 +156,7 @@ downloadLink.click();
 
 function exportTableToCSV(filename) {
 var csv = [];
-var rows = document.querySelectorAll("#selling tr");
+var rows = document.querySelectorAll("#mikmos-tbl-desc tr");
 
  for (var i = 0; i < rows.length; i++) {
 var row = [], cols = rows[i].querySelectorAll("td, th");
@@ -169,7 +169,7 @@ downloadCSV(csv.join("\n"), filename);
 
 window.onload=function() {
 var sum = 0;
-var dataTable = document.getElementById("selling");
+var dataTable = document.getElementById("mikmos-tbl-desc");
 var cells = document.querySelectorAll("td + td + td + td + td");
 for (var i = 0; i < cells.length; i++)
 sum+=parseFloat(cells[i].firstChild.data);
@@ -210,7 +210,7 @@ $idget = $mikmosView['.id'];
 $MIKMOSCMS = 'MIKMOScms';
 $API->comm("/system/script/set", array(".id" => "$idget", "comment" => "$MIKMOSCMS"));
 }
-echo Loading('./?load=billing','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>

@@ -78,7 +78,7 @@ $handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
 $data = $editor;
 fwrite($handle, $data);
 chmod($my_file,0755);
-echo Loading('./?index=vouchers_style','1','Loading...');
+_e('<script>window.history.go(-1)</script>');
 echo '<style>.panel-body{display:none;}</dstyle>';
 }
 if(isset($_POST['edit'])){
@@ -92,7 +92,7 @@ $handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
 $data = $editor;
 fwrite($handle, $data);
 chmod($my_file,0755);
-echo Loading('./?index=vouchers_style','1','Loading...');
+_e('<script>window.history.go(-1)</script>');
 echo '<style>.panel-body{display:none;}</dstyle>';
 }
 ?>
@@ -122,7 +122,7 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 </tr>
 <tr>
 <td colspan="3">
-<textarea id="editor" name="editor" style="width:100%" rows=20><?php _e(file_get_contents($styles_vo));?></textarea>
+<textarea id="editor" name="editor" style="width:100%" rows="20" required><?php _e(file_get_contents($styles_vo));?></textarea>
 </td>
 </tr>
 <tr>
@@ -155,7 +155,7 @@ case'del':
 $style = $_GET['style'];
 $my_file = './vouchers/styles/'.$style.'.php';
 unlink($my_file);
-echo Loading('./?index=vouchers_style','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>

@@ -1,1 +1,204 @@
-<?php eval("?>".mikmos__de("_MIKMOS","NETPD9waHANCnN3aXRjaCgkX0dFVFsnZ2V0J10pew0KZGVmYXVsdDoNCiRtaWttb3NMb2FkID0gJEFQSS0+Y29tbSgiL3Rvb2wvbmV0d2F0Y2gvZ2V0YWxsIik7DQokbWlrbW9zVG90ID0gY291bnQoJG1pa21vc0xvYWQpOw0KPz4NCjxkaXYgaWQ9InJlbG9hZE5ldHdhY3RoeCI+DQoNCjxkaXYgY2xhc3M9InJvdyI+DQo8ZGl2IGNsYXNzPSJjb2wtc20tMTIiPg0KPHNlY3Rpb24gY2xhc3M9InBhbmVsIj4NCjxoZWFkZXIgY2xhc3M9InBhbmVsLWhlYWRpbmciPg0KPHN0cm9uZz48P3BocCBlY2hvIF9fTkVUV0FUQ0g7Pz48L3N0cm9uZz4gfCA8c3BhbiBjbGFzcz0idGV4dC1kYW5nZXIiPjw/cGhwIGlmKCRtaWttb3NUb3QgPCAyICl7ZWNobyAiJG1pa21vc1RvdCI7IH1lbHNlaWYoJG1pa21vc1RvdCA+IDEpe2VjaG8gIiRtaWttb3NUb3QiO30/Pjwvc3Bhbj4gaXRlbXMNCjxzcGFuIGNsYXNzPSJ0b29scyBwdWxsLXJpZ2h0Ij4gPC9zcGFuPg0KPC9oZWFkZXI+DQo8ZGl2IGNsYXNzPSJwYW5lbC1ib2R5Ij4NCjxwIGNsYXNzPSJ0ZXh0LW11dGVkIj4NCjxhIGNsYXNzPSJidG4gYnRuLXN1Y2Nlc3MiIGhyZWY9Ii4vP2xvYWQ9bmV0d2F0Y2gmZ2V0PWFlIj4gPGkgY2xhc3M9ImZhIGZhLXBsdXMiPjwvaT4gPD9waHAgZWNobyBfX0FERDs/PjwvYT4NCjwvcD48aHI+DQo8P3BocCAvL3ByaW50X3IoJG1pa21vc0xvYWQpOz8+DQo8ZGl2IGNsYXNzPSJ0YWJsZS1yZXNwb25zaXZlIj4NCjxkaXYgY2xhc3M9ImFkdi10YWJsZSI+DQo8ZGl2IGNsYXNzPSJ0YWJsZS1yZXNwb25zaXZlIj4NCiA8dGFibGUgY2xhc3M9InRhYmxlIHRhYmxlLWJvcmRlcmVkIHRhYmxlLWhvdmVyIHRleHQtbm93cmFwIiBpZD0ibWlrbW9zLXRibC1ub2luZm8iPg0KIDx0aGVhZD4NCjx0cj4gDQo8dGggY2xhc3M9InRleHQtY2VudGVyIiBzdHlsZT0id2lkdGg6NzBweDsiPjwvdGg+DQo8dGg+SG9zdDwvdGg+DQo8dGg+SW50ZXJ2YWw8L3RoPg0KPHRoPlRpbWUgT3V0PC90aD4NCjx0aD5TdGF0dXM8L3RoPg0KPHRoPldha3R1PC90aD4NCjwvdHI+DQo8L3RoZWFkPg0KDQo8dGJvZHk+DQo8P3BocA0KZm9yICgkaT0wOyAkaTwkbWlrbW9zVG90OyAkaSsrKXsNCgkkbWlrbW9zRGF0YSA9ICRtaWttb3NMb2FkWyRpXTsNCj8+DQo8dHI+DQo8dGQgY2xhc3M9ImFsaWduLW1pZGRsZSI+DQo8P3BocCBpZigkbWlrbW9zRGF0YVsnZGlzYWJsZWQnXT09J2ZhbHNlJyl7Pz4NCjxhIHRpdGxlPSJOb24gQWt0aWZrYW4iIGhyZWY9Ii4vP2xvYWQ9bmV0d2F0Y2gmZ2V0PWRpc2FibGVkJmlkPTw/cGhwIGVjaG8gJG1pa21vc0RhdGFbJy5pZCddOz8+IiBjbGFzcz0iYnRuIGJ0bi1pbmZvIGJ0bi14cyI+PGkgY2xhc3M9J2ZhIGZhLXVubG9jayAnPjwvaT48L2E+IDw/cGhwIH1lbHNleyA/PjxhIHRpdGxlPSJBa3RpZmthbiIgaHJlZj0iLi8/bG9hZD1uZXR3YXRjaCZnZXQ9ZW5hYmxlZCZpZD08P3BocCBlY2hvICRtaWttb3NEYXRhWycuaWQnXTs/PiIgY2xhc3M9ImJ0biBidG4tZGFuZ2VyIGJ0bi14cyI+PGkgY2xhc3M9J2ZhIGZhLWxvY2sgJz48L2k+PC9hPiA8P3BocCB9ID8+IA0KPGEgdGl0bGU9IkhhcHVzIiBocmVmPSIuLz9sb2FkPW5ldHdhdGNoJmdldD1kZWwmaWQ9PD9waHAgZWNobyAkbWlrbW9zRGF0YVsnLmlkJ107Pz4iIGNsYXNzPSJidG4gYnRuLWRhbmdlciBidG4teHMiPjxpIGNsYXNzPSdmYSBmYS10cmFzaCc+PC9pPjwvYT4gPC90ZD4NCjx0ZD48P3BocCBlY2hvICRtaWttb3NEYXRhWydob3N0J107Pz48L3RkPg0KPHRkIGNsYXNzPSJ0ZXh0LWNlbnRlciI+PD9waHAgZWNobyAkbWlrbW9zRGF0YVsnaW50ZXJ2YWwnXTs/PjwvdGQ+DQo8dGQgY2xhc3M9InRleHQtY2VudGVyIj48P3BocCBlY2hvICRtaWttb3NEYXRhWyd0aW1lb3V0J107Pz48L3RkPg0KPHRkIGNsYXNzPSJ0ZXh0LWNlbnRlciI+PD9waHAgZWNobyAkbWlrbW9zRGF0YVsnc3RhdHVzJ107Pz48L3RkPg0KPHRkPjw/cGhwIGVjaG8gJG1pa21vc0RhdGFbJ3NpbmNlJ107Pz48L3RkPg0KPC90cj4NCjw/cGhwDQp9DQo/Pg0KPC90Ym9keT4NCjwvdGFibGU+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L3NlY3Rpb24+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4NCnNldFRpbWVvdXQoZnVuY3Rpb24oKXsNCiB3aW5kb3cubG9jYXRpb24ucmVsb2FkKDEpOw0KfSwgNTAwMDApOw0KPC9zY3JpcHQ+DQo8P3BocA0KYnJlYWs7DQpjYXNlJ2FlJzoNCmlmKCFlbXB0eSgkX0dFVFsnaWQnXSkpew0KJGlkX25ldCA9ICRfR0VUWydpZCddOw0KJEFQSSA9IG5ldyBSb3V0ZXJvc0FQSSgpOw0KJEFQSS0+ZGVidWcgPSBmYWxzZTsNCiRBUEktPmNvbm5lY3QoJF9JUE1LLCAkX1VTTUssIF9kZShsdHJpbSgkX1BTTUssIF9fQ01TKSkpOw0KJG1pa21vc0xvYWQgPSRBUEktPmNvbW0oIi90b29sL25ldHdhdGNoL3ByaW50IiwgYXJyYXkoIj8uaWQiID0+ICIkaWRfbmV0IikpOw0KJG1pa21vc0xvYWRzID0gJG1pa21vc0xvYWRbMF07DQp9ZWxzZXsNCiRpZF9uZXQgPSAnJzsNCn0NCmlmKGlzc2V0KCRfUE9TVFsnc2F2ZSddKSl7DQokaG9zdCA9ICgkX1BPU1RbJ2hvc3QnXSk7DQokaW50ZXJ2YWwgPSAoJF9QT1NUWydpbnRlcnZhbCddKTsNCiR0aW1lb3V0ID0gKCRfUE9TVFsndGltZW91dCddKTsNCiR1cHNjcmlwdCA9ICgkX1BPU1RbJ3Vwc2NyaXB0J10pOw0KJGRvd25zY3JpcHQgPSAoJF9QT1NUWydkb3duc2NyaXB0J10pOw0KJGRpc2FibGVkID0gKCRfUE9TVFsnZGlzYWJsZWQnXSk7DQokQVBJLT5jb21tKCIvdG9vbC9uZXR3YXRjaC9hZGQiLCBhcnJheSgNCiJob3N0IiA9PiAiJGhvc3QiLA0KImludGVydmFsIiA9PiAiJGludGVydmFsIiwNCiJ0aW1lb3V0IiA9PiAiJHRpbWVvdXQiLA0KInVwLXNjcmlwdCIgPT4gIiR1cHNjcmlwdCIsDQoiZG93bi1zY3JpcHQiID0+ICIkZG93bnNjcmlwdCIsDQoiZGlzYWJsZWQiID0+ICIkZGlzYWJsZWQiLA0KKSk7DQplY2hvICI8c2NyaXB0PndpbmRvdy5sb2NhdGlvbj0nLi8/bG9hZD1uZXR3YXRjaCc8L3NjcmlwdD4iOw0KfQ0KaWYoaXNzZXQoJF9QT1NUWydlZGl0J10pKXsNCiRob3N0ID0gKCRfUE9TVFsnaG9zdCddKTsNCiRpbnRlcnZhbCA9ICgkX1BPU1RbJ2ludGVydmFsJ10pOw0KJHRpbWVvdXQgPSAoJF9QT1NUWyd0aW1lb3V0J10pOw0KJHVwc2NyaXB0ID0gKCRfUE9TVFsndXBzY3JpcHQnXSk7DQokZG93bnNjcmlwdCA9ICgkX1BPU1RbJ2Rvd25zY3JpcHQnXSk7DQokZGlzYWJsZWQgPSAoJF9QT1NUWydkaXNhYmxlZCddKTsNCiRBUEktPmNvbW0oIi90b29sL25ldHdhdGNoL3NldCIsIGFycmF5KA0KIi5pZCIgPT4gIiRpZF9uZXQiLA0KImhvc3QiID0+ICIkaG9zdCIsDQoiaW50ZXJ2YWwiID0+ICIkaW50ZXJ2YWwiLA0KInRpbWVvdXQiID0+ICIkdGltZW91dCIsDQoidXAtc2NyaXB0IiA9PiAiJHVwc2NyaXB0IiwNCiJkb3duLXNjcmlwdCIgPT4gIiRkb3duc2NyaXB0IiwNCiJkaXNhYmxlZCIgPT4gIiRkaXNhYmxlZCIsDQopKTsNCmVjaG8gIjxzY3JpcHQ+d2luZG93LmxvY2F0aW9uPScuLz9sb2FkPW5ldHdhdGNoJzwvc2NyaXB0PiI7DQp9DQo/Pg0KPGRpdiBjbGFzcz0icm93Ij4NCjxkaXYgY2xhc3M9ImNvbC1zbS0xMiI+DQo8c2VjdGlvbiBjbGFzcz0icGFuZWwiPg0KPGhlYWRlciBjbGFzcz0icGFuZWwtaGVhZGluZyI+DQo8c3Ryb25nPjw/cGhwIGVjaG8gX19ORVRXQVRDSDs/Pjwvc3Ryb25nPjwvaT4NCjwvaGVhZGVyPg0KPGRpdiBjbGFzcz0icGFuZWwtYm9keSI+DQoNCjxmb3JtIG5hbWU9ImZvcm0iIGF1dG9jb21wbGV0ZT0ib2ZmIiBtZXRob2Q9InBvc3QiIGFjdGlvbj0iIj4NCjxwIGNsYXNzPSJ0ZXh0LW11dGVkIj4NCjxhIGNsYXNzPSJidG4gYnRuLXdhcm5pbmciIGhyZWY9Ii4vP2xvYWQ9bmV0d2F0Y2giPiA8aSBjbGFzcz0iZmEgZmEtY2xvc2UgYnRuLW1yZyI+PC9pPiA8P3BocCBlY2hvIF9fQ0FOQ0VMOz8+PC9hPg0KPGJ1dHRvbiB0eXBlPSJzdWJtaXQiIG5hbWU9ImVkaXQiIGNsYXNzPSJidG4gYnRuLXByaW1hcnkgYnRuLW1yZyIgPjxpIGNsYXNzPSJmYSBmYS1zYXZlIGJ0bi1tcmciPjwvaT4gPD9waHAgZWNobyBfX1NBVkU7Pz48L2J1dHRvbj4NCjwvcD48aHI+DQo8ZGl2IGNsYXNzPSJyb3ciPg0KPGRpdiBjbGFzcz0iY29sLW1kLTciPg0KPHRhYmxlIGNsYXNzPSJ0YWJsZSI+DQo8dHI+DQo8dGQ+SG9zdDwvdGQ+PHRkPjxpbnB1dCBjbGFzcz0iZm9ybS1jb250cm9sIiB0eXBlPSJ0ZXh0IiBhdXRvY29tcGxldGU9Im9mZiIgbmFtZT0iaG9zdCIgdmFsdWU9Ijw/cGhwIGVjaG8gJG1pa21vc0xvYWRzWydob3N0J107Pz4iIHBsYWNlaG9sZGVyPSIwLjAuMC4wIiByZXF1aXJlZD0iMSIgYXV0b2ZvY3VzPjwvdGQ+DQo8L3RyPg0KPHRyPg0KPHRkPkludGVydmFsPC90ZD48dGQ+PGlucHV0IGNsYXNzPSJmb3JtLWNvbnRyb2wiIHR5cGU9InRleHQiIHNpemU9IjQiIGF1dG9jb21wbGV0ZT0ib2ZmIiBuYW1lPSJpbnRlcnZhbCIgdmFsdWU9Ijw/cGhwIGVjaG8gJG1pa21vc0xvYWRzWydpbnRlcnZhbCddOz8+IiBwbGFjZWhvbGRlcj0iMW0iIHJlcXVpcmVkPSIxIj48L3RkPg0KPC90cj4NCjx0cj4NCjx0ZD5UaW1lb3V0PC90ZD48dGQ+PGlucHV0IGNsYXNzPSJmb3JtLWNvbnRyb2wiIHR5cGU9InRleHQiIG5hbWU9InRpbWVvdXQiIGF1dG9jb21wbGV0ZT0ib2ZmIiB2YWx1ZT0iPD9waHAgZWNobyAkbWlrbW9zTG9hZHNbJ3RpbWVvdXQnXTs/PiIgcGxhY2Vob2xkZXI9IjFzIiByZXF1aXJlZD0iMSI+PC90ZD4NCjwvdHI+DQo8dHI+DQo8dGQ+RW5hYmxlZDwvdGQ+PHRkPg0KPHNlbGVjdCBjbGFzcz0iZm9ybS1jb250cm9sIiBuYW1lPSJkaXNhYmxlZCIgcmVxdWlyZWQ9IjEiPg0KPG9wdGlvbiA8P3BocCBpZigkbWlrbW9zRGF0YVsnZGlzYWJsZWQnXT09J2ZhbHNlJyl7ZWNobydzZWxlY3RlZCc7fT8+IHZhbHVlPSJmYWxzZSI+PD9waHAgZWNobyBfX0VOQUJMRTs/Pjwvb3B0aW9uPg0KPG9wdGlvbiA8P3BocCBpZigkbWlrbW9zRGF0YVsnZGlzYWJsZWQnXT09J3RydWUnKXtlY2hvJ3NlbGVjdGVkJzt9Pz4gdmFsdWU9InRydXMiPjw/cGhwIGVjaG8gX19ESVNBQkxFOz8+PC9vcHRpb24+DQo8L3NlbGVjdD4NCjwvdGQ+DQo8L3RyPg0KPHRyPg0KPHRkPlVwIFNjcmlwdDwvdGQ+PHRkPg0KPHRleHRhcmVhIGNsYXNzPSJmb3JtLWNvbnRyb2wiIG5hbWU9InVwc2NyaXB0Ij48P3BocCBlY2hvICRtaWttb3NMb2Fkc1sndXAtc2NyaXB0J107Pz48L3RleHRhcmVhPg0KPC90ZD4NCjwvdHI+DQo8dHI+DQo8dGQ+RG93biBTY3JpcHQ8L3RkPjx0ZD4NCjx0ZXh0YXJlYSBjbGFzcz0iZm9ybS1jb250cm9sIiBuYW1lPSJkb3duc2NyaXB0Ij48P3BocCBlY2hvICRtaWttb3NMb2Fkc1snZG93bi1zY3JpcHQnXTs/PjwvdGV4dGFyZWE+DQo8L3RkPg0KPC90cj4NCjx0cj4NCjx0ZD48L3RkPjx0ZD4NCjxkaXY+DQo8L2Rpdj4NCjwvdGQ+DQo8L3RyPg0KPC90YWJsZT4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Zvcm0+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8P3BocA0KYnJlYWs7DQpjYXNlJ2Rpc2FibGVkJzoNCkBzZXNzaW9uX3N0YXJ0KCk7DQplcnJvcl9yZXBvcnRpbmcoMCk7DQokcmVtb3ZldXNlcnByb2ZpbGUgPSAkX0dFVFsnaWQnXTsNCiRBUEktPmNvbW0oIi90b29sL25ldHdhdGNoL3NldCIsIGFycmF5KA0KIi5pZCI9PiAiJHJlbW92ZXVzZXJwcm9maWxlIiwNCiJkaXNhYmxlZCI9PiAidHJ1ZSIsKSk7DQplY2hvIExvYWRpbmcoJy4vP2xvYWQ9bmV0d2F0Y2gnLCcwJyk7DQpicmVhazsNCmNhc2UnZW5hYmxlZCc6DQpAc2Vzc2lvbl9zdGFydCgpOw0KZXJyb3JfcmVwb3J0aW5nKDApOw0KJHJlbW92ZXVzZXJwcm9maWxlID0gJF9HRVRbJ2lkJ107DQokQVBJLT5jb21tKCIvdG9vbC9uZXR3YXRjaC9zZXQiLCBhcnJheSgNCiIuaWQiPT4gIiRyZW1vdmV1c2VycHJvZmlsZSIsDQoiZGlzYWJsZWQiPT4gImZhbHNlIiwpKTsNCmVjaG8gTG9hZGluZygnLi8/bG9hZD1uZXR3YXRjaCcsJzAnKTsNCmJyZWFrOw0KY2FzZSdkZWwnOg0KQHNlc3Npb25fc3RhcnQoKTsNCmVycm9yX3JlcG9ydGluZygwKTsNCiRyZW1vdmV1c2VycHJvZmlsZSA9ICRfR0VUWydpZCddOw0KJEFQSS0+Y29tbSgiL3Rvb2wvbmV0d2F0Y2gvcmVtb3ZlIiwgYXJyYXkoDQoiLmlkIj0+ICIkcmVtb3ZldXNlcnByb2ZpbGUiLCkpOw0KZWNobyBMb2FkaW5nKCcuLz9sb2FkPW5ldHdhdGNoJywnMCcpOw0KYnJlYWs7DQp9DQo/Pg0K")); ?>
+<?php
+switch($_GET['get']){
+default:
+$mikmosLoad = $API->comm("/tool/netwatch/getall");
+$mikmosTot = count($mikmosLoad);
+?>
+<div id="reloadNetwacthx">
+
+<div class="row">
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong><?php echo __NETWATCH;?></strong> | <span class="text-danger"><?php if($mikmosTot < 2 ){echo "$mikmosTot"; }elseif($mikmosTot > 1){echo "$mikmosTot";}?></span> items
+<span class="tools pull-right"> </span>
+</header>
+<div class="panel-body">
+<p class="text-muted">
+<a class="btn btn-success" href="./?load=netwatch&get=ae"> <i class="fa fa-plus"></i> <?php echo __ADD;?></a>
+</p><hr>
+<?php //print_r($mikmosLoad);?>
+<div class="table-responsive">
+<div class="adv-table">
+<div class="table-responsive">
+ <table class="table table-bordered table-hover text-nowrap" id="mikmos-tbl-noinfo">
+ <thead>
+<tr> 
+<th class="text-center" style="width:70px;"></th>
+<th>Host</th>
+<th>Interval</th>
+<th>Time Out</th>
+<th>Status</th>
+<th>Waktu</th>
+</tr>
+</thead>
+
+<tbody>
+<?php
+for ($i=0; $i<$mikmosTot; $i++){
+	$mikmosData = $mikmosLoad[$i];
+?>
+<tr>
+<td class="align-middle">
+<?php if($mikmosData['disabled']=='false'){?>
+<a title="Non Aktifkan" href="./?load=netwatch&get=disabled&id=<?php echo $mikmosData['.id'];?>" class="btn btn-info btn-xs"><i class='fa fa-unlock '></i></a> <?php }else{ ?><a title="Aktifkan" href="./?load=netwatch&get=enabled&id=<?php echo $mikmosData['.id'];?>" class="btn btn-danger btn-xs"><i class='fa fa-lock '></i></a> <?php } ?> 
+<a title="Hapus" href="./?load=netwatch&get=del&id=<?php echo $mikmosData['.id'];?>" class="btn btn-danger btn-xs"><i class='fa fa-trash'></i></a> </td>
+<td><?php echo $mikmosData['host'];?></td>
+<td class="text-center"><?php echo $mikmosData['interval'];?></td>
+<td class="text-center"><?php echo $mikmosData['timeout'];?></td>
+<td class="text-center"><?php echo $mikmosData['status'];?></td>
+<td><?php echo $mikmosData['since'];?></td>
+</tr>
+<?php
+}
+?>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+setTimeout(function(){
+ window.location.reload(1);
+}, 50000);
+</script>
+<?php
+break;
+case'ae':
+if(!empty($_GET['id'])){
+$id_net = $_GET['id'];
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikmosLoad =$API->comm("/tool/netwatch/print", array("?.id" => "$id_net"));
+$mikmosLoads = $mikmosLoad[0];
+}else{
+$id_net = '';
+}
+if(isset($_POST['save'])){
+$host = ($_POST['host']);
+$interval = ($_POST['interval']);
+$timeout = ($_POST['timeout']);
+$upscript = ($_POST['upscript']);
+$downscript = ($_POST['downscript']);
+$disabled = ($_POST['disabled']);
+$API->comm("/tool/netwatch/add", array(
+"host" => "$host",
+"interval" => "$interval",
+"timeout" => "$timeout",
+"up-script" => "$upscript",
+"down-script" => "$downscript",
+"disabled" => "$disabled",
+));
+echo "<script>window.location='./?load=netwatch'</script>";
+}
+if(isset($_POST['edit'])){
+$host = ($_POST['host']);
+$interval = ($_POST['interval']);
+$timeout = ($_POST['timeout']);
+$upscript = ($_POST['upscript']);
+$downscript = ($_POST['downscript']);
+$disabled = ($_POST['disabled']);
+$API->comm("/tool/netwatch/set", array(
+".id" => "$id_net",
+"host" => "$host",
+"interval" => "$interval",
+"timeout" => "$timeout",
+"up-script" => "$upscript",
+"down-script" => "$downscript",
+"disabled" => "$disabled",
+));
+echo "<script>window.location='./?load=netwatch'</script>";
+}
+?>
+<div class="row">
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong><?php echo __NETWATCH;?></strong></i>
+</header>
+<div class="panel-body">
+
+<form name="form" autocomplete="off" method="post" action="">
+<p class="text-muted">
+<a class="btn btn-warning" href="./?load=netwatch"> <i class="fa fa-close btn-mrg"></i> <?php echo __CANCEL;?></a>
+<button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> <?php echo __SAVE;?></button>
+</p><hr>
+<div class="row">
+<div class="col-md-7">
+<table class="table">
+<tr>
+<td>Host</td><td><input class="form-control" type="text" autocomplete="off" name="host" value="<?php echo $mikmosLoads['host'];?>" placeholder="0.0.0.0" required="1" autofocus></td>
+</tr>
+<tr>
+<td>Interval</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="interval" value="<?php echo $mikmosLoads['interval'];?>" placeholder="1m" required="1"></td>
+</tr>
+<tr>
+<td>Timeout</td><td><input class="form-control" type="text" name="timeout" autocomplete="off" value="<?php echo $mikmosLoads['timeout'];?>" placeholder="1s" required="1"></td>
+</tr>
+<tr>
+<td>Enabled</td><td>
+<select class="form-control" name="disabled" required="1">
+<option <?php if($mikmosData['disabled']=='false'){echo'selected';}?> value="false"><?php echo __ENABLE;?></option>
+<option <?php if($mikmosData['disabled']=='true'){echo'selected';}?> value="trus"><?php echo __DISABLE;?></option>
+</select>
+</td>
+</tr>
+<tr>
+<td>Up Script</td><td>
+<textarea class="form-control" name="upscript"><?php echo $mikmosLoads['up-script'];?></textarea>
+</td>
+</tr>
+<tr>
+<td>Down Script</td><td>
+<textarea class="form-control" name="downscript"><?php echo $mikmosLoads['down-script'];?></textarea>
+</td>
+</tr>
+<tr>
+<td></td><td>
+<div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<?php
+break;
+case'disabled':
+@session_start();
+error_reporting(0);
+$removeuserprofile = $_GET['id'];
+$API->comm("/tool/netwatch/set", array(
+".id"=> "$removeuserprofile",
+"disabled"=> "true",));
+_e('<script>window.history.go(-1)</script>');
+break;
+case'enabled':
+@session_start();
+error_reporting(0);
+$removeuserprofile = $_GET['id'];
+$API->comm("/tool/netwatch/set", array(
+".id"=> "$removeuserprofile",
+"disabled"=> "false",));
+_e('<script>window.history.go(-1)</script>');
+break;
+case'del':
+@session_start();
+error_reporting(0);
+$removeuserprofile = $_GET['id'];
+$API->comm("/tool/netwatch/remove", array(
+".id"=> "$removeuserprofile",));
+_e('<script>window.history.go(-1)</script>');
+break;
+}
+?>

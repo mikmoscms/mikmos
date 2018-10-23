@@ -1,1 +1,186 @@
-<?php eval("?>".mikmos__de("_MIKMOS","WALPD9waHANCnN3aXRjaCgkX0dFVFsnZ2V0J10pew0KZGVmYXVsdDoNCiRtaWttb3NMb2FkID0gJEFQSS0+Y29tbSgiL2lwL2hvdHNwb3Qvd2FsbGVkLWdhcmRlbi9wcmludCIpOw0KJG1pa21vc1RvdCA9IGNvdW50KCRtaWttb3NMb2FkKTsNCj8+DQo8ZGl2IGNsYXNzPSJyb3ciPg0KPGRpdiBjbGFzcz0iY29sLXNtLTEyIj4NCjxzZWN0aW9uIGNsYXNzPSJwYW5lbCI+DQo8aGVhZGVyIGNsYXNzPSJwYW5lbC1oZWFkaW5nIj4NCjxzdHJvbmc+PD9waHAgZWNobyBfX1dBTExFRF9HQVJERU47Pz48L3N0cm9uZz58IDxzcGFuIGNsYXNzPSJ0ZXh0LWRhbmdlciI+PD9waHAgaWYoJG1pa21vc1RvdCA8IDIgKXtlY2hvICIkbWlrbW9zVG90IjsgfWVsc2VpZigkbWlrbW9zVG90ID4gMSl7ZWNobyAiJG1pa21vc1RvdCI7fT8+PC9zcGFuPiBpdGVtcw0KPC9oZWFkZXI+DQo8ZGl2IGNsYXNzPSJwYW5lbC1ib2R5Ij4NCjw/cGhwIC8vcHJpbnRfcigkbWlrbW9zTG9hZCk7Pz4NCjxwIGNsYXNzPSJ0ZXh0LW11dGVkIj4NCjxhIGNsYXNzPSJidG4gYnRuLXN1Y2Nlc3MiIGhyZWY9Ii4vP2xvYWQ9d2FsbGVkX2dhcmRlbiZnZXQ9YWUiPiA8aSBjbGFzcz0iZmEgZmEtcGx1cyI+PC9pPiA8P3BocCBlY2hvIF9fQUREOz8+PC9hPg0KPC9wPjxocj4NCjxkaXYgY2xhc3M9InRhYmxlLXJlc3BvbnNpdmUiPg0KPGRpdiBjbGFzcz0iYWR2LXRhYmxlIj4NCjx0YWJsZSBjbGFzcz0idGFibGUgdGFibGUtYm9yZGVyZWQgdGFibGUtaG92ZXIgdGV4dC1ub3dyYXAiIGlkPSJtaWttb3MtdGJsLW5vaW5mbyI+DQo8dGhlYWQ+DQo8dHI+DQo8dGggc3R5bGU9IndpZHRoOjEyMHB4Ij48L3RoPg0KPHRoPkFjdGlvbnM8L3RoPg0KPHRoPlNlcnZlcjwvdGg+DQo8dGg+RHN0LiBIb3N0PC90aD4NCjx0aD5Ec3QuIFBvcnQ8L3RoPg0KPHRoPkhpdHM8L3RoPg0KPC90cj4NCjwvdGhlYWQ+DQo8dGJvZHk+DQo8P3BocA0KZm9yICgkaT0wOyAkaTwkbWlrbW9zVG90OyAkaSsrKXsNCiRtaWttb3NEYXRhID0gJG1pa21vc0xvYWRbJGldOw0KaWYoJG1pa21vc0RhdGFbJ2Rpc2FibGVkJ109PSd0cnVlJyl7JGRpc2FibGVkID0gIjxhICB0aXRsZT0nRW5hYmxlJyBocmVmPScuLz9sb2FkPXdhbGxlZF9nYXJkZW4mZ2V0PWRpcyZpZD0iLiRtaWttb3NEYXRhWycuaWQnXS4iJmQ9ZmFsc2UnIGNsYXNzPSdidG4gYnRuLWRhbmdlciBidG4teHMnPjxpIGNsYXNzPSdmYSBmYS1sb2NrJz48L2k+PC9hPiI7fWVsc2V7JGRpc2FibGVkID0gIjxhICB0aXRsZT0nRGlzYWJsZScgaHJlZj0nLi8/bG9hZD13YWxsZWRfZ2FyZGVuJmdldD1kaXMmaWQ9Ii4kbWlrbW9zRGF0YVsnLmlkJ10uIiZkPXRydWUnIGNsYXNzPSdidG4gYnRuLXN1Y2Nlc3MgYnRuLXhzJz48aSBjbGFzcz0nZmEgZmEtdW5sb2NrJz48L2k+PC9hPiI7fQ0KaWYoJG1pa21vc0RhdGFbJ2FjdGlvbiddPT0nYWxsb3cnKXskYWN0aW9ucyA9ICI8YSAgdGl0bGU9J0RlbnknIGhyZWY9Jy4vP2xvYWQ9d2FsbGVkX2dhcmRlbiZnZXQ9YWN0aW9ucyZpZD0iLiRtaWttb3NEYXRhWycuaWQnXS4iJmFjdGlvbj1kZW55Jz48c3BhbiBjbGFzcz0nYnRuIGJ0bi1zdWNjZXNzIGJ0bi14cyc+IiAuICRtaWttb3NEYXRhWydhY3Rpb24nXS4gIjwvc3Bhbj48L2E+Ijt9ZWxzZXskYWN0aW9ucyA9ICI8YSAgdGl0bGU9J0FsbG93JyBocmVmPScuLz9sb2FkPXdhbGxlZF9nYXJkZW4mZ2V0PWFjdGlvbnMmaWQ9Ii4kbWlrbW9zRGF0YVsnLmlkJ10uIiZhY3Rpb249YWxsb3cnPjxzcGFuIGNsYXNzPSdidG4gYnRuLWRhbmdlciBidG4teHMnPiIgLiAkbWlrbW9zRGF0YVsnYWN0aW9uJ10uICI8L3NwYW4+PC9hPiI7fQ0KaWYoZW1wdHkoJG1pa21vc0RhdGFbJ3NlcnZlciddKSl7JHNlcnZlciA9ICJBbGwiO31lbHNleyRzZXJ2ZXIgPSAkbWlrbW9zRGF0YVsnc2VydmVyJ107fQ0KZWNobyAiPHRyPiI7DQplY2hvICI8dGQgY2xhc3M9J3RleHQtY2VudGVyJz48YSAgdGl0bGU9J1JlbW92ZScgaHJlZj0nLi8/bG9hZD13YWxsZWRfZ2FyZGVuJmdldD1kZWwmaWQ9Ii4kbWlrbW9zRGF0YVsnLmlkJ10uIicgY2xhc3M9J2J0biBidG4tZGFuZ2VyIGJ0bi14cyc+PGkgY2xhc3M9J2ZhIGZhLXRyYXNoJz48L2k+PC9hPiA8YSAgdGl0bGU9J0VkaXQnIGhyZWY9Jy4vP2xvYWQ9d2FsbGVkX2dhcmRlbiZnZXQ9YWUmaWQ9Ii4kbWlrbW9zRGF0YVsnLmlkJ10uIicgY2xhc3M9J2J0biBidG4taW5mbyBidG4teHMnPjxpIGNsYXNzPSdmYSBmYS1lZGl0Jz48L2k+PC9hPiAiIC4gJGRpc2FibGVkLiAiPC90ZD4iOw0KZWNobyAiPHRkPiIgLiAkYWN0aW9ucy4gIjwvdGQ+IjsNCmVjaG8gIjx0ZD4iIC4gJHNlcnZlci4gIjwvdGQ+IjsNCmVjaG8gIjx0ZD4iIC4gJG1pa21vc0RhdGFbJ2RzdC1ob3N0J10uICI8L3RkPiI7DQplY2hvICI8dGQ+IiAuICRtaWttb3NEYXRhWydkc3QtcG9ydCddLiAiPC90ZD4iOw0KZWNobyAiPHRkPiIgLiAkbWlrbW9zRGF0YVsnaGl0cyddLiAiPC90ZD4iOw0KZWNobyAiPC90cj4iOw0KfQ0KPz4NCiAgPC90Ym9keT4NCjwvdGFibGU+DQo8L2Rpdj4NCjwvZGl2Pg0KDQo8L2Rpdj4NCjwvc2VjdGlvbj4NCjwvZGl2Pg0KPC9kaXY+DQo8P3BocA0KYnJlYWs7DQpjYXNlJ2FlJzoNCmlmKCFlbXB0eSgkX0dFVFsnaWQnXSkpew0KJGlkX25ldCA9ICRfR0VUWydpZCddOw0KJEFQSSA9IG5ldyBSb3V0ZXJvc0FQSSgpOw0KJEFQSS0+ZGVidWcgPSBmYWxzZTsNCiRBUEktPmNvbm5lY3QoJF9JUE1LLCAkX1VTTUssIF9kZShsdHJpbSgkX1BTTUssIF9fQ01TKSkpOw0KJG1pa21vc0xvYWQgPSAgJEFQSS0+Y29tbSgiL2lwL2hvdHNwb3Qvd2FsbGVkLWdhcmRlbi9wcmludCIsIGFycmF5KCI/LmlkIiA9PiAiJGlkX25ldCIpKTsNCiRtaWttb3NMb2FkcyA9ICRtaWttb3NMb2FkWzBdOw0KfWVsc2V7DQokaWRfbmV0ID0gJyc7DQp9DQppZihpc3NldCgkX1BPU1RbJ3NhdmUnXSkpew0KJGFjdGlvbiA9ICgkX1BPU1RbJ2FjdGlvbiddKTsNCiRkc3Rob3N0ID0gKCRfUE9TVFsnZHN0aG9zdCddKTsNCiRkc3Rwb3J0ID0gKCRfUE9TVFsnZHN0cG9ydCddKTsNCiRkaXNhYmxlZCA9ICgkX1BPU1RbJ2Rpc2FibGVkJ10pOw0KJEFQSS0+Y29tbSgiL2lwL2hvdHNwb3Qvd2FsbGVkLWdhcmRlbi9hZGQiLCBhcnJheSgNCiJhY3Rpb24iID0+ICIkYWN0aW9uIiwNCiJkc3QtaG9zdCIgPT4gIiRkc3Rob3N0IiwNCiJkc3QtcG9ydCIgPT4gIiRkc3Rwb3J0IiwNCiJkaXNhYmxlZCIgPT4gIiRkaXNhYmxlZCIsDQopKTsNCmVjaG8gIjxzY3JpcHQ+d2luZG93LmxvY2F0aW9uPScuLz9sb2FkPXdhbGxlZF9nYXJkZW4nPC9zY3JpcHQ+IjsNCn0NCmlmKGlzc2V0KCRfUE9TVFsnZWRpdCddKSl7DQokYWN0aW9uID0gKCRfUE9TVFsnYWN0aW9uJ10pOw0KJGRzdGhvc3QgPSAoJF9QT1NUWydkc3Rob3N0J10pOw0KJGRzdHBvcnQgPSAoJF9QT1NUWydkc3Rwb3J0J10pOw0KJGRpc2FibGVkID0gKCRfUE9TVFsnZGlzYWJsZWQnXSk7DQokQVBJLT5jb21tKCIvaXAvaG90c3BvdC93YWxsZWQtZ2FyZGVuL3NldCIsIGFycmF5KA0KIi5pZCIgPT4gIiRpZF9uZXQiLA0KImFjdGlvbiIgPT4gIiRhY3Rpb24iLA0KImRzdC1ob3N0IiA9PiAiJGRzdGhvc3QiLA0KImRzdC1wb3J0IiA9PiAiJGRzdHBvcnQiLA0KImRpc2FibGVkIiA9PiAiJGRpc2FibGVkIiwNCikpOw0KZWNobyAiPHNjcmlwdD53aW5kb3cubG9jYXRpb249Jy4vP2xvYWQ9d2FsbGVkX2dhcmRlbic8L3NjcmlwdD4iOw0KfQ0KJHNydmxpc3QgPSAkQVBJLT5jb21tKCIvaXAvaG90c3BvdC9wcmludCIpOw0KPz4NCjxkaXYgY2xhc3M9InJvdyI+DQo8ZGl2IGNsYXNzPSJjb2wtc20tMTIiPg0KPHNlY3Rpb24gY2xhc3M9InBhbmVsIj4NCjxoZWFkZXIgY2xhc3M9InBhbmVsLWhlYWRpbmciPg0KPHN0cm9uZz48P3BocCBlY2hvIF9fV0FMTEVEX0dBUkRFTjs/Pjwvc3Ryb25nPjw/cGhwIGlmKCFlbXB0eSgkaWRfbmV0KSl7IGVjaG8gIiB8ICIuX19FRElULiIgaWQgPT4gIi4kaWRfbmV0O307Pz4NCjxzcGFuIGNsYXNzPSJ0b29scyBwdWxsLXJpZ2h0Ij4NCjwvc3Bhbj4NCjwvaGVhZGVyPg0KPGRpdiBjbGFzcz0icGFuZWwtYm9keSI+DQo8ZGl2IGNsYXNzPSJyb3ciPg0KPGRpdiBjbGFzcz0iY29sLW1kLTciPg0KPGZvcm0gYXV0b2NvbXBsZXRlPSJvZmYiIG1ldGhvZD0icG9zdCIgYWN0aW9uPSIiPg0KPHRhYmxlIGNsYXNzPSJ0YWJsZSI+DQo8dHI+DQo8dGQ+QWN0aW9uczwvdGQ+PHRkPg0KPGRpdiBjbGFzcz0icmFkaW8iPg0KPGxhYmVsPg0KPGlucHV0IHJlcXVpcmVkIHZhbHVlPSJhbGxvdyIgbmFtZT0iYWN0aW9uIiA8P3BocCBpZigkbWlrbW9zTG9hZHNbJ2FjdGlvbiddPT0nYWxsb3cnKXtlY2hvJ2NoZWNrZWQnO30/PiB0eXBlPSJyYWRpbyI+DQpBbGxvdw0KPC9sYWJlbD4mbmJzcCZuYnNwJm5ic3AmbmJzcCZuYnNwDQo8bGFiZWw+DQo8aW5wdXQgcmVxdWlyZWQgdmFsdWU9ImRlbnkiIG5hbWU9ImFjdGlvbiIgPD9waHAgaWYoJG1pa21vc0xvYWRzWydhY3Rpb24nXT09J2RlbnknKXtlY2hvJ2NoZWNrZWQnO30/PiB0eXBlPSJyYWRpbyI+DQpEZW55DQo8L2xhYmVsPg0KPC9kaXY+DQo8L3RkPg0KPC90cj4NCjx0cj4NCjx0ZD5Ec3QuIEhvc3Q8L3RkPjx0ZD48aW5wdXQgY2xhc3M9ImZvcm0tY29udHJvbCIgdHlwZT0idGV4dCIgc2l6ZT0iNCIgYXV0b2NvbXBsZXRlPSJvZmYiIG5hbWU9ImRzdGhvc3QiIHZhbHVlPSI8P3BocCBlY2hvICRtaWttb3NMb2Fkc1snZHN0LWhvc3QnXTs/PiIgYXV0b2ZvY3VzPjwvdGQ+DQo8L3RyPg0KPHRyPg0KPHRkPkRzdC4gUG9ydDwvdGQ+PHRkPjxpbnB1dCBjbGFzcz0iZm9ybS1jb250cm9sIiB0eXBlPSJ0ZXh0IiBuYW1lPSJkc3Rwb3J0IiBhdXRvY29tcGxldGU9Im9mZiIgdmFsdWU9Ijw/cGhwIGVjaG8gJG1pa21vc0xvYWRzWydkc3QtcG9ydCddOz8+IiBwbGFjZWhvbGRlcj0iMCI+PC90ZD4NCjwvdHI+DQo8dHI+DQo8dGQ+RW5hYmxlZDwvdGQ+PHRkPg0KPHNlbGVjdCBjbGFzcz0iZm9ybS1jb250cm9sIiBuYW1lPSJkaXNhYmxlZCI+DQo8b3B0aW9uIDw/cGhwIGlmKCRtaWttb3NMb2Fkc1snZGlzYWJsZWQnXT09J2ZhbHNlJyl7ZWNobydzZWxlY3RlZCc7fT8+IHZhbHVlPSJmYWxzZSI+PD9waHAgZWNobyBfX0VOQUJMRTs/Pjwvb3B0aW9uPg0KPG9wdGlvbiA8P3BocCBpZigkbWlrbW9zTG9hZHNbJ2Rpc2FibGVkJ109PSd0cnVlJyl7ZWNobydzZWxlY3RlZCc7fT8+IHZhbHVlPSJ0cnVzIj48P3BocCBlY2hvIF9fRElTQUJMRTs/Pjwvb3B0aW9uPg0KPC9zZWxlY3Q+DQo8L3RkPg0KPC90cj4NCjx0cj4NCjx0ZD48L3RkPjx0ZD4NCjxkaXY+DQo8YSBjbGFzcz0iYnRuIGJ0bi13YXJuaW5nIiBocmVmPSIuLz9sb2FkPXdhbGxlZF9nYXJkZW4iPiA8aSBjbGFzcz0iZmEgZmEtY2xvc2UgYnRuLW1yZyI+PC9pPiBDbG9zZTwvYT4NCjw/cGhwIA0KaWYoZW1wdHkoJF9HRVRbJ2lkJ10pKXsgPz4NCjxidXR0b24gdHlwZT0ic3VibWl0IiBuYW1lPSJzYXZlIiBjbGFzcz0iYnRuIGJ0bi1wcmltYXJ5IGJ0bi1tcmciID48aSBjbGFzcz0iZmEgZmEtc2F2ZSBidG4tbXJnIj48L2k+IFNhdmU8L2J1dHRvbj4NCjw/cGhwIH1lbHNleyA/Pg0KPGJ1dHRvbiB0eXBlPSJzdWJtaXQiIG5hbWU9ImVkaXQiIGNsYXNzPSJidG4gYnRuLXByaW1hcnkgYnRuLW1yZyIgPjxpIGNsYXNzPSJmYSBmYS1lZGl0IGJ0bi1tcmciPjwvaT4gRWRpdDwvYnV0dG9uPg0KPD9waHAgfSA/Pg0KPC9kaXY+DQo8L3RkPg0KPC90cj4NCjwvdGFibGU+DQo8L2Zvcm0+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9kaXY+DQo8P3BocA0KYnJlYWs7DQpjYXNlJ2Rpcyc6DQokaWRnZXQgPSAkX0dFVFsnaWQnXTsNCiRkZ2V0ID0gJF9HRVRbJ2QnXTsNCiRBUEktPmNvbW0oIi9pcC9ob3RzcG90L3dhbGxlZC1nYXJkZW4vc2V0IiwgYXJyYXkoDQoiLmlkIj0+ICIkaWRnZXQiLA0KImRpc2FibGVkIj0+ICIkZGdldCIpKTsNCmVjaG8gTG9hZGluZygnLi8/bG9hZD13YWxsZWRfZ2FyZGVuJywnMCcpOw0KYnJlYWs7DQpjYXNlJ2FjdGlvbnMnOg0KJGlkZ2V0ID0gJF9HRVRbJ2lkJ107DQokYWN0aW9uZ2V0ID0gJF9HRVRbJ2FjdGlvbiddOw0KJEFQSS0+Y29tbSgiL2lwL2hvdHNwb3Qvd2FsbGVkLWdhcmRlbi9zZXQiLCBhcnJheSgNCiIuaWQiPT4gIiRpZGdldCIsDQoiYWN0aW9uIj0+ICIkYWN0aW9uZ2V0IikpOw0KZWNobyBMb2FkaW5nKCcuLz9sb2FkPXdhbGxlZF9nYXJkZW4nLCcwJyk7DQpicmVhazsNCmNhc2UnZGVsJzoNCiRpZGdldCA9ICRfR0VUWydpZCddOw0KJEFQSS0+Y29tbSgiL2lwL2hvdHNwb3Qvd2FsbGVkLWdhcmRlbi9yZW1vdmUiLCBhcnJheSgNCiIuaWQiPT4gIiRpZGdldCIsKSk7DQplY2hvIExvYWRpbmcoJy4vP2xvYWQ9d2FsbGVkX2dhcmRlbicsJzAnKTsNCmJyZWFrOw0KfQ0KPz4=")); ?>
+<?php
+switch($_GET['get']){
+default:
+$mikmosLoad = $API->comm("/ip/hotspot/walled-garden/print");
+$mikmosTot = count($mikmosLoad);
+?>
+<div class="row">
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong><?php echo __WALLED_GARDEN;?></strong>| <span class="text-danger"><?php if($mikmosTot < 2 ){echo "$mikmosTot"; }elseif($mikmosTot > 1){echo "$mikmosTot";}?></span> items
+</header>
+<div class="panel-body">
+<?php //print_r($mikmosLoad);?>
+<p class="text-muted">
+<a class="btn btn-success" href="./?load=walled_garden&get=ae"> <i class="fa fa-plus"></i> <?php echo __ADD;?></a>
+</p><hr>
+<div class="table-responsive">
+<div class="adv-table">
+<table class="table table-bordered table-hover text-nowrap" id="mikmos-tbl-noinfo">
+<thead>
+<tr>
+<th style="width:120px"></th>
+<th>Actions</th>
+<th>Server</th>
+<th>Dst. Host</th>
+<th>Dst. Port</th>
+<th>Hits</th>
+</tr>
+</thead>
+<tbody>
+<?php
+for ($i=0; $i<$mikmosTot; $i++){
+$mikmosData = $mikmosLoad[$i];
+if($mikmosData['disabled']=='true'){$disabled = "<a  title='Enable' href='./?load=walled_garden&get=dis&id=".$mikmosData['.id']."&d=false' class='btn btn-danger btn-xs'><i class='fa fa-lock'></i></a>";}else{$disabled = "<a  title='Disable' href='./?load=walled_garden&get=dis&id=".$mikmosData['.id']."&d=true' class='btn btn-success btn-xs'><i class='fa fa-unlock'></i></a>";}
+if($mikmosData['action']=='allow'){$actions = "<a  title='Deny' href='./?load=walled_garden&get=actions&id=".$mikmosData['.id']."&action=deny'><span class='btn btn-success btn-xs'>" . $mikmosData['action']. "</span></a>";}else{$actions = "<a  title='Allow' href='./?load=walled_garden&get=actions&id=".$mikmosData['.id']."&action=allow'><span class='btn btn-danger btn-xs'>" . $mikmosData['action']. "</span></a>";}
+if(empty($mikmosData['server'])){$server = "All";}else{$server = $mikmosData['server'];}
+echo "<tr>";
+echo "<td class='text-center'><a  title='Remove' href='./?load=walled_garden&get=del&id=".$mikmosData['.id']."' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></a> <a  title='Edit' href='./?load=walled_garden&get=ae&id=".$mikmosData['.id']."' class='btn btn-info btn-xs'><i class='fa fa-edit'></i></a> " . $disabled. "</td>";
+echo "<td>" . $actions. "</td>";
+echo "<td>" . $server. "</td>";
+echo "<td>" . $mikmosData['dst-host']. "</td>";
+echo "<td>" . $mikmosData['dst-port']. "</td>";
+echo "<td>" . $mikmosData['hits']. "</td>";
+echo "</tr>";
+}
+?>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</section>
+</div>
+</div>
+<?php
+break;
+case'ae':
+if(!empty($_GET['id'])){
+$id_net = $_GET['id'];
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikmosLoad =  $API->comm("/ip/hotspot/walled-garden/print", array("?.id" => "$id_net"));
+$mikmosLoads = $mikmosLoad[0];
+}else{
+$id_net = '';
+}
+if(isset($_POST['save'])){
+$action = ($_POST['action']);
+$dsthost = ($_POST['dsthost']);
+$dstport = ($_POST['dstport']);
+$disabled = ($_POST['disabled']);
+$API->comm("/ip/hotspot/walled-garden/add", array(
+"action" => "$action",
+"dst-host" => "$dsthost",
+"dst-port" => "$dstport",
+"disabled" => "$disabled",
+));
+echo "<script>window.location='./?load=walled_garden'</script>";
+}
+if(isset($_POST['edit'])){
+$action = ($_POST['action']);
+$dsthost = ($_POST['dsthost']);
+$dstport = ($_POST['dstport']);
+$disabled = ($_POST['disabled']);
+$API->comm("/ip/hotspot/walled-garden/set", array(
+".id" => "$id_net",
+"action" => "$action",
+"dst-host" => "$dsthost",
+"dst-port" => "$dstport",
+"disabled" => "$disabled",
+));
+echo "<script>window.location='./?load=walled_garden'</script>";
+}
+$srvlist = $API->comm("/ip/hotspot/print");
+?>
+<div class="row">
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong><?php echo __WALLED_GARDEN;?></strong><?php if(!empty($id_net)){ echo " | ".__EDIT." id => ".$id_net;};?>
+<span class="tools pull-right">
+</span>
+</header>
+<div class="panel-body">
+<div class="row">
+<div class="col-md-7">
+<form autocomplete="off" method="post" action="">
+<table class="table">
+<tr>
+<td>Actions</td><td>
+<div class="radio">
+<label>
+<input required value="allow" name="action" <?php if($mikmosLoads['action']=='allow'){echo'checked';}?> type="radio">
+Allow
+</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+<label>
+<input required value="deny" name="action" <?php if($mikmosLoads['action']=='deny'){echo'checked';}?> type="radio">
+Deny
+</label>
+</div>
+</td>
+</tr>
+<tr>
+<td>Dst. Host</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="dsthost" value="<?php echo $mikmosLoads['dst-host'];?>" autofocus></td>
+</tr>
+<tr>
+<td>Dst. Port</td><td><input class="form-control" type="text" name="dstport" autocomplete="off" value="<?php echo $mikmosLoads['dst-port'];?>" placeholder="0"></td>
+</tr>
+<tr>
+<td>Enabled</td><td>
+<select class="form-control" name="disabled">
+<option <?php if($mikmosLoads['disabled']=='false'){echo'selected';}?> value="false"><?php echo __ENABLE;?></option>
+<option <?php if($mikmosLoads['disabled']=='true'){echo'selected';}?> value="trus"><?php echo __DISABLE;?></option>
+</select>
+</td>
+</tr>
+<tr>
+<td></td><td>
+<div>
+<a class="btn btn-warning" href="./?load=walled_garden"> <i class="fa fa-close btn-mrg"></i> Close</a>
+<?php 
+if(empty($_GET['id'])){ ?>
+<button type="submit" name="save" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Save</button>
+<?php }else{ ?>
+<button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-edit btn-mrg"></i> Edit</button>
+<?php } ?>
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<?php
+break;
+case'dis':
+$idget = $_GET['id'];
+$dget = $_GET['d'];
+$API->comm("/ip/hotspot/walled-garden/set", array(
+".id"=> "$idget",
+"disabled"=> "$dget"));
+_e('<script>window.history.go(-1)</script>');
+break;
+case'actions':
+$idget = $_GET['id'];
+$actionget = $_GET['action'];
+$API->comm("/ip/hotspot/walled-garden/set", array(
+".id"=> "$idget",
+"action"=> "$actionget"));
+_e('<script>window.history.go(-1)</script>');
+break;
+case'del':
+$idget = $_GET['id'];
+$API->comm("/ip/hotspot/walled-garden/remove", array(
+".id"=> "$idget",));
+_e('<script>window.history.go(-1)</script>');
+break;
+}
+?>

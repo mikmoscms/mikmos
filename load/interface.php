@@ -31,6 +31,7 @@ $mikmosTot = count($mikmosLoad);
 <th>rx-packet</th>
 <th>tx-byte</th>
 <th>rx-byte</th>
+<th>Dashboard</th>
 <th>Monitoring</th>
 </tr>
 </thead>
@@ -52,6 +53,13 @@ for ($i=0; $i<$mikmosTot; $i++){
 <td class="text-center"><?php echo formatBytes2($mikmosData['rx-packet']);?></td>
 <td class="text-center"><?php echo formatBytes2($mikmosData['tx-byte']);?></td>
 <td class="text-center"><?php echo formatBytes2($mikmosData['rx-byte']);?></td>
+<td class="text-center"><?php if('ether'.$_RETR==$mikmosData['default-name']){ ?>
+<a title="Sedang Aktif" onclick="return confirm('Yakin untuk non-aktifkan di Dashboard?')"  href="?load=interface&get=enabled&id=0" class="btn btn-xs btn-primary"><i class="fa fa-home"></i></a>
+<?php }else{ ?>
+
+<?php if($mikmosData['running']=='true'){ ?><a title="Aktifkan Grafik Interface <?php echo $mikmosData['name'];?> di Dashboard" onclick="return confirm('Yakin untuk aktifkan di Dashboard?')" href="?load=interface&get=enabled&id=<?php echo str_replace("ether", "", $mikmosData['default-name']);?>" class="btn btn-xs btn-danger"><i class="fa fa-close"></i></a><?php } ?>
+
+<?php } ?></td>
 <td class="text-center"><?php if($mikmosData['running']=='false'){?><?php }else{ ?><a title="Lihat Trafik Interface <?php echo $mikmosData['name'];?>" href="?load=interface&get=interface&id=<?php echo $mikmosData['default-name'];?>" class="btn btn-xs btn-danger"><i class="fa fa-random"></i> TRAFFIC</a><?php } ?></td>
 </tr>
 <?php
@@ -76,18 +84,12 @@ setTimeout(function(){
 break;
 case'interface':
 $interfaceeth = $_GET['id'];
-
 $API->comm("/system/logging/action/set", array("name" => "memory", "memory-lines" => "1", "memory-stop-on-full" => "yes"));
-
 $mikmosLoad = $API->comm("/interface/print", array("?running"=> "true"));
 $mikmosLoadx = $API->comm("/interface/print", array("?default-name"=> "$interfaceeth"));
 $mikmosTot = count($mikmosLoad);
 if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESSION['loncat'];}
-
-
 ?>
-
-
 <div class="row">
 <div class="col-sm-12">
 <section class="panel">
@@ -132,9 +134,9 @@ for ($i=0; $i<$mikmosTot; $i++){
 <div class="adv-table">
 <div class="table-responsive">
 
-	<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
-	<input hidden name="interface" id="interface" type="text" value="<?php _e($interfaceeth);?>" />
-    <div id="trafiknya"></div>
+<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+<input hidden name="interface" id="interface" type="text" value="<?php _e($interfaceeth);?>" />
+<div id="trafiknya"></div>
 </div>
 </div>
 </div>
@@ -142,17 +144,8 @@ for ($i=0; $i<$mikmosTot; $i++){
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-	<script type="text/javascript" src="assets/js/lib/highcharts/highcharts.js"></script>
-	<script> 
+<script type="text/javascript" src="assets/js/lib/highcharts/highcharts.js"></script>
+<script> 
 	var chart;
 	function requestDatta(interface) {
 		$.ajax({
@@ -231,7 +224,7 @@ case'timer':
 $loncat = $_GET['loncat'];
 $interface = $_GET['id'];
 $_SESSION['loncat'] = $loncat;
-echo Loading('./?load=interface&get=interface&id='.$interface.'','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 case'enabled':
 $interface = $_GET['id'];
@@ -257,7 +250,7 @@ $_RLOG 		= "'.$_RLOG.'";
 ?>';
 fwrite($handle, $data);
 chmod($my_file,0644);
-echo Loading('./?load=interface','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>

@@ -189,7 +189,7 @@ return $content;
 }
 
 function masaaktif(){
-$whitelist = array('127.0.10.1','::1');
+$whitelist = array('127.0.0.1','::1');
 $onlinelist = array('125.163.55.136','103.29.214.216');
 $urlon = "https://mikmos.my.id/";
 $folder = "versi/";
@@ -226,7 +226,7 @@ $jumlah_harix = ((($hasil_akhir-$hasil_awal) / 86400)-1);
 if($jumlah_harix < 1){$jumlah_hari = "<script>alert('Hosting Sudah Expired!');window.location.replace('./?index=logout');</script>" ;}else{$jumlah_hari = $jumlah_harix;}
 $content .= "
 <table class='table table-striped'>
-<tr><td colspan='2'>Terimakasih Bos Ku</td></tr>
+<tr><td colspan='2'>Terimakasih Bos Ku, salam hangat</td></tr>
 <tr><td>Klien</td><td>".$kklien[1]."</td></tr>
 <tr><td>Mulai</td><td>".$kmulai[1]."</td></tr>
 <tr><td>Akhir</td><td>".$kakhir[1]."</td></tr>
@@ -235,11 +235,11 @@ $content .= "
 }
 $contentx = "
 <table class='table table-striped'>
-<tr><td colspan='2' style='text-align:center;'>Terima kasih sudah menggunakan MIKMOS, Jika Bos ku ingin berlangganan Hosting bisa Kontak kami</td></tr>
+<tr><td colspan='2' style='text-align:center;'>Terima kasih sudah menggunakan MIKMOS, Jika Bos ku ingin berlangganan MIKMOS ONLINE bisa Kontak kami<br/>- MIKMOS -</td></tr>
 </table>";
 $contentz = "
 <table class='table table-striped'>
-<tr><td colspan='2' style='text-align:center;'>Jika Bos ku menggunakan hosting dari MIKMOS, berarti Bos ku sudah membantu usia MIKMOS.<br/>Terimakasih Bos ku</td></tr>
+<tr><td colspan='2' style='text-align:center;'>Jika Bos ku menggunakan hosting dari MIKMOS, berarti Bos ku sudah membantu usia MIKMOS. Terimakasih Bos ku salam kenal<br/>- MIKMOS -</td></tr>
 </table>";
 if(in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
 return $contentx;

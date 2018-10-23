@@ -75,6 +75,116 @@ $bg_array = array("#CEED9D","#ECED9D","#EDCF9D","#EC9CA7","#fdd752","#a48ad4","#
 </div>
 </div>
 </div>
+<?php 
+if(!empty($_RETR)){
+?>
+<div class="row">
+<?php
+$interfaceeth = 'ether'.$_RETR;
+$API->comm("/system/logging/action/set", array("name" => "memory", "memory-lines" => "1", "memory-stop-on-full" => "yes"));
+$mikmosLoad = $API->comm("/interface/print", array("?running"=> "true"));
+$mikmosLoadx = $API->comm("/interface/print", array("?default-name"=> "$interfaceeth"));
+$mikmosTot = count($mikmosLoad);
+if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESSION['loncat'];}
+?>
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong>Monitoring <?php echo __INTERFACE;?>  <?php _e($mikmosLoadx[0]['name']);?></strong>
+<span class="tools pull-right">
+<a title="Sedang Aktif" onclick="return confirm('Yakin untuk non-aktifkan, untuk meng aktif kan di menu Interface')"  href="?load=interface&get=enabled&id=0" class="btn btn-danger"><i class="fa fa-power-off"></i> Non Aktif</a> </span>
+</header>
+<div class="panel-body"><hr>
+<?php //print_r($mikmosLoad);?>
+<div class="table-responsive">
+<div class="adv-table">
+<div class="table-responsive">
+
+<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+<input hidden name="interface" id="interface" type="text" value="<?php _e($interfaceeth);?>" />
+<div id="trafiknya"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="assets/js/lib/highcharts/highcharts.js"></script>
+<script> 
+	var chart;
+	function requestDatta(interface) {
+		$.ajax({
+			url: './api/grafik.php?interface='+interface,
+			datatype: "json",
+			success: function(data) {
+				var midata = JSON.parse(data);
+				if( midata.length > 0 ) {
+					var TX=parseInt(midata[0].data);
+					var RX=parseInt(midata[1].data);
+					var x = (new Date()).getTime(); 
+					shift=chart.series[0].data.length > 19;
+					chart.series[0].addPoint([x, TX], true, shift);
+					chart.series[1].addPoint([x, RX], true, shift);
+					//document.getElementById("trafiknya").innerHTML=TX + " / " + RX;
+				}else{
+					//document.getElementById("trafiknya").innerHTML="- / -";
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) { 
+				console.error("Status: " + textStatus + " request: " + XMLHttpRequest); console.error("Error: " + errorThrown); 
+			}       
+		});
+	}	
+
+	$(document).ready(function() {
+			Highcharts.setOptions({
+				global: {
+					useUTC: false
+				}
+			});
+	
+
+           chart = new Highcharts.Chart({
+			   chart: {
+				renderTo: 'container',
+				animation: Highcharts.svg,
+				type: 'spline',
+				events: {
+					load: function () {
+						setInterval(function () {
+							requestDatta(document.getElementById("interface").value);
+						}, <?php _e($timerloncat);?>);
+					}				
+			}
+		 },
+		 title: {
+			text: 'Monitoring Interface <?php _e($mikmosLoadx[0]['name']);?>'
+		 },
+		 xAxis: {
+			type: 'datetime',
+				tickPixelInterval: 150,
+				maxZoom: 20 * 1000
+		 },
+		 yAxis: {
+			minPadding: 0.2,
+				maxPadding: 0.2,
+				title: {
+					text: 'Trafik',
+					margin: 10
+				}
+		 },
+            series: [{
+                name: 'TX',
+                data: []
+            }, {
+                name: 'RX',
+                data: []
+            }]
+	  });
+  });
+</script>
+<?php } ?>
 <div class="row">
 <div class="col-lg-6">
 <div class="card">

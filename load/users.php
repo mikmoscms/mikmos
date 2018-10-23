@@ -156,7 +156,7 @@ $getuser = $API->comm("/ip/hotspot/user/print", array(
 "?name"=> "$name",
 ));
 $uid =$getuser[0]['.id'];
-echo Loading('./?load=users&get=edit&id='.$uid.'','0');
+_e('<script>window.location="./?load=users&get=edit&id='.$uid.'"</script>');
 }
 ?>
 <script>
@@ -313,6 +313,7 @@ $mikmosLoadPU = $API->comm("/ip/hotspot/user/profile/print", array(
 "?name" => "$uprofile"));
 $profiledetalis = $mikmosLoadPU[0];
 $ponlogin = $profiledetalis['on-login'];
+$gettlimit = explode(",",$ponlogin)[5];
 $getvalid = explode(",",$ponlogin)[3];
 $getprice = explode(",",$ponlogin)[2];
 
@@ -329,8 +330,8 @@ $WA_valid = "Validity : *".$getvalid."* %0A";
 }else{
 $WA_valid = "";
 }
-if ($utimelimit != "") {
-$WA_tlimit = "TimeLimit : *".$utimelimit."* %0A";
+if ($gettlimit != "") {
+$WA_tlimit = "TimeLimit : *".$gettlimit."* %0A";
 }else{
 $WA_tlimit = "";
 }
@@ -380,7 +381,7 @@ $name = ($_POST['name']);
 $password = ($_POST['pass']);
 $profile = ($_POST['profile']);
 $disabled = ($_POST['disabled']);
-$timelimit = ($_POST['timelimit']);
+$timelimit = ($gettlimit);
 $datalimit = ($_POST['datalimit']);
 $comment = ($_POST['comment']);
 $mbgb = ($_POST['mbgb']);
@@ -426,10 +427,11 @@ x.type = 'password';
 <p class="text-muted">
 <a class="btn btn-danger" href="./?load=users"> <i class="fa fa-close"></i> <?php echo __CANCEL;?></a>
 <button type="submit" class="btn bg-primary" name="save"><i class="fa fa-edit"></i> <?php echo __EDIT;?></button>
-
-<a id="shareWA" class="btn bg-success" title="Share WhatsApp" href="whatsapp://send?text=<?php echo $shareWA;?>"> <i class="fa fa-whatsapp"></i> Share</a>
-
-
+<?php if(!isset($_GET['screen_check'])){  echo "<script language='JavaScript'> 
+<!--  
+document.location=\"?load=users&get=edit&id=$id_get&screen_check=done&Width=\"+screen.width; 
+//--> 
+</script>";}else{if(($_GET['Width']<799)) { echo '<a id="shareWA" class="btn bg-success" title="Share WhatsApp" href="whatsapp://send?text='.$shareWA.'"> <i class="fa fa-whatsapp"></i> Share</a>'; }}?> 
 <?php if($userdetails['limit-uptime'] == "1s"){ ?>
 <a title="Expired Aktifkan Kembali" class="btn btn-danger" href="#"> <i class="fa fa-warning"></i> Expired</a>
 
@@ -521,10 +523,10 @@ for ($i=0; $i<$TotalReg; $i++){
 <td class="align-middle">Bytes Out/In</td><td><input class="form-control" type="text" value="<?php if($ubytesout == 0){echo'0';}else{echo formatBytes($ubytesout,2);}?> / <?php if($ubytesin == 0){echo'0';}else{echo formatBytes($ubytesin,2);}?>" disabled></td>
 </tr>
 <tr>
-<td class="align-middle">Price</td><td><input class="form-control" type="text" value="<?php if($getprice == 0){}else{if($_LANG == "id"){echo number_format($getprice,0,",",".");}else{ echo number_format($getprice); }}?>" disabled></td>
+<td class="align-middle">Harga</td><td><input class="form-control" type="text" value="<?php if($getprice == 0){echo '0';}else{if($_LANG == "id"){echo number_format($getprice,0,",",".");}else{ echo number_format($getprice); }}?>" disabled></td>
 </tr>
 <tr>
-<td class="align-middle">Masa Aktif</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if($utimelimit == "1s"){echo "";}else{ echo $utimelimit;}?>" disabled></td>
+<td class="align-middle">Masa Aktif</td><td><input class="form-control" type="text" size="4" autocomplete="off" name="timelimit" value="<?php if($gettlimit == "1s"){echo "";}else{ echo $gettlimit;}?>" disabled></td>
 </tr>
 <?php if($getvalid != ""){?>
 <tr>
@@ -736,9 +738,9 @@ chmod($my_file,0644);
 
 
 if($qty < 2){
-echo Loading('./?load=users&get=generate&generate='.$commt.'','0');
+_e('<script>window.location="./?load=users&get=generate&generate='.$commt.'&prof='.$profile.'"</script>');
 }else{
-echo Loading('./?load=users&get=generate&generate='.$commt.'','0');
+_e('<script>window.location="./?load=users&get=generate&generate='.$commt.'&prof='.$profile.'"</script>');
 }
 }
 $mikmosLoadP = $API->comm("/ip/hotspot/user/profile/print");
@@ -771,7 +773,7 @@ $uprice = number_format($uprice,0,",",".");
 <button type="submit" class="btn bg-primary" name="generate"><i class="fa fa-save"></i> <?php echo __GENERATE;?></button>
 <?php
 if(!empty($_GET['generate'])){?>
-<a class="btn btn-success" href="./?load=users&comment=<?php echo $_GET['generate'];?>"> <i class="fa fa-check"></i> Lihat Hasil Generate Voucher</a>
+<a class="btn btn-success" href="./?load=users&comment=<?php echo $_GET['generate'];?>&prof=<?php echo $_GET['generate'];?>"> <i class="fa fa-check"></i> Lihat Hasil Generate Voucher</a>
 <?php } ?>
 </p>
 <table class="table">
@@ -810,14 +812,11 @@ echo "<option>" . $mikmosLoadS[$i]['name'] . "</option>";
 <option>7</option>
 <option>8</option>
 </select>
-<input class="form-control " type="text" size="4" maxlength="4" autocomplete="off" name="prefix" value="" hidden />
 </td>
 </tr>
-<!--
 <tr>
 <td class="align-middle">Prefix</td><td><input class="form-control " type="text" size="4" maxlength="4" autocomplete="off" name="prefix" value=""></td>
 </tr>
--->
 <tr>
 <td class="align-middle">Karakter</td><td>
 <select class="form-control " name="char" required="1">
@@ -901,12 +900,12 @@ case'dis':
 $idget = $_GET['id'];
 $dget = $_GET['d'];
 $API->comm("/ip/hotspot/user/set", array(".id"=> "$idget", "disabled"=> "$dget"));
-echo Loading('./?load=users','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 case'del':
 $idget = $_GET['id'];
 $API->comm("/ip/hotspot/user/remove", array(".id"=> "$idget",));
-echo Loading('./?load=users','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 case'delprof':
 $prof = $_GET['id'];
@@ -917,7 +916,7 @@ $mikmosView = $mikmosLoad[$i];
 $idget = $mikmosView['.id'];
 $API->comm("/ip/hotspot/user/remove", array(".id"=> "$idget"));
 }
-echo Loading('./?load=users','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 case'delprofcom':
 $prof = $_GET['id'];
@@ -929,7 +928,7 @@ $mikmosView = $mikmosLoad[$i];
 $idget = $mikmosView['.id'];
 $API->comm("/ip/hotspot/user/remove", array(".id"=> "$idget"));
 }
-echo Loading('./?load=users','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 case'delexp':
 $mikmosLoad = $API->comm("/ip/hotspot/user/print", array("?limit-uptime" => "1s"));
@@ -939,7 +938,7 @@ $mikmosView = $mikmosLoad[$i];
 $idget = $mikmosView['.id'];
 $API->comm("/ip/hotspot/user/remove", array(".id"=> "$idget"));
 }
-echo Loading('./?load=users','0');
+_e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>
