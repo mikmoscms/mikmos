@@ -1,10 +1,10 @@
 # MIKMOS cms
 
 Description of MIKMOS cms
-@author Yedin Abu Shafa mikmoscms@gmail.com <http://mikmos.my.id>
-@copyright Copyright (c) 2018, MIKMOS Team.
-@license https://opensource.org/licenses/gpl-license GNU Public License
-@for AllFiles MIKMOScms
+- @author Yedin Abu Shafa mikmoscms@gmail.com <http://mikmos.my.id>
+- @copyright Copyright (c) 2018, MIKMOS Team.
+- @license https://opensource.org/licenses/gpl-license GNU Public License
+- @for AllFiles MIKMOScms
 
 ----
 ![MIKMOScms](https://image.ibb.co/hJxZDA/Screenshot-2018-10-19-MIKMOS-CMS-Mikrotik-Monitoring-System-2.png)
