@@ -154,7 +154,7 @@ $getprice = ($_POST['price']);
 if($getprice == ""){$price = "0";}else{$price = $getprice;}
 $gettelegram = ($_POST['telegram']);
 if($gettelegram == Enable){
-$teleg_login = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Online" mode=http dst-path=login.txt';
+$teleg_login = ';/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Online" mode=http dst-path=login.txt';
 $teleg_logout = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Offline" mode=http dst-path=logout.txt';
 }else{
 $teleg_login = '';
@@ -163,23 +163,23 @@ $teleg_logout = '';
 $getlock = ($_POST['lockunlock']);
 if($getlock == Enable){$lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';}else{$lock = "";}
 
-$onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
-$onlogin2 = ':put (",ntf,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
-$onlogin3 = ':put (",remc,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
-$onlogin4 = ':put (",ntfc,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
+$onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
+$onlogin2 = ':put (",ntf,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
+$onlogin3 = ':put (",remc,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
+$onlogin4 = ':put (",ntfc,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
 
 if($expmode == "rem"){
-  $onlogin = $onlogin1.$lock."}}".$teleg_login;
+  $onlogin = $onlogin1.$lock."}}";
 }elseif($expmode == "ntf"){
-  $onlogin = $onlogin2.$lock."}}".$teleg_login;
+  $onlogin = $onlogin2.$lock."}}";
 }elseif($expmode == "remc"){
-  $onlogin = $onlogin3.$lock."}}".$teleg_login;
+  $onlogin = $onlogin3.$lock."}}";
 }elseif($expmode == "ntfc"){
-  $onlogin = $onlogin4.$lock."}}".$teleg_login;
+  $onlogin = $onlogin4.$lock."}}";
 }elseif($expmode == "0" && $price != "" ){
-$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock.$teleg_login;
+$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock;
 }else{
-$onlogin = "".$teleg_login;
+$onlogin = "";
 }
 $onlogout = $teleg_logout;
 
@@ -415,31 +415,31 @@ $getlock = ($_POST['lockunlock']);
 if($getlock == Enable){$lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';}else{$lock = "";}
 $gettelegram = ($_POST['telegram']);
 if($gettelegram == Enable){
-$teleg_login = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Online" mode=http dst-path=login.txt';
+$teleg_login = ';/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Online" mode=http dst-path=login.txt';
 $teleg_logout = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Offline" mode=http dst-path=logout.txt';
 }else{
 $teleg_login = '';
 $teleg_logout = '';
 }
 
-$onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
-$onlogin2 = ':put (",ntf,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
-$onlogin3 = ':put (",remc,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
-$onlogin4 = ':put (",ntfc,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
+$onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
+$onlogin2 = ':put (",ntf,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
+$onlogin3 = ':put (",remc,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
+$onlogin4 = ':put (",ntfc,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',")'.$teleg_login.'; {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
 
 
 if($expmode == "rem"){
-  $onlogin = $onlogin1.$lock."}}".$teleg_login;
+  $onlogin = $onlogin1.$lock."}}";
 }elseif($expmode == "ntf"){
-  $onlogin = $onlogin2.$lock."}}".$teleg_login;
+  $onlogin = $onlogin2.$lock."}}";
 }elseif($expmode == "remc"){
-  $onlogin = $onlogin3.$lock."}}".$teleg_login;
+  $onlogin = $onlogin3.$lock."}}";
 }elseif($expmode == "ntfc"){
-  $onlogin = $onlogin4.$lock."}}".$teleg_login;
+  $onlogin = $onlogin4.$lock."}}";
 }elseif($expmode == "0" && $price != "" ){
-$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock.$teleg_login;
+$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock;
 }else{
-$onlogin = "".$teleg_login;
+$onlogin = "";
 }
 $onlogout = $teleg_logout;
 
