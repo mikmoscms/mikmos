@@ -9,6 +9,7 @@ require_once('./inc/config.php');
 require_once('./lib/routeros_api.class.php');
 require_once('./lib/fungsi.php');
 require_once('./inc/ip_mk/'.$_ROUTER.'.php');
+require_once('./inc/TELEGRAM.php');
 $bg_array = array("#CEED9D","#ECED9D","#EDCF9D","#EC9CA7","#fdd752","#a48ad4","#aec785","#1fb5ac","#fa8564");
 if(empty($_LANG)){
 require_once('./inc/lang/id.php');
@@ -51,6 +52,7 @@ include("load/t_menu_adm.php");
 
 <?php load_router($_ROUTER, "./inc/ip_mk/", "on"); ?>
 <?php load_adm("./inc/adm/"); ?>
+<?php load_teleg(); ?>
 </div>
 <div class="col-md-6">
 
@@ -188,6 +190,112 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 <?php
 include("load/t_bawah.php");
 break;
+case'telegram':
+include("load/t_atas.php");
+include("load/t_menu_adm.php");
+?>
+<div class="row">
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong><?php echo __TELEGRAM;?></strong>
+<span class="tools pull-right"></span>
+</header>
+<div class="panel-body">
+<p class="text-muted">
+Telegram
+</p><hr>
+<div class="row">
+<div class="col-md-6">
+<?php load_teleg(); ?>
+</div>
+<div class="col-md-6">
+<table class="table table-striped">
+<tr><td>Status</td><td><?php if(empty($_STATTELEG)){_e('Tidak Aktif');}else{_e('Aktif');}?></td></tr>
+<tr><td>Plug</td><td><?php echo $_TELEGRAM;?></td></tr>
+<tr><td>Bot Api</td><td><?php if(empty($_STATTELEG)){_e('Bot Api Masih Kosong');}else{_e($_BOT_API);}?></td></tr>
+<tr><td>Chat Id</td><td><?php if(empty($_STATTELEG)){_e('Chat Id Masih Kosong');}else{_e($_CHAT_ID);}?></td></tr>
+</table>
+</div>
+</div></div></div></div>
+<?php
+include("load/t_bawah.php");
+break;
+case'telegram_ae':
+include("load/t_atas.php");
+include("load/t_menu_adm.php");
+include './inc/TELEGRAM.php';
+if(isset($_POST['edit'])) 
+{
+$botapi = $_POST['botapi'];
+$chatid = $_POST['chatid'];
+$my_file_d = './inc/TELEGRAM.php';
+unlink($my_file_d);
+$my_file = './inc/TELEGRAM.php';
+$handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
+$data = '<?php
+/** 
+Yedin Abu Shafa 
+Kontak WA: 081802161315
+**/
+$_STATTELEG	= "1";
+$_TELEGRAM	= "TELEGRAM";
+$_BOT_API	= "'.$botapi.'";
+$_CHAT_ID	= "'.$chatid.'";
+?>';
+fwrite($handle, $data);
+chmod($my_file,0644);
+_e('<script>window.location.replace("./settings.php?index=telegram");</script>');
+echo '<style>.panel-body{display:none;}</style>';
+}
+?>
+<div class="row">
+<div class="col-sm-12">
+<section class="panel">
+<header class="panel-heading">
+<strong><?php echo __TELEGRAM;?></strong>
+<span class="tools pull-right"></span>
+</header>
+<div class="panel-body">
+<p class="text-muted">
+</p><hr>
+<div class="row">
+<div class="col-md-7">
+<form action="" method="post">
+<table class="table">
+<tr>
+<td class="align-middle">BOT API</td><td>
+<input class="form-control" type="text" name="botapi" placeholder="XXXXXXXXX:AAE--mvH9LY7lmCMY3nnTauLZZ-K3ON4t_X" value="<?php echo $_BOT_API;?>" autocomplete="0" required />
+</td>
+</tr>
+<tr>
+<td class="align-middle">CHAT ID</td><td>
+<input class="form-control" type="text" name="chatid" placeholder="-0987654321" value="<?php echo $_CHAT_ID;?>" autocomplete="0" required />
+</td>
+</tr>
+<tr>
+<td></td><td>
+<div>
+<a class="btn btn-warning" href="./settings.php?index"> <i class="fa fa-close btn-mrg"></i> Close</a>
+<button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Edit</button>
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<div class="col-md-5">
+
+Telegram Bot fitur yang digunakan untuk monitoring user hotspot ketika login & logout.<br/><br/>
+
+Pastikan sudah membuat BOT API Telegram jika belum, bisa klik disini <br/><br/>
+<a class="btn btn-info" target="_blank" href="https://www.google.co.id/search?q=cara+membuat+Bot+Telegram">Cara Membuat Bot Telegram</a>
+<br/><br/>Bot Telegram di sinkronkan ke Menu Profil Users
+ </div>
+ </div> </div> </div></div>
+<?php
+include("load/t_bawah.php");
+break;
 case'change':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
@@ -222,11 +330,11 @@ $API->debug = false;
 if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
 $_SESSION['connect'] = 'connect';
 _e('<script>window.location.replace("./?load=home");</script>');
-$API->disconnect();
 }else{
 $_SESSION['connect'] = 'noconnect';
 _e('<script>window.location.replace("./settings.php?index");</script>');
 }
+$API->disconnect();
 include("load/t_bawah.php");
 break;
 case'gagal':
@@ -318,6 +426,7 @@ $konek = __CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__CONN
 }else{
 $konek = __NO_CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__NO_CONNECT.'</span>';
 }
+$API->disconnect();
 }
 if(isset($_POST['save'])) 
 {
@@ -370,7 +479,13 @@ $_TIMER		= "1200";
 ?>';
 fwrite($handle1, $data1);
 chmod($my_file1,0644);
-echo '<script>window.location.replace("./settings.php?index=mikrotik");</script>';
+$API = new RouterosAPI();
+$API->debug = false;
+if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+$_SESSION['connect'] = 'connect';
+_e('<script>window.location.replace("./settings.php?index=mikrotik");</script>');
+$API->disconnect();
+}
 }
 }
 if(isset($_POST['edit'])) 
@@ -424,8 +539,15 @@ $_RLOG 		= "'.$logo.'";
 ?>';
 fwrite($handle, $data);
 chmod($my_file,0644);
+
+$API = new RouterosAPI();
+$API->debug = false;
+if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+$_SESSION['connect'] = 'connect';
 _e('<script>window.location.replace("./settings.php?index=mikrotik");</script>');
-echo '<style>.panel-body{display:none;}</dstyle>';
+$API->disconnect();
+}
+
 }
 ?>
 <script>
@@ -579,9 +701,9 @@ _e('<script>window.location.replace("./settings.php?index=update");</script>');
 <div class="col-sm-12">
 <div class="panel">
 <header class="panel-heading">
-<strong><?php echo __UPDATE;?></strong>
+<strong><?php echo __UPDATE;?> Manual</strong>
 </header>
-<h2>Upload File Update.zip</h2>
+<p>Update Manual ini untuk mengunggah File File-Update.zip jika CURL-PHP di WebServer tidak aktif. Maka alternatif menggunakan fasilitas menu ini.</p>
 <form enctype="multipart/form-data" method="post" action="">
 <p>Silahkan update : <input type="file" name="zip_file">  <button type="submit" name="submit" class="btn btn-primary btn-mrg" ><i class="fa fa-upload btn-mrg"></i><?php echo __UPDATE;?></button>
 </form>
@@ -617,40 +739,6 @@ unlink('mikmos_update.zip');
 _e('<script>window.location.replace("./settings.php?index");</script>');
 }
 ?>
-<?php
-include("load/t_bawah.php");
-break;
-case'changebill':
-include("load/t_atas.php");
-include("load/t_menu_adm.php");
-if(isset($_POST['changebill'])) 
-{
-$API = new RouterosAPI();
-$API->debug = false;
-$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
-$mikmosLoad = $API->comm("/system/script/print", array("?comment" => "mikhmon"));
-$mikmosTot = count($mikmosLoad);
-for ($i=0; $i<$mikmosTot; $i++){
-$mikmosView = $mikmosLoad[$i];
-$idget = $mikmosView['.id'];
-$MIKMOSCMS = 'MIKMOScms';
-$API->comm("/system/script/set", array(".id" => "$idget", "comment" => "$MIKMOSCMS"));
-}
-}
-?>
-<div class="row">
-<div class="col-sm-12">
-<div class="panel">
-<header class="panel-heading">
-<strong><?php echo __UPDATE;?></strong>
-</header>
-<h2>Upload File Update.zip</h2>
-<form enctype="multipart/form-data" method="post" action="">
-<button type="submit" name="changebill" class="btn btn-primary btn-mrg" ><i class="fa fa-upload btn-mrg"></i><?php echo __UPDATE;?></button>
-</form>
-</div>
-</div>
-</div>
 <?php
 include("load/t_bawah.php");
 break;
@@ -691,11 +779,11 @@ echo "<script>window.location='./?index=login'</script>";
 <div class="table-responsive">
 <div class="adv-table">
 <form action="" method="post" enctype="multipart/form-data">
-        <div>
-          <h3>Anda yakin untuk me-Reboot Mikrotik <?php echo $_ROUTER;?>?</h3>
-        </div>
-  	  <button onclick="return confirm('Anda yakin untuk me-Reboot Mikrotik <?php echo $_ROUTER;?>?')" class="btn bg-danger" type="submit" title="Reboot" name="reboot"><i class="fa fa-power-off"></i> Reboot</button>
-    </form>
+<div>
+<h3>Anda yakin untuk me-Reboot Mikrotik <?php echo $_ROUTER;?>?</h3>
+</div>
+<button onclick="return confirm('Anda yakin untuk me-Reboot Mikrotik <?php echo $_ROUTER;?>?')" class="btn bg-danger" type="submit" title="Reboot" name="reboot"><i class="fa fa-power-off"></i> Reboot</button>
+</form>
 </div>
 </div>
 </div>

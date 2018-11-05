@@ -1,13 +1,4 @@
 $(function() {
-    "use strict";
-    $(function() {
-            $(".preloader").fadeIn();
-        }),
-
-        jQuery(document).on("click", ".mega-dropdown", function(i) {
-            i.stopPropagation();
-        });
-
 
     var i = function() {
         (window.innerWidth > 0 ? window.innerWidth : this.screen.width) < 1170 ? ($("body").addClass("mini-sidebar"),

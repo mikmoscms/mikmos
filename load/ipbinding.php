@@ -52,14 +52,14 @@ if($mikmosData['type']=="bypassed"){$bypass = "<span class='btn btn-warning btn-
 elseif($mikmosData['type']=="blocked"){$bypass = "<span class='btn btn-warning btn-xs' title='B - Blocked'>B</span>";}
 else{$bypass = "<strong title='R - Regular' style='color:#345333'>R</strong>";}
 
-if($mikmosData['bypassed']=="true"){$address1 = "<atitle='Queues Simple ".$address."' href='#'><span class='btn btn-warning btn-xs'><i class='fa fa-retweet'></i></span> ".$address."</a>";}
-else{$address1 = "<atitle='Make Binding IP ".$address."' href='./?load=host&get=makebinding&mac_binding=". $mac . "&server_binding=". $server . "&address_binding=". $address . "&toaddress_binding=". $toaddress . "'><i class='fa fa-retweet'></i> ".$address."</a>";}
+if($mikmosData['bypassed']=="true"){$address1 = "<a title='Queues Simple ".$address."' href='#'><span class='btn btn-warning btn-xs'><i class='fa fa-retweet'></i></span> ".$address."</a>";}
+else{$address1 = "<a title='Make Binding IP ".$address."' href='./?load=host&get=makebinding&mac_binding=". $mac . "&server_binding=". $server . "&address_binding=". $address . "&toaddress_binding=". $toaddress . "'><i class='fa fa-retweet'></i> ".$address."</a>";}
 
-if($mikmosData['disabled']=="true"){$disabled = "style='color:#ccc'";$lockn="<atitle='Enable IP Binding ". $address . "' href='./?load=ipbinding&get=disable&id=". $id . "'><span class='btn btn-info btn-xs'><i class='fa fa-lock'></i></span></a>";}
-else{$disabled = "style=''";$lockn="<atitle='Disable IP Binding ". $address . "' href='./?load=ipbinding&get=enable&id=". $id . "'><span class='btn btn-info btn-xs'><i class='fa fa-unlock'></i></span></a>";}
+if($mikmosData['disabled']=="true"){$disabled = "style='color:#ccc'";$lockn="<a title='Enable IP Binding ". $address . "' href='./?load=ipbinding&get=disable&id=". $id . "'><span class='btn btn-info btn-xs'><i class='fa fa-lock'></i></span></a>";}
+else{$disabled = "style=''";$lockn="<a title='Disable IP Binding ". $address . "' href='./?load=ipbinding&get=enable&id=". $id . "'><span class='btn btn-info btn-xs'><i class='fa fa-unlock'></i></span></a>";}
 
 echo "<tr ".$disabled.">";
-echo "<td style='text-align:center;'><atitle='Remove ". $user . "' href='./?load=ipbinding&get=del&id=". $id . "&name=". $comment . "'><span class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></span></a> ".$lockn." " . $bypass . "</td>";
+echo "<td style='text-align:center;'><a title='Remove ". $user . "' href='./?load=ipbinding&get=del&id=". $id . "&name=". $comment . "'><span class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></span></a> ".$lockn." " . $bypass . "</td>";
 echo "<td>" . $comment . "</td>";
 echo "<td>" . $mac . "</td>";
 echo "<td>" . $address1 . "</td>";

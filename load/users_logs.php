@@ -1,11 +1,6 @@
 <?php
-error_reporting(0);
 switch($_GET['get']){
 default:
-@session_start();
-if(!isset($_SESSION['connect'])){
- echo "<meta http-equiv='refresh' content='0;url=./?load=settings' />";
-}
 
 $mikmosLoad = $API->comm("/log/print", array("?topics" => "hotspot,info,debug"));
 $mikmosData = array_reverse($mikmosLoad);
@@ -55,12 +50,6 @@ $API->disconnect();
 </section>
 </div>
 </div>
-
-<script type="text/javascript">
-setTimeout(function(){
-   window.location.reload(1);
-}, 30000);
-</script>
 
 
 <?php

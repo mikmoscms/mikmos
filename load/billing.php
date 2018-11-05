@@ -75,6 +75,7 @@ $shd = "none";
 <p>
 
 <div style="display: table;">
+
 <div style="padding-bottom: 5px; padding-top: 5px;"> 
 <button class="btn bg-primary" onclick="exportTableToCSV('report-mikmos-<?php _e($filedownload);?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
 <button class="btn bg-primary" onclick="location.href='./?load=billing';" title="Reload all data"><i class="fa fa-search"></i> ALL</button>
@@ -96,14 +97,14 @@ $shd = "none";
 <div class="adv-table">
 
  <table class="table table-bordered table-hover text-nowrap" id="mikmos-tbl-desc">
-<thead class="thead-light">
+<thead>
 <tr>
-<th colspan=3 >Billing report <?php _e($filedownload);?><b style="font-size:0;">,</b></th>
+<th colspan=3 >Billing Report <?php _e($filedownload);?><b style="font-size:0;">,</b></th>
 <th style="text-align:right;">Total</th>
 <th style="text-align:right;font-weight:bold;" id="total"></th>
 </tr>
 <tr>
-<th >Bulan</th>
+<th width="30px"></th>
 <th >Date</th>
 <th >Time</th>
 <th class="no-sort">Username</th>
@@ -121,13 +122,15 @@ $tgl = $getname[0];
 $getdy = explode("/",$tgl);
 $m = $getdy[0];
 $dy = $m."/".$getdy[1]."/".$getdy[2];
+$dy1 = $getdy[1]."/".$getdy[2];
 $ltime = $getname[1];
 $username = $getname[2];
 $price = $getname[3];
 ?>
 <tr>
-<td><strong><a href='./?load=billing&idbl=<?php _e($getowner);?>' title='Lihat Bulan : <?php _e($getowner);?>'><i class='fa fa-search'></i> <?php _e($m);?></a></strong></td>
-<td><strong><a href='./?load=billing&idhr=<?php _e($tgl);?>' title='Lihat Tanggal : <?php _e($tgl);?>'><i class='fa fa-search'></i> <?php _e($dy);?></a></strong></td>
+<td>
+<a onclick="return confirm('Yakin untuk mneghapusnya semua users Comment <?php echo $mikmosComm;?>?')" title="Menghapus Semua Users di Comment <?php echo $mikmosComm;?>" class="btn btn-xs btn-danger" href="./?load=users&get=delprofcom&id=<?php echo $mikmosProf;?>&comment=<?php echo $mikmosComm;?>"> <i class="fa fa-trash-o"></i></a> <strong></strong></td>
+<td><strong><a class="btn btn-primary"  href='./?load=billing&idbl=<?php _e($getowner);?>' title='Lihat Bulan : <?php _e($getowner);?>'><i class='fa fa-search'></i> <?php _e($m);?></a> <a class="btn btn-warning" href='./?load=billing&idhr=<?php _e($tgl);?>' title='Lihat Tanggal : <?php _e($tgl);?>'><i class='fa fa-search'></i> <?php _e($dy1);?></a></strong></td>
 <td><?php _e($ltime);?></td>
 <td><?php _e($username);?></td>
 <td style='text-align:right;'><?php _e($price);?></td>

@@ -141,6 +141,7 @@ echo "</tr>";
 
 break;
 case'add':
+include './inc/TELEGRAM.php';
 if(isset($_POST['save'])){
 $name = ganti_spasi($_POST['name']);
 $sharedusers = ($_POST['sharedusers']);
@@ -151,27 +152,36 @@ $timelimit = ($_POST['timelimit']);
 $graceperiod = ($_POST['graceperiod']);
 $getprice = ($_POST['price']);
 if($getprice == ""){$price = "0";}else{$price = $getprice;}
+$gettelegram = ($_POST['telegram']);
+if($gettelegram == Enable){
+$teleg_login = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Online" mode=http dst-path=login.txt';
+$teleg_logout = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Offline" mode=http dst-path=logout.txt';
+}else{
+$teleg_login = '';
+$teleg_logout = '';
+}
 $getlock = ($_POST['lockunlock']);
 if($getlock == Enable){$lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';}else{$lock = "";}
 
-  $onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
+$onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
 $onlogin2 = ':put (",ntf,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
 $onlogin3 = ':put (",remc,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
 $onlogin4 = ':put (",ntfc,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
 
 if($expmode == "rem"){
-  $onlogin = $onlogin1.$lock."}}";
+  $onlogin = $onlogin1.$lock."}}".$teleg_login;
 }elseif($expmode == "ntf"){
-  $onlogin = $onlogin2.$lock."}}";
+  $onlogin = $onlogin2.$lock."}}".$teleg_login;
 }elseif($expmode == "remc"){
-  $onlogin = $onlogin3.$lock."}}";
+  $onlogin = $onlogin3.$lock."}}".$teleg_login;
 }elseif($expmode == "ntfc"){
-  $onlogin = $onlogin4.$lock."}}";
+  $onlogin = $onlogin4.$lock."}}".$teleg_login;
 }elseif($expmode == "0" && $price != "" ){
-$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock;
+$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock.$teleg_login;
 }else{
-$onlogin = "";
+$onlogin = "".$teleg_login;
 }
+$onlogout = $teleg_logout;
 
 $API->comm("/ip/hotspot/user/profile/add", array(
   "name" => "$name",
@@ -180,6 +190,7 @@ $API->comm("/ip/hotspot/user/profile/add", array(
   "status-autorefresh" => "1m",
   "transparent-proxy" => "yes",
   "on-login" => "$onlogin",
+  "on-logout" => "$onlogout",
 ));
 
 $mikmosLoad = $API->comm("/ip/hotspot/user/profile/print", array(
@@ -254,6 +265,23 @@ echo "<script>window.location='./?load=profile'</script>";
   </select>
 </td>
   </tr>
+
+<?php if($_STATTELEG==0){?>
+  <tr>
+<td>Telegram</td><td>Bot Telegram belum diaktfikan<br/> Untuk mengaktifkan Bot Telegram, input Bot telegram <br/>di Menu -> Administrator -> Telegram
+</td>
+  </tr>
+<?php }else{ ?>
+  <tr>
+<td>Telegram</td><td>
+<select class="form-control" id="telegram" name="telegram">
+<option value="">=== Telegram Users Online ===</option>
+<option value="Enable">Enable</option>
+<option value="Disable">Disable</option>
+</select>
+</td>
+  </tr>
+<?php } ?>
   <tr>
 <td></td><td>
 </td>
@@ -325,6 +353,8 @@ Mode Expired adalah kontrol untuk user hotspot
 break;
 case'edit':
 $userprofile = $_GET['id'];
+
+include './inc/TELEGRAM.php';
 if(substr($userprofile,0,1) == "*"){
 $userprofile = $userprofile;
   }elseif(substr($userprofile,0,1) != ""){
@@ -367,7 +397,11 @@ $gettimelimit = explode(",",$ponlogin)[5];
 $getlocku = explode(",",$ponlogin)[6];
 if($getlocku == ""){$getlocku = "Disable";}else{$getlocku = $getlocku;}
 
-  if(isset($_POST['edit'])){
+if(empty($mikmosData['on-logout'])){$gettelegram = "Disable";}else{$gettelegram = "Enable";}
+
+
+
+if(isset($_POST['edit'])){
 $name = ganti_spasi($_POST['name']);
 $sharedusers = ($_POST['sharedusers']);
 $ratelimit = ($_POST['ratelimit']);
@@ -379,25 +413,36 @@ $getprice = ($_POST['price']);
 if($getprice == ""){$price = "0";}else{$price = $getprice;}
 $getlock = ($_POST['lockunlock']);
 if($getlock == Enable){$lock = ';[:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';}else{$lock = "";}
-   
+$gettelegram = ($_POST['telegram']);
+if($gettelegram == Enable){
+$teleg_login = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Online" mode=http dst-path=login.txt';
+$teleg_logout = '/tool fetch url="https://api.telegram.org/bot'.$_BOT_API.'/sendMessage?chat_id='.$_CHAT_ID.'&text=$user%20 Offline" mode=http dst-path=logout.txt';
+}else{
+$teleg_login = '';
+$teleg_logout = '';
+}
+
 $onlogin1 = ':put (",rem,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"]'; 
 $onlogin2 = ':put (",ntf,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time]';
 $onlogin3 = ':put (",remc,'.$price.','.$validity.','.$graceperiod.','.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event="[/ip hotspot active remove [find where user=$user]];[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/sys sch re [find where name=$user]];[/sys script run [find where name=$user]];[/sys script re [find where name=$user]]" start-date=$date start-time=$time];[/system script add name=$user source=":local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$graceperiod.');[/system scheduler add disabled=no interval=\$uptime name=$user on-event= \"[/ip hotspot user remove [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]\"]"];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
 $onlogin4 = ':put (",ntfc,'.$price.','.$validity.',,'.$timelimit.','.$getlock.',"); {:local price ('.$price.');:local date [/system clock get date ];:local time [/system clock get time ];:local uptime ('.$validity.');[/system scheduler add disabled=no interval=$uptime name=$user on-event= "[/ip hotspot user set limit-uptime=1s [find where name=$user]];[/ip hotspot active remove [find where user=$user]];[/sys sch re [find where name=$user]]" start-date=$date start-time=$time];:local bln [:pick $date 0 3]; :local thn [:pick $date 7 11];[:local mac $"mac-address"; /system script add name="$date-|-$time-|-$user-|-$price-|-$address-|-$mac-|-'.$validity.'" owner="$bln$thn" source=$date comment=MIKMOScms]';
 
+
 if($expmode == "rem"){
-  $onlogin = $onlogin1.$lock."}}";
+  $onlogin = $onlogin1.$lock."}}".$teleg_login;
 }elseif($expmode == "ntf"){
-  $onlogin = $onlogin2.$lock."}}";
+  $onlogin = $onlogin2.$lock."}}".$teleg_login;
 }elseif($expmode == "remc"){
-  $onlogin = $onlogin3.$lock."}}";
+  $onlogin = $onlogin3.$lock."}}".$teleg_login;
 }elseif($expmode == "ntfc"){
-  $onlogin = $onlogin4.$lock."}}";
+  $onlogin = $onlogin4.$lock."}}".$teleg_login;
 }elseif($expmode == "0" && $price != "" ){
-$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock;
+$onlogin = ':put (",,'.$price.',,,,'.$getlock.',")'.$lock.$teleg_login;
 }else{
-$onlogin = "";
+$onlogin = "".$teleg_login;
 }
+$onlogout = $teleg_logout;
+
 
 $API->comm("/ip/hotspot/user/profile/set", array(
 /*"add-mac-cookie" => "yes",*/
@@ -408,6 +453,7 @@ $API->comm("/ip/hotspot/user/profile/set", array(
   "status-autorefresh" => "1m",
   "transparent-proxy" => "yes",
   "on-login" => "$onlogin",
+  "on-logout" => "$onlogout",
 ));
 echo "<script>window.location='./?load=profile'</script>";
   }
@@ -481,6 +527,22 @@ echo "<script>window.location='./?load=profile'</script>";
   </select>
 </td>
   </tr>
+<?php if($_STATTELEG==0){?>
+  <tr>
+<td>Telegram</td><td>Bot Telegram belum diaktfikan<br/> Untuk mengaktifkan Bot Telegram, input Bot telegram <br/>di Menu -> Administrator -> Telegram
+</td>
+  </tr>
+<?php }else{ ?>
+  <tr>
+<td>Telegram</td><td>
+<select class="form-control" id="telegram" name="telegram">
+<option value="">=== Telegram Users Online ===</option>
+<option <?php if($gettelegram=="Enable"){echo 'selected';}?> value="Enable"><?php echo __ENABLE;?></option>
+<option <?php if($gettelegram=="Disable"){echo 'selected';}?> value="Disable"><?php echo __DISABLE;?></option>
+  </select>
+</td>
+  </tr>
+<?php } ?>
   <tr>
 <td></td><td>
 </td>
@@ -513,6 +575,7 @@ Mode Expired adalah kontrol untuk user hotspot
   <tr><td>Masa Tenggang</td><td>Tenggang waktu sebelum user dihapus.</td></tr>
   <tr><td>Masa Hapus</td><td>User akan dihapus setelah masa tenggang</td></tr>
   <tr><td>Kunci User</td><td>Username/Kode voucher hanya bisa digunakan pada 1 perangkat saja.</td></tr>
+  <tr><td>Telegram</td><td>Untuk mengaktifkan Bot Telegram, input Bot telegram di Menu -> Administrator -> Telegram</td></tr>
   <tr><td>Format</td><td>[wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.</td></tr>
   </table>
   <?php }else{?>
@@ -527,6 +590,7 @@ Mode Expired adalah kontrol untuk user hotspot
   <tr><td>Masa Tenggang</td><td>Tenggang waktu sebelum user dihapus.</td></tr>
   <tr><td>Masa Hapus</td><td>Grace period before user deleted.</td></tr>
   <tr><td>Kunci User</td><td>Username can only be used on 1 device only.</td></tr>
+  <tr><td>Telegram</td><td>Untuk mengaktifkan Bot Telegram, input Bot telegram di Menu -> Administrator -> Telegram</td></tr>
   <tr><td>Format</td><td>[wdhm] Contoh : 30d = 30hari, 12h = 12jam, 4w3d = 31hari.</td></tr>
   </table>
   

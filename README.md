@@ -24,9 +24,9 @@ Fitur:
 ----
 Sistem yang dibutuhkan
 ----
-Minimum Requirements
+Requirements
 - Linux or Windows OS
-- PHP Version 5.6 ataw lebih
+- PHP Version 5.6 atau lebih
 - PHP-CURL
 - PHP-ZIP
 

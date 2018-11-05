@@ -10,9 +10,23 @@
 <title><?php _e(__WEBTITLLE);?></title>
 <link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/helper.css" rel="stylesheet">
-<link href="assets/css/mikmos_style<?php _e($_SESSION['css']);?>.css" rel="stylesheet">
+<?php if(empty($_SESSION['css'])){ ?>
+<link href="assets/css/mikmos_style.css" rel="stylesheet">
+<?php }else{ ?>
+<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css" rel="stylesheet">
+<?php } ?>
 <script src="assets/js/lib/jquery/jquery.min.js"></script>
 <script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128579565-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128579565-1');
+</script>
+
 </head>
 <body class="fix-header fix-sidebar">
 <?php
@@ -25,10 +39,17 @@ echo cek_update();
 <div class="header">
 <nav class="navbar top-navbar navbar-expand-md navbar-light">
 <div class="navbar-header">
+<?php if(empty($_SESSION['css'])){ ?>
 <a class="navbar-brand" href="?load=home">
-<b><img src="assets/images/logo<?php _e($_SESSION['css']);?>.png" class="dark-logo" /></b>
-<span><img src="assets/images/logo-text<?php _e($_SESSION['css']);?>.png" class="dark-logo" /></span>
+<b><img src="assets/images/logo.png"/></b>
+<span><img src="assets/images/logo-text.png"/></span>
 </a>
+<?php }else{ ?>
+<a class="navbar-brand" href="?load=home">
+<b><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo.png"/></b>
+<span><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo-text.png"/></span>
+</a>
+<?php } ?>
 </div>
 <div class="navbar-collapse">
 <ul class="navbar-nav mr-auto mt-md-0">
@@ -65,11 +86,13 @@ if(!is_dir($file)){
 <a title="Aktifkan" class="alert alert-warning clearfix" href="./settings.php?index=change&get=<?php _e(substr($file, 0, -4));?>">
 <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-minus"></i></div>
 <div class="mail-contnet">
-<h5><?php _e(substr($file, 0, -4));?></h5> 
+<h5><?php _e(substr($file, 0, -4));?> </h5> 
 </div>
 </a>
 <?php } ?>
 <?php }}}} ?>
+
+
 </div>
 </li>
 <li>
@@ -78,13 +101,19 @@ if(!is_dir($file)){
 </ul>
 </div>
 </li>
+
 </ul>
 <ul class="navbar-nav my-lg-0">
 <li class="nav-item search-box box"><?php _e(update_system());?></li>
 <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><div class="form-control" id="pesan"></div></a>
 </li>
 <li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/user<?php _e($_SESSION['css']);?>.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
+<?php if(empty($_SESSION['css'])){ ?>
+<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
+<?php }else{ ?>
+<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
+<?php } ?>
+
 <div class="dropdown-menu dropdown-menu-right animated zoomIn">
 <ul class="dropdown-user">
 <li><a href="./?index=logout"><i class="fa fa-power-off"></i> <?php _e(__LOGOUT);?></a></li>

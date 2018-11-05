@@ -763,18 +763,93 @@ $uprice = number_format($uprice,0,",",".");
  </span>
 </header>
 
-<form name="form" autocomplete="off" method="post" action="">
+
+
+
+<?php if(!empty($_GET['generate'])){ 
+ $gpname = $_GET['prof'];
+ $mikmosLoad = $API->comm("/ip/hotspot/user/profile/print", array(
+ "?name" => "$gpname"));
+ $mikmosView = $mikmosLoad[0];
+ ?>
+
 <div class="panel-body">
+<strong>Berhasil <?php echo __GENERATE;?> Vouchers: <span style="color:red"><?php echo $_GET['generate'];?></span></strong>
+<form target="_blank" action="./vouchers/vouchers.php" method="get">
+
+ <input class="form-control" name="id" value="<?php echo $mikmosView['.id'];?>" type="hidden">
+ <input class="form-control" name="vouchers" value="<?php echo $_GET['generate'];?>" type="hidden">
+<hr>
+<div class="row">
+<div class="col-md-7">
+<p class="text-muted">
+<a class="btn btn-danger" href="./?load=users"> <i class="fa fa-arrow-left"></i> <?php echo __BACK;?></a>
+<a class="btn btn-primary" href="./?load=users&get=generate"> <i class="fa fa-ticket"></i> Buat Voucher <?php echo __GENERATE;?> Lagi</a>
+</p>
+
+<table class="table">
+ <tr>
+ <td class="align-middle">Style Voucher</td><td>
+ <select class="form-control" name="styles" required="1">
+ <?php
+$rep=opendir('./vouchers/styles/');
+while ($file = readdir($rep)) {
+if($file != '..' && $file !='.' && $file !=''){
+if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
+if(!is_dir($file)){?>
+<option style="text-transform:uppercase" value="<?php echo substr($file,0, -4);?>"><?php echo substr($file, 0, -4);?></option>
+<?php }}}}
+?>
+ </select>
+ <input class="form-control" name="pilihan" value="vc" type="hidden">
+ </td>
+ </tr>
+ <tr>
+ <td class="align-middle">QRcode</td><td>
+ <select class="form-control" name="qrcode" required="1">
+<option style="text-transform:uppercase" value="qr">Tampil</option>
+<option style="text-transform:uppercase" value="noqr">Tidak</option>
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td></td><td>
+ <div>
+ <button type="submit" class="btn btn-primary btn-mrg" ><i class="fa fa-print btn-mrg"></i> Cetak Hasil Generate Voucher</button>
+ </div>
+ </td>
+ </tr>
+ <tr>
+ <td></td><td>
+ <div>
+<a class="btn btn-success" href="./?load=users&comment=<?php echo $_GET['generate'];?>&prof=<?php echo $_GET['prof'];?>"> <i class="fa fa-check"></i> Lihat Hasil Generate Voucher</a>
+ </div>
+ </td>
+ </tr>
+</table>
+</div>
+
+<div class="col-md-5">
+
+</div>
+</div>
+
+</form>
+</div>
+
+<?php }else { ?>
+
+
+
+<div class="panel-body">
+<form name="form" autocomplete="off" method="post" action="">
 <hr>
 <div class="row">
 <div class="col-md-7">
 <p class="text-muted">
 <a class="btn btn-danger" href="./?load=users"> <i class="fa fa-close"></i> <?php echo __CANCEL;?></a>
 <button type="submit" class="btn bg-primary" name="generate"><i class="fa fa-save"></i> <?php echo __GENERATE;?></button>
-<?php
-if(!empty($_GET['generate'])){?>
-<a class="btn btn-success" href="./?load=users&comment=<?php echo $_GET['generate'];?>&prof=<?php echo $_GET['generate'];?>"> <i class="fa fa-check"></i> Lihat Hasil Generate Voucher</a>
-<?php } ?>
+
 </p>
 <table class="table">
 <tr>
@@ -886,8 +961,10 @@ for ($i=0; $i<$mikmosTot; $i++){
 </div>
 </div>
 
-</div>
 </form>
+</div>
+
+<?php } ?>
 </div>
 </div>
 

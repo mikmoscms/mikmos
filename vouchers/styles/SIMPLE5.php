@@ -21,11 +21,11 @@
     </tr>
     <tr>
       <td style="border:1px solid #666;color:#666;" valign="top">Aktif</td>
-      <td style="border:1px solid #666;color:#666;" valign="top"><?php echo $v_valid;?></td>
+      <td style="border:1px solid #666;color:#666;" valign="top"><?php echo $v_tlimit;?></td>
     </tr>
     <tr>
       <td style="border:1px solid #666;color:#666;" valign="top">Tenggang</td>
-      <td style="border:1px solid #666;color:#666;" valign="top"><?php echo $v_tlimit;?></td>
+      <td style="border:1px solid #666;color:#666;" valign="top"><?php echo $v_valid;?></td>
     </tr>
     <tr>
       <td style="border:1px solid #666;color:#666;" valign="top">Kuota</td>

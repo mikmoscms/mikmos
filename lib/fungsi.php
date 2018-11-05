@@ -111,7 +111,7 @@ while ($file = readdir($rep)) {
  if($file != '..' && $file !='.' && $file !=''){
  if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
  if(!is_dir($file)){
-echo '<div class="card p-20" style="background-color:#fa8564"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
+echo '<div class="card p-20" style="background-color:#34a853"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-users f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">'.substr($file, 0, -4).'</h2>
 <p class="m-b-0 color-white"><a class="color-white" href="./settings.php?index=administrator_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
@@ -119,6 +119,16 @@ echo '<div class="card p-20" style="background-color:#fa8564"><div class="media 
 </div>
 </div>';
 }}}}}
+function load_teleg(){
+include './inc/TELEGRAM.php';
+echo '<div class="card p-20" style="background-color:#0088cc"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-telegram f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">TELEGRAM</h2>
+<p class="m-b-0 color-white"><a class="color-white" href="./settings.php?index=telegram_ae" title="'.__EDIT.' TELEGRAM">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
+</div>
+</div>
+</div>';
+}
 function _e($echo){
 echo $echo;
 }

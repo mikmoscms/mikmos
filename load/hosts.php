@@ -62,11 +62,11 @@ else{$dhcp = "";}
 if($mikmosData['bypassed']=="true"){$bypass = "<span class='btn btn-warning btn-xs' title='P - bypass'>P</span>";}
 elseif($mikmosData['bypassed']=="false"){$bypass = "<strong style='color:#FF0000'></strong>";}
 else{$bypass = "";}
-if($mikmosData['bypassed']=="true"){$address1 = "<atitle='Cek Binding IP ".$address."' href='./?load=ipbinding'><span class='btn btn-warning btn-xs'><i class='fa fa-retweet'></i></span> ".$address."</a>";}
-else{$address1 = "<atitle='Make Binding IP ".$address."' href='./?load=hosts&get=makebinding&mac_binding=". $mac . "&server_binding=all&address_binding=". $address . "&toaddress_binding=". $toaddress . "&comment=".$comment1."'><span class='btn btn-info btn-xs'><i class='fa fa-retweet'></i></span> ".$address."</a>";}
+if($mikmosData['bypassed']=="true"){$address1 = "<a title='Cek Binding IP ".$address."' href='./?load=ipbinding'><span class='btn btn-warning btn-xs'><i class='fa fa-retweet'></i></span> ".$address."</a>";}
+else{$address1 = "<a title='Make Binding IP ".$address."' href='./?load=hosts&get=makebinding&mac_binding=". $mac . "&server_binding=all&address_binding=". $address . "&toaddress_binding=". $toaddress . "&comment=".$comment1."'><span class='btn btn-info btn-xs'><i class='fa fa-retweet'></i></span> ".$address."</a>";}
 
 echo "<tr>";
-echo "<td><atitle='".__DEL." ". $user . "' href='./?load=hosts&del=". $id . "'><span class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></span></a>";
+echo "<td><a title='".__DEL." ". $user . "' href='./?load=hosts&del=". $id . "'><span class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></span></a>";
 echo "&nbsp";
 echo "" . $authorized . "" . $dhcp . "" . $bypass . "</td>";
 echo "<td>" . $mac . "</td>";

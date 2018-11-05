@@ -1,5 +1,4 @@
 <?php 
-error_reporting(0);
 @session_start();
 @ob_start("ob_gzhandler");
 @date_default_timezone_set("Asia/Bangkok");

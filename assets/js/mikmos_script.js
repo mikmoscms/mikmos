@@ -57,7 +57,7 @@ color: "#dcdcdc"
 $(".message-center").slimScroll({
 position: "right",
 size: "5px",
-height: "330px",
+height: "350px",
 color: "#dcdcdc"
 }),
 $(".message-center1").slimScroll({

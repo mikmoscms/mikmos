@@ -53,8 +53,8 @@
 			  <td style="width:95px;text-align:right;">
 			<!--VALIDASI-TIMELIMIT-KUOTA-->
 			<div style="clear:both;padding:0 2.5px;font-size:9px;font-weight:bold;color:#666;">
-			Validasi <?php echo $v_valid;?><br/>
-			Time Limit <?php echo $v_tlimit;?><br/>
+			Aktif <?php echo $v_tlimit;?><br/>
+			Tenggang <?php echo $v_valid;?><br/>
 			Kuota <?php if(empty($v_dlimit)){;?>Unlimted <?php }else{ echo $v_dlimit;}?>
 			</div>
 			<!--VALIDASI-TIMELIMIT-KUOTA-->  
