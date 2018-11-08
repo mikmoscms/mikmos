@@ -26,7 +26,6 @@
 
   gtag('config', 'UA-128579565-1');
 </script>
-
 </head>
 <body class="fix-header fix-sidebar">
 <?php

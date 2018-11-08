@@ -10,7 +10,11 @@
 <title><?php _e(__WEBTITLLE);?></title>
 <link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/helper.css" rel="stylesheet">
-<link href="assets/css/mikmos_style<?php _e($_SESSION['css']);?>.css" rel="stylesheet">
+<?php if(empty($_SESSION['css'])){ ?>
+<link href="assets/css/mikmos_style.css" rel="stylesheet">
+<?php }else{ ?>
+<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css" rel="stylesheet">
+<?php } ?>
 <script>
   function PassUser(){
 var x = document.getElementById('passUser');
@@ -26,18 +30,25 @@ x.type = 'password';
 <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
 </div>
 <div id="main-wrapper">
+
 <div class="header">
 <nav class="navbar top-navbar navbar-expand-md navbar-light">
 <div class="navbar-header">
+<?php if(empty($_SESSION['css'])){ ?>
 <a class="navbar-brand" href="?load=home">
-<b><img src="assets/images/logo<?php _e($_SESSION['css']);?>.png" alt="homepage" class="dark-logo" /></b>
-<span><img src="assets/images/logo-text<?php _e($_SESSION['css']);?>.png" alt="homepage" class="dark-logo" /></span>
+<b><img src="assets/images/logo.png"/></b>
+<span><img src="assets/images/logo-text.png"/></span>
 </a>
+<?php }else{ ?>
+<a class="navbar-brand" href="?load=home">
+<b><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo.png"/></b>
+<span><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo-text.png"/></span>
+</a>
+<?php } ?>
 </div>
 <div class="navbar-collapse">
 <ul class="navbar-nav mr-auto mt-md-0">
 <li class="nav-item dropdown">
-
 </li>
 </ul>
 </div>

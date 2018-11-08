@@ -11,7 +11,7 @@
 <li>
 <a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users"></i><?php _e(__USERS);?></a>
 <ul aria-expanded="false" class="collapse">
-<li><a href="./?load=users" class=""><i class="fa fa-list"></i> <?php _e(__USERS);?></a></li>
+<li><a href="./?load=users" class=""><i class="fa fa-list"></i> List <?php _e(__USERS);?></a></li>
 <li><a href="./?load=users&get=add" class=""><i class="fa fa-plus-square"></i> <?php _e(__USERS);?></a></li>
 <li><a href="./?load=users&get=generate" class=""><i class="fa fa-plus-square"></i> <?php _e(__GENERATE);?></a></li>
 </ul>
@@ -19,7 +19,7 @@
 <li>
 <a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-tags"></i><?php _e(__PROFILE);?></a>
 <ul aria-expanded="false" class="collapse">
-<li><a href="./?load=profile" class=""><i class="fa fa-list-ul"></i> <?php _e(__PROFILE);?></a></li>
+<li><a href="./?load=profile" class=""><i class="fa fa-list-ul"></i> List <?php _e(__PROFILE);?></a></li>
 <li><a href="./?load=profile&get=add" class=""><i class="fa fa-plus-square"></i> <?php _e(__PROFILE);?></a></li>
 </ul>
 </li>
@@ -30,9 +30,9 @@
 <li><a href="./?load=cookies" class=""><i class="fa fa-retweet"></i> <?php _e(__COOKIES);?></a></li>
 </ul>
 </li>
-<li><a href="./?load=vouchers" class=""><i class="fa fa-ticket"></i> <span class="hide-menu"><?php _e(__VOUCHERS);?></a></li>
-<li><a href="./?load=billing" class=""><i class="fa fa-money"></i> <span class="hide-menu"><?php _e(__BILLING);?></a></li>
-<li><a href="./?load=users_logs" class=""><i class="fa fa-history"></i> <span class="hide-menu"><?php _e(__LOG_ACTIVITY);?></a></li>
+<li><a href="./?load=vouchers" class=""><i class="fa fa-ticket"></i> <?php _e(__VOUCHERS);?></a></li>
+<li><a href="./?load=billing" class=""><i class="fa fa-money"></i> <?php _e(__BILLING);?></a></li>
+<li><a href="./?load=users_logs" class=""><i class="fa fa-history"></i> <?php _e(__LOG_ACTIVITY);?></a></li>
 <li><a href="./?load=interface" class=""><i class="fa fa-area-chart"></i> <?php _e(__INTERFACE);?></a></li>
 <li>
 <a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-sitemap"></i><span class="hide-menu"><?php _e(__SYSTEM);?></span></a>
@@ -51,9 +51,8 @@
 <li>
 <a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-gears"></i><span class="hide-menu"><?php _e(__ADMINISTRATOR);?></span></a>
 <ul aria-expanded="false" class="collapse">
-
-
 <li><a href="./settings.php?index" class=""><i class="fa fa-gear"></i> <?php _e(__SETTINGS);?></a></li>
+<li><a href="./?index=backup" class=""><i class="fa fa-file-zip-o"></i> <?php _e(__BACKUP);?></a></li>
 <li><a href="./settings.php?index=administrator" class=""><i class="fa fa-key"></i> <?php _e(__ADMIN);?></a></li>
 <li><a href="./settings.php?index=mikrotik" class=""><i class="fa fa-signal"></i> <?php _e(__ROUTER);?></a></li>
 <li><a href="./settings.php?index=telegram" class=""><i class="fa fa-telegram"></i> <?php _e(__TELEGRAM);?></a></li>

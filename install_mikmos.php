@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 @session_start();
 @ob_start("ob_gzhandler");
 @date_default_timezone_set("Asia/Bangkok");
@@ -46,6 +47,7 @@ require_once('./inc/lang/'.$_LANG.'.php');
 <li class="nav-item"> <a title="<?php echo __MENU;?>" class="nav-link nav-toggler hidden-md-up text-muted" href="javascript:void(0)"><i class="fa fa-list"></i></a> </li>
 <li class="nav-item m-l-10"> <a title="<?php echo __MENU;?>" class="nav-link sidebartoggler hidden-sm-down text-muted" href="javascript:void(0)"><i class="fa fa-list"></i></a> </li>
 </ul>
+
 </div>
 </nav>
 </div>
@@ -60,10 +62,9 @@ default:
 <li class="nav-devider"></li>
 <li class="nav-label">Install MIKMOS</li>
 <li><a href="./install.php?install" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
-<li><a href="./install.php?install=step_1" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
-<li><a href="./install.php?install=step_2" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 3</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
 </ul>
 </nav>
 </div>
@@ -91,9 +92,7 @@ default:
 <?php
 break;
 case'step_1':
-if(!empty($_ADMK_DETEK)){
-echo '<script>window.location.replace("./install.php?install=step_2");</script>';
-}
+
 ?>
 <?php
 if(isset($_POST['submit'])) 
@@ -134,11 +133,10 @@ echo '<script>window.location.replace("./install.php?install=step_2");</script>'
 <ul id="sidebarnav">
 <li class="nav-devider"></li>
 <li class="nav-label">Install MIKMOS</li>
-<li><a href="./install.php?install" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
 <li><a href="./install.php?install=step_1" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
-<li><a href="./install.php?install=step_2" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 3</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
 </ul>
 </nav>
 </div>
@@ -283,11 +281,10 @@ echo '<script>window.location.replace("./install.php?install=finish");</script>'
 <ul id="sidebarnav">
 <li class="nav-devider"></li>
 <li class="nav-label">Install MIKMOS</li>
-<li><a href="./install.php?install" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
-<li><a href="./install.php?install=step_1" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
 <li><a href="./install.php?install=step_2" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 3</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
 </ul>
 </nav>
 </div>
@@ -398,10 +395,9 @@ include_once('./inc/ip_mk/'.$_SESSION['router'].'.php');
 <ul id="sidebarnav">
 <li class="nav-devider"></li>
 <li class="nav-label">Install MIKMOS</li>
-<li><a href="./install.php?install" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
-<li><a href="./install.php?install=step_1" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
-<li><a href="./install.php?install=step_2" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
-<li><a href="./install.php?install=step_3" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 3</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Wellcome</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 1</span></a></li>
+<li><a href="#" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Step 2</span></a></li>
 <li><a href="./install.php?install=finish" class=""><i class="fa fa-dashboard"></i><span class="hide-menu">Finish</span></a></li>
 </ul>
 </nav>

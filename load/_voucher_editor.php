@@ -13,7 +13,7 @@ default:
 <div class="panel-body">
 <p class="text-muted">
 <a class="btn btn-success" href="./?index=vouchers_style&get=ae"> <i class="fa fa-plus"></i> <?php _e(__ADD);?></a>
-<a target="_blank" class="btn btn-info" href="<?php _e("https://mikmos.my.id/?load=voucher");?>"> <i class="fa fa-download"></i> <?php _e(__VOUCHERS_STYLE);?></a>
+<a target="_blank" class="btn btn-info" href="<?php _e(_Mikmos_Web(2));?>"> <i class="fa fa-download"></i> <?php _e(__VOUCHERS_STYLE);?></a>
 </p><hr>
 <?php //print_r($mikmosLoad));?>
 <div class="table-responsive">

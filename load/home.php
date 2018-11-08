@@ -192,7 +192,7 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 <h4><?php _e(__SYSTEM_RESOURCES);?></h4>
 </div>
 <div class="card-body">
-<div class="message-center">
+<div style="height:360px;overflow:auto;">
 <table class="table table-striped" style="font-size:80%;">
 <tr><td><?php _e(__PLATFORM);?></td><td><?php _e($mikmosResource['platform']);?></td></tr>
 <tr><td><?php _e(__MODEL);?></td><td><?php _e($mikmosRB['model']);?></td></tr>
@@ -215,23 +215,24 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 <h4><?php _e(__LOG_ACTIVITY);?></h4>
 </div>
 <div class="card-body">
-<div class="message-center">
+<div style="height:360px;overflow:auto;">
 <table class="table table-hover" style="font-size:80%;">
 <?php
-$mikmosLog = $API->comm("/system/logging/print", array("?prefix" => "=>",));
-$mikmosLogd = $mikmosLog[0];
-if($mikmosLogd['prefix'] == "=>"){}else{ $API->comm("/system/logging/add", array("action" => "disk","prefix" => "=>","topics" => "hotspot,info,debug",)); }
-$mikmosLogdbg = $API->comm("/log/print", array("?topics" => "hotspot,info,debug",));
-$mikmosLogView = array_reverse($mikmosLogdbg);
-$mikmosLogdbgTot = count($mikmosLogdbg);
-for ($i=0; $i<$mikmosLogdbgTot; $i++){
-_e("<tr>");
-_e("<td>" . $mikmosLogView[$i]['time']."</td>");
-_e("<td>" . $mikmosLogView[$i]['message']."</td>");
-_e("</tr>");
+$mikmosLoad = $API->comm("/log/print", array("?topics" => "hotspot,info,debug"));
+$mikmosData = array_reverse($mikmosLoad);
+$mikmosTot = count($mikmosLoad);
+?>
+<tbody>
+<?php
+for ($i=0; $i<$mikmosTot; $i++){
+?>
+<tr>
+<td><?php _e($mikmosData[$i]['time']);?></td>
+<td><?php _e($mikmosData[$i]['message']);?></td>
+</tr>
+<?php 
 }
 $API->disconnect();
-
 ?>
 </table>
 </div>

@@ -27,7 +27,7 @@ $API->write('/system/script/remove', false);
 $API->write('=.id=' . $ARREMD[$i]['.id']);
 $READ = $API->read();
 }}}
-_e('<script>window.history.go(-1)</script>');
+echo Loading('./?load=billing','0');
 }
 if(strlen($idhr) > "0"){
 if($_SESSION['connect']=='connect') {
@@ -67,18 +67,18 @@ $shd = "none";
 <section class="panel">
 <header class="panel-heading">
 <strong>Report <?php _e(__BILLING);?></strong>
-<span class="tools pull-right">
-<a class="btn bg-danger" href="./?load=billing&get=migreport" onclick="return confirm('Migrasi Billing Report?...')" title="Migrasi sisa Report"><i class="fa fa-retweet"></i> Migrasi Billing Report</a>
+<span class="pull-right">
+
+<a class="btn bg-danger" href="./?load=billing&get=migreport" onclick="return confirm('Serius Mau Migrasi?...')" title="Migrasi sisa Report"><i class="fa fa-retweet"></i> Migrasi Billing Report</a>
 </span>
 </header>
 <div class="panel-body">
-<p>
+<p class="text-muted">
+<div style=""> 
 
-<div style="display: table;">
-
-<div style="padding-bottom: 5px; padding-top: 5px;"> 
 <button class="btn bg-primary" onclick="exportTableToCSV('report-mikmos-<?php _e($filedownload);?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
-<button class="btn bg-primary" onclick="location.href='./?load=billing';" title="Reload all data"><i class="fa fa-search"></i> ALL</button>
+
+<button class="btn bg-primary" onclick="location.href='./?load=billing';" title="Reload all data"><i class="fa fa-search"></i>Reload ALL</button>
 
 
 <form style="display: <?php _e($shd);?>;" autocomplete="off" method="post" action="">
@@ -88,27 +88,65 @@ $shd = "none";
 </center>
 </form>
 
+<div style="padding-top: 5px;">
+<?php
+$ntgl=date("d");
+$nbulan=date("n");
+$nbulanan=array(1=>'01','02','03','04','05','06','07','08','09','10','11','12');
+$nthn=date("Y");
+
+$ibln =array(1=>"Januari","Februari","Maret","April","Mei", "Juni","Juli","Agustus","September","Oktober", "November","Desember"); 
+$ibln1 =array(1=>"jan","feb","mar","apr","may", "jun","jul","aug","sep","okt", "nov","des"); 
+echo '<select style="padding:7.5px;" id="sday">
+<option value="" >Semua</option>'; 
+for($itgl=1; $itgl<=31; $itgl++){ 
+$tgl_leng=strlen($itgl); 
+if ($tgl_leng==1) $i="0".$itgl; 
+else $i=$itgl;
+if($i==$ntgl){ echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';}else{ echo '<option value="'.$i.'" >'.$i.'</option>';}
+} 
+echo "</select>"; 
+echo "  "; 
+echo '<select style="padding:7.5px;" id="smonth">'; 
+for($ibul=1; $ibul<=12; $ibul++){ 
+$ibul_leng=strlen($ibul); 
+if ($ibul_leng==1) $ib="0".$ibul; 
+else $ib=$ibul; 
+if($ib==$nbulanan[$nbulan]){ echo '<option value="'.$ibln1[$ibul].'" selected="selected">'.$ibln[$ibul].'</option>';}else{ echo '<option value="'.$ibln1[$ibul].'" >'.$ibln[$ibul].'</option>';}
+} 
+echo '</select>'; 
+echo "  "; 
+echo '<select style="padding:7.5px;" id="syear">'; 
+for($ithn=2018; $ithn<=$nthn; $ithn++){ 
+if($ithn==$nthn){ echo '<option value="'.$ithn.'" selected="selected">'.$ithn.'</option>';}else{ echo '<option value="'.$ithn.'">'.$ithn.'</option>';}
+}
+echo '</select> ';
+?>
+<input class="btn bg-primary" type="button" value=" Cari " name="sbutton" onclick="javascript:var x = $('#sday').val();var y = $('#smonth').val();var z = $('#syear').val(); if (x && y && z){document.location = '?load=billing&idhr='+y+'/'+x+'/'+z;}else{document.location = '?load=billing&idbl='+y+''+z;}"/>
+
 </div>
 </div>
 
+</p><hr>
+<p>
+Jika Report Kosong, karna sebelumnya menggunakan aplikasi lain, silahkan klik tombol MIGRASI BILLING REPORT untuk menampilkannya.
 </p>
-<hr>
+
 <div class="table-responsive">
-<div class="adv-table">
+<div class="">
 
  <table class="table table-bordered table-hover text-nowrap" id="mikmos-tbl-desc">
 <thead>
 <tr>
-<th colspan=3 >Billing Report <?php _e($filedownload);?><b style="font-size:0;">,</b></th>
+<th colspan="2">Billing report <?php _e($filedownload);?><b style="font-size:0;">,</b></th>
 <th style="text-align:right;">Total</th>
 <th style="text-align:right;font-weight:bold;" id="total"></th>
 </tr>
 <tr>
-<th width="30px"></th>
-<th >Date</th>
-<th >Time</th>
-<th class="no-sort">Username</th>
-<th class="no-sort" style="text-align:right;">Price <?php _e($curency);?></th>
+<th>Waktu</th>
+<th>Tanggal</th>
+<th class="no-sort">Username / Vouchers</th>
+<th class="no-sort" style="text-align:right;">Penjualan <?php _e($curency);?></th>
 </tr>
 </thead>
 <tbody>
@@ -122,16 +160,13 @@ $tgl = $getname[0];
 $getdy = explode("/",$tgl);
 $m = $getdy[0];
 $dy = $m."/".$getdy[1]."/".$getdy[2];
-$dy1 = $getdy[1]."/".$getdy[2];
 $ltime = $getname[1];
 $username = $getname[2];
 $price = $getname[3];
 ?>
 <tr>
-<td>
-<a onclick="return confirm('Yakin untuk mneghapusnya semua users Comment <?php echo $mikmosComm;?>?')" title="Menghapus Semua Users di Comment <?php echo $mikmosComm;?>" class="btn btn-xs btn-danger" href="./?load=users&get=delprofcom&id=<?php echo $mikmosProf;?>&comment=<?php echo $mikmosComm;?>"> <i class="fa fa-trash-o"></i></a> <strong></strong></td>
-<td><strong><a class="btn btn-primary"  href='./?load=billing&idbl=<?php _e($getowner);?>' title='Lihat Bulan : <?php _e($getowner);?>'><i class='fa fa-search'></i> <?php _e($m);?></a> <a class="btn btn-warning" href='./?load=billing&idhr=<?php _e($tgl);?>' title='Lihat Tanggal : <?php _e($tgl);?>'><i class='fa fa-search'></i> <?php _e($dy1);?></a></strong></td>
 <td><?php _e($ltime);?></td>
+<td><?php _e($dy);?></td>
 <td><?php _e($username);?></td>
 <td style='text-align:right;'><?php _e($price);?></td>
 </tr>
@@ -159,7 +194,7 @@ downloadLink.click();
 
 function exportTableToCSV(filename) {
 var csv = [];
-var rows = document.querySelectorAll("#mikmos-tbl-desc tr");
+var rows = document.querySelectorAll("#billing tr");
 
  for (var i = 0; i < rows.length; i++) {
 var row = [], cols = rows[i].querySelectorAll("td, th");
@@ -172,32 +207,13 @@ downloadCSV(csv.join("\n"), filename);
 
 window.onload=function() {
 var sum = 0;
-var dataTable = document.getElementById("mikmos-tbl-desc");
-var cells = document.querySelectorAll("td + td + td + td + td");
+var dataTable = document.getElementById("billing");
+var cells = document.querySelectorAll("td + td + td + td");
 for (var i = 0; i < cells.length; i++)
 sum+=parseFloat(cells[i].firstChild.data);
 
 var th = document.getElementById('total');
 th.innerHTML = th.innerHTML + (sum) ;
-}
-</script>
-<script>
-function fTgl() {
-var input, filter, table, tr, td, i;
-input = document.getElementById("filterData");
-filter = input.value.toUpperCase();
-table = document.getElementById("selling");
-tr = table.getElementsByTagName("tr");
-for (i = 1; i < tr.length; i++) {
-td = tr[i].getElementsByTagName("td")[0];
-if (td) {
-if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-tr[i].style.display = "";
-} else {
-tr[i].style.display = "none";
-}
-}
-}
 }
 </script>
 

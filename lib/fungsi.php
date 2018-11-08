@@ -1,4 +1,18 @@
 <?php
+function ini_lokal() {
+$whitelist = array( '127.0.0.1', '::1' );
+if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
+return true;
+}
+function _Get_Pre($num = 0) {
+if($num == 0){ return '_premium/'; }
+}
+function _Mikmos_Web($num = 0) {
+if($num == 0){ return 'https://mikmos.my.id/';}
+if($num == 1){ return 'https://mikmos.online/';}
+if($num == 2){ return 'https://mikmos.my.id/?load=voucher';}
+if($num == 10){ return 'http://localhost/web/';}
+}
 function compresspage($buffer) {
 $search = array('/\n/','/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s');
 $replace = array(' ','>','<','\\1');
@@ -147,7 +161,7 @@ $version = $expl1[0].'.'.$expl1[1].'.'.$versi;
 return $version;
 }
 function update_system(){
-$urlon = "https://mikmos.my.id/";
+$urlon = _Mikmos_Web(0);
 $file = "versi/versi.xml";
 $contents = get_content($urlon.$file);
 if(!$contents){
@@ -164,8 +178,8 @@ $content .= "<span class='btn btn-info btn-sm'>MIKMOS Versi ".versi_off('versi')
 return $content;
 }
 function cek_update(){
-$urlon = "https://mikmos.my.id/";
-$file = "versi/versi.xml";
+$urlon = _Mikmos_Web(0);
+$file = "versi/versi"._Get_Pre(0).".xml";
 $contents = get_content($urlon.$file);
 if(!$contents){
 $content .="";
@@ -183,8 +197,8 @@ $content .= '
 <p> Versi: '.$versi[1].' - Seri: '.$seri[1].'</p>
 </div>
 <div id="popupfoot"> 
-<p><a class="btn btn-danger" href="'.$urlon.'files/update_mikmos_v.'.$versi1.'_to_v.'.$versi[1].'.zip"> <i class="fa fa-download"></i> Update Offline</a> 
-<a class="btn btn-warning" href="./settings.php?index=update_online&url='.$urlon.'files/update_mikmos_v.'.$versi1.'_to_v.'.$versi[1].'.zip"> <i class="fa fa-upload"></i> Update Online</a>
+<p><a class="btn btn-danger" href="'.$urlon.'files'._Get_Pre(0).'/update_mikmos_v.'.$versi1.'_to_v.'.$versi[1].'.zip"> <i class="fa fa-download"></i> Update Offline</a> 
+<a class="btn btn-warning" href="./settings.php?index=update_online&url='.$urlon.'files'._Get_Pre(0).'/update_mikmos_v.'.$versi1.'_to_v.'.$versi[1].'.zip"> <i class="fa fa-upload"></i> Update Online</a>
 </p>
 <a href="#" class="closex">Nanti Saja</a> 
 </div>
@@ -199,9 +213,7 @@ return $content;
 }
 
 function masaaktif(){
-$whitelist = array('127.0.0.1','::1');
-$onlinelist = array('125.163.55.136','103.29.214.216');
-$urlon = "https://mikmos.my.id/";
+$urlon = _Mikmos_Web(0);
 $folder = "versi/";
 $klien = $_SERVER['SERVER_NAME'];
 $file =  $folder.$klien.".xml";
@@ -209,6 +221,7 @@ $contents = get_content($urlon.$file);
 if(!$contents){
 $content .="";
 }else{
+preg_match( '|<mikmos>(.*)<\/mikmos>|ims', $contents, $kmikmos );
 preg_match( '|<klien>(.*)<\/klien>|ims', $contents, $kklien );
 preg_match( '|<mulai>(.*)<\/mulai>|ims', $contents, $kmulai );
 preg_match( '|<akhir>(.*)<\/akhir>|ims', $contents, $kakhir );
@@ -230,35 +243,52 @@ $hasil_awal = $tanggal_awal;
 for ($hw=$tanggal_awal; $hw<=$tanggal_akhir; $hw+=86400) {
 if ($hasil_awal==" ") {
 $hasil_awal = $hw;
-}}
+}
+}
 $hasil_akhir = $hw;
 $jumlah_harix = ((($hasil_akhir-$hasil_awal) / 86400)-1);
-if($jumlah_harix < 1){$jumlah_hari = "<script>alert('Hosting Sudah Expired!');window.location.replace('./?index=logout');</script>" ;}else{$jumlah_hari = $jumlah_harix;}
+if($jumlah_harix < 1){$jumlah_hari = "<script>alert('Mikmos Online Sudah Expired!');window.location.replace('./?index=logout');</script>" ;}else{$jumlah_hari = $jumlah_harix;}
 $content .= "
 <table class='table table-striped'>
 <tr><td colspan='2'>Terimakasih Bos Ku, salam hangat</td></tr>
 <tr><td>Klien</td><td>".$kklien[1]."</td></tr>
 <tr><td>Mulai</td><td>".$kmulai[1]."</td></tr>
 <tr><td>Akhir</td><td>".$kakhir[1]."</td></tr>
+<tr><td>Sisa</td><td>".$jumlah_hari." Hari lagi</td></tr>
 </table>
 ";
 }
 $contentx = "
 <table class='table table-striped'>
-<tr><td colspan='2' style='text-align:center;'>Terima kasih sudah menggunakan MIKMOS, Jika Bos ku ingin berlangganan MIKMOS ONLINE bisa Kontak kami<br/>- MIKMOS -</td></tr>
+<tr><td colspan='2' style='text-align:center;'>Terima kasih sudah menggunakan MIKMOS, Jika Bos ku ingin berlangganan MIKMOS ONLINE bisa <a title='Mikmos Online' href='"._Mikmos_Web(1)."' target='_blank'><b>KLIK DISINI</b></a><br/><br/>- MIKMOS -</td></tr>
 </table>";
 $contentz = "
 <table class='table table-striped'>
-<tr><td colspan='2' style='text-align:center;'>Jika Bos ku menggunakan hosting dari MIKMOS, berarti Bos ku sudah membantu usia MIKMOS. Terimakasih Bos ku salam kenal<br/>- MIKMOS -</td></tr>
+<tr><td colspan='2' style='text-align:center;'>Jika Bos ku menggunakan MIKMOS Online, berarti Bos ku sudah membantu usia MIKMOS. Terimakasih Bos ku salam kenal<br/><br/>- MIKMOS -</td></tr>
 </table>";
-if(in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
-return $contentx;
-}else{
-if(in_array($_SERVER['REMOTE_ADDR'], $onlinelist)){
+
+if (!ini_lokal()){
+if ($kmikmos[1]=='mikmosonline'){
 return $content;
 }else{
 return $contentz;
 }
+}else{
+return $contentx;
+}
+}
+function get(){
+$urlon = _Mikmos_Web(2);
+$folder = "versi/";
+$klien = $_SERVER['SERVER_NAME'];
+$klien1 = 'demo.mikmos.my.id';
+$file =  $folder.$klien.".xml";
+$contents = get_content($urlon.$file);
+if(!$contents){
+$content .="";
+}else{
+preg_match( '|<klien>(.*)<\/klien>|ims', $contents, $kklien );
+echo $kklien[1];
 }
 }
 function get_content($url)

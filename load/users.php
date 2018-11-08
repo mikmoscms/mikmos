@@ -37,7 +37,7 @@ $mikmosTotP = count($mikmosLoadP);
 <?php if(($mikmosProf)&&($mikmosComm)){?>
 <a onclick="return confirm('Yakin untuk mneghapusnya semua users Comment <?php echo $mikmosComm;?>?')" title="Menghapus Semua Users di Comment <?php echo $mikmosComm;?>" class="btn btn-danger" href="./?load=users&get=delprofcom&id=<?php echo $mikmosProf;?>&comment=<?php echo $mikmosComm;?>"> <i class="fa fa-trash-o"></i> Hapus Users</a>
 <?php }elseif($mikmosLupt=='expired'){ ?>
-<!--<a onclick="return confirm('Yakin untuk mneghapusnya semua users Expire?')" title="Hapus Users Expired" class="btn btn-danger" href="./?load=users&get=delexp"> <i class="fa fa-trash-o"></i> Hapus Users Expired</a>-->
+<a onclick="return confirm('Yakin untuk mneghapusnya semua users Expire?')" title="Hapus Users Expired" class="btn btn-danger" href="./?load=users&get=delexp"> <i class="fa fa-trash-o"></i> Hapus Users Expired</a>
 <?php }elseif($mikmosProf){ ?>
 <a onclick="return confirm('Yakin untuk mneghapusnya semua users di Profile <?php echo $mikmosProf;?>?')" title="Menghapus Semua Users di Profile <?php echo $mikmosProf;?>" class="btn btn-danger" href="./?load=users&get=delprof&id=<?php echo $mikmosProf;?>"> <i class="fa fa-trash-o"></i> Hapus Users Profil</a>
 <?php } ?>
@@ -138,7 +138,8 @@ $profile = ($_POST['profile']);
 $disabled = ($_POST['disabled']);
 $timelimit = ($_POST['timelimit']);
 $datalimit = ($_POST['datalimit']);
-$comment = ($_POST['comment']);
+$commentx = ($_POST['comment']);
+$comment = "up-".$commentx;
 $mbgb = ($_POST['mbgb']);
 if($timelimit == ""){$timelimit = "0";}else{$timelimit = $timelimit;}
 if($datalimit == ""){$datalimit = "0";}else{$datalimit = $datalimit*$mbgb;}
@@ -400,7 +401,34 @@ $API->comm("/ip/hotspot/user/set", array(
 ));
 echo "<script>window.location='./?load=users&get=edit&id=".$uid."'</script>";
 }
-
+if(isset($_POST['reset'])){
+$server = ($_POST['server']);
+$name = ($_POST['name']);
+$password = ($_POST['pass']);
+$profile = ($_POST['profile']);
+$disabled = ($_POST['disabled']);
+$timelimit = ($gettlimit);
+$datalimit = ($_POST['datalimit']);
+$comment = ($_POST['comment']);
+$mbgb = ($_POST['mbgb']);
+if($timelimit == ""){$timelimit = "0";}else{$timelimit = $timelimit;}
+if($datalimit == ""){$datalimit = "0";}else{$datalimit = $datalimit*$mbgb;}
+$API->comm("/ip/hotspot/user/set", array(
+".id"=> "$uid",
+"server" => "$server",
+"name" => "$name",
+"password" => "$password",
+"profile" => "$profile",
+"disabled" => "$disabled",
+"limit-uptime" => "$timelimit",
+"limit-bytes-total" => "$datalimit",
+"comment" => "$comment",
+));
+$API->comm("/ip/hotspot/user/reset-counters", array(
+".id"=> "$uid",
+));
+echo "<script>window.location='./?load=users&get=edit&id=".$uid."'</script>";
+}
 ?>
 <script>
 function PassUser(){
@@ -427,18 +455,19 @@ x.type = 'password';
 <p class="text-muted">
 <a class="btn btn-danger" href="./?load=users"> <i class="fa fa-close"></i> <?php echo __CANCEL;?></a>
 <button type="submit" class="btn bg-primary" name="save"><i class="fa fa-edit"></i> <?php echo __EDIT;?></button>
-<?php if(!isset($_GET['screen_check'])){  echo "<script language='JavaScript'> 
+<?php if(!isset($_GET['screen_check'])){ 
+ echo "<script language='JavaScript'> 
 <!--  
 document.location=\"?load=users&get=edit&id=$id_get&screen_check=done&Width=\"+screen.width; 
 //--> 
-</script>";}else{if(($_GET['Width']<799)) { echo '<a id="shareWA" class="btn bg-success" title="Share WhatsApp" href="whatsapp://send?text='.$shareWA.'"> <i class="fa fa-whatsapp"></i> Share</a>'; }}?> 
-<?php if($userdetails['limit-uptime'] == "1s"){ ?>
-<a title="Expired Aktifkan Kembali" class="btn btn-danger" href="#"> <i class="fa fa-warning"></i> Expired</a>
-
+</script>";
+}else{if(($_GET['Width']<799)) { echo '<a id="shareWA" class="btn bg-success" title="Share WhatsApp" href="whatsapp://send?text='.$shareWA.'"> <i class="fa fa-whatsapp"></i> Share</a>'; }}?> 
+<?php 
+$cekk = explode("-",$userdetails['comment'])[0];
+if(($userdetails['limit-uptime'] == "1s")&&($cekk == "up")){ ?>
+<button title="Expired Aktifkan Kembali" type="submit" class="btn bg-danger" name="reset"><i class="fa fa-warning"></i> Aktikan Kembali</button>
 <?php } ?>
-
 </p>
-
 <table class="table">
 <tr>
 <td class="align-middle">Enabled</td>
@@ -545,7 +574,7 @@ for ($i=0; $i<$TotalReg; $i++){
 <?php echo "Expired";?>
 </td>
 <td>
-<a title="Lihat yang Expired" class="btn btn-xs btn-danger" href="#">Aktifkan Kembali</a>
+<a title="Lihat yang Expired" class="btn btn-xs btn-danger" href="#">Expired</a>
 </td>
 
 <?php }else{ ?>

@@ -154,78 +154,7 @@ var url = "./api/getvalidprice.php?name=";
 var getvalidprice = url+prof
 $("#GetValidPrice").load(getvalidprice);
 }
-//table filter
-function fTable() {
-var input, filter, table, tr, td, i;
-input = document.getElementById("filterTable");
-filter = input.value.toUpperCase();
-table = document.getElementById("tFilter");
-tr = table.getElementsByTagName("tr");
-for (i = 1; i < tr.length; i++) {
-td = tr[i].getElementsByTagName("td")[1];
-if (td) {
-if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-tr[i].style.display = "";
-} else {
-tr[i].style.display = "none";
-}
-}
-}
-}
 
-function fTable1() {
- var input, filter, table, tr, td, i;
- input = document.getElementById("filterTable1");
- filter = input.value.toUpperCase();
- table = document.getElementById("tFilter");
- tr = table.getElementsByTagName("tr");
- for (i = 1; i < tr.length; i++) {
- td = tr[i].getElementsByTagName("td")[2];
- if (td) {
- if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
- tr[i].style.display = "";
- } else {
- tr[i].style.display = "none";
- }
- }
- }
-}
-
-function fTable2() {
- var input, filter, table, tr, td, i;
- input = document.getElementById("filterTable2");
- filter = input.value.toUpperCase();
- table = document.getElementById("tFilter");
- tr = table.getElementsByTagName("tr");
- for (i = 1; i < tr.length; i++) {
- td = tr[i].getElementsByTagName("td")[7];
- if (td) {
- if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
- tr[i].style.display = "";
- } else {
- tr[i].style.display = "none";
- }
- }
- }
-}
-
-function fTable3() {
- var input, filter, table, tr, td, i;
- input = document.getElementById("filterTable3");
- filter = input.value.toUpperCase();
- table = document.getElementById("tFilter");
- tr = table.getElementsByTagName("tr");
- for (i = 1; i < tr.length; i++) {
- td = tr[i].getElementsByTagName("td")[5];
- if (td) {
- if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
- tr[i].style.display = "";
- } else {
- tr[i].style.display = "none";
- }
- }
- }
-}
 
 
 $(document).ready(function() {    
