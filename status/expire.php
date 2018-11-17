@@ -15,7 +15,7 @@ include('../inc/ip_mk/'.$_GET['router'].'.php');
 }
 $API = new RouterosAPI();
 $API->debug = false;
-$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 
 $uname = $_GET['user'];
 if($uname != ""){

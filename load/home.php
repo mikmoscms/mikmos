@@ -7,9 +7,6 @@ include_once('../lib/routeros_api.class.php');
 include_once('../inc/lang/id.php');
 include_once('../inc/ip_mk/'.$_ROUTER.'.php');
 $interface = $_GET["interface"];
-$API = new RouterosAPI();
-$API->debug = false;
-$KONEK = $API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 $mikmosLoadJ = $API->comm("/system/clock/print");
 $mikmosJ = $mikmosLoadJ[0];
 $mikmosLoadResource = $API->comm("/system/resource/print");
@@ -88,7 +85,7 @@ $mikmosTot = count($mikmosLoad);
 if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESSION['loncat'];}
 ?>
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong>Monitoring <?php echo __INTERFACE;?>  <?php _e($mikmosLoadx[0]['name']);?></strong>
 <span class="tools pull-right">
@@ -96,7 +93,6 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 </header>
 <div class="panel-body"><hr>
 <?php //print_r($mikmosLoad);?>
-<div class="table-responsive">
 <div class="adv-table">
 <div class="table-responsive">
 
@@ -106,7 +102,6 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 </div>
 </div>
 </div>
-</section>
 </div>
 </div>
 </div>

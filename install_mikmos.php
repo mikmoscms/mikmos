@@ -196,13 +196,14 @@ echo '<script>window.location.replace("./install.php?install=finish");</script>'
  {
 $router1 = strtoupper(ganti_spasi($_POST['router']));
 $ip1 = $_POST['ip'];
+$port1 = $_POST['port'];
 $user1 = $_POST['user'];
 $pass1 = $_POST['pass'];
 require_once('./lib/routeros_api.class.php');
 $API = new RouterosAPI();
 $API->debug = false;
-$API->connect($ip1, $user1, $pass1);
-if($API->connect($ip1, $user1, $pass1)){
+$API->connect($ip1, $port1, $user1, $pass1);
+if($API->connect($ip1, $port1, $user1, $pass1)){
 $konek = __CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__CONNECT.'</span>';
 }else{
 $konek = __NO_CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__NO_CONNECT.'</span>';
@@ -212,6 +213,7 @@ $konek = __NO_CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__N
  {
  $router = strtoupper(ganti_spasi($_POST['router']));
  $ip = $_POST['ip'];
+ $port = $_POST['port'];
  $user = $_POST['user'];
  $pass = _en($_POST['pass']);
  $per = $_POST['per'];
@@ -240,6 +242,7 @@ Kontak WA: 081802161315
 **/
 $_ROUTER = "'.$router.'";
 $_IPMK = "'.$ip.'";
+$_POMK = "'.$port.'";
 $_USMK = "'.$user.'";
 $_PSMK = "'.__CMS.'_'.$pass.'";
 $_RPER = "'.$per.'";
@@ -260,6 +263,7 @@ Kontak WA: 081802161315
 $_ROUTER 	= "'.$router.'";
 $_LANG 		= "id";
 $_TIMER		= "1200";
+$_THEMES	= "white";
 ?>';
 fwrite($handle1, $data1);
 echo '<script>window.location.replace("./install.php?install=finish");</script>';
@@ -311,6 +315,9 @@ Step 2 - Membuat Akses Router
 </tr>
 <tr>
 <td class="align-middle">IP</td><td><input class="form-control" autocomplete="off" type="text" name="ip" value="<?php echo $ip1;?>" placeholder="Ip/Host Mikrotik" required /></td>
+</tr>
+<tr>
+<td class="align-middle">Port</td><td><input class="form-control" autocomplete="off" type="text" name="port" value="<?php echo $port1;?>" placeholder="Port (default : 8728)" required /></td>
 </tr>
 <tr>
 <td class="align-middle">Username</td><td><input class="form-control" autocomplete="off" type="text" name="user" value="<?php echo $user1;?>" placeholder="Username" required /></td>

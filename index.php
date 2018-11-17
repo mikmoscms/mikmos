@@ -26,7 +26,7 @@ if($_SESSION['connect']=='connect') {
 require_once('./inc/ip_mk/'.$_ROUTER.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
-$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 }
 switch($_GET['index']){
 default:
@@ -91,7 +91,8 @@ break;
 case'forgot':
 if(isset($_POST['username']) && isset($_POST['level'])) {
 require_once('./inc/adm/'.$_POST['level'].'.php');
-if($_POST['username'] == $_USER && $_POST['level'] == $_LEVEL) {
+require_once('./inc/ip_mk/'.$_ROUTER.'.php');
+if(($_POST['username'] == $_USER) && ($_POST['hp'] == $_RTEL) && ($_POST['level'] == $_LEVEL)) {
 $_ceklog = '<div class="alert alert-success alert-dismissible text-dark" role="alert">Username: '. $_USER.'<br/>Password: '. _de(ltrim($_PASS, __CMS)).'</div><p><a class="btn btn-danger btn-sm" href="./?index=login">LOGIN</a></p>';
 } else {
 $_ceklog = '<div class="alert alert-danger alert-dismissible" role="alert"><i class="fa fa-times-circle"></i> Gagal!, ada yang Salah...</div><p><a class="btn btn-danger btn-sm" href="./?index=forgot">ULANG</a></p>';
@@ -102,10 +103,10 @@ break;
 case'logout':
 include("load/t_atas.php");
 include("load/t_menu.php");
-if(isset($_SESSION['username'])) {
+//if(isset($_SESSION['username'])) {
 session_destroy();
 _e('<script>window.location.replace("./?index=login");</script>');
-}
+//}
 include("load/t_bawah.php");
 break;
 case'lang':

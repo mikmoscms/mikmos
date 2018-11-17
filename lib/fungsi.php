@@ -1,11 +1,66 @@
 <?php
+
+function rupiah($angka){
+	$hasil_rupiah = "Rp " . number_format($angka,2,',','.').".-";
+	return $hasil_rupiah;
+}
+
+function mikBillingHR($da){
+include('./inc/config.php');
+include('./inc/ip_mk/'.$_ROUTER.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikbilHR = $API->comm("/system/script/print", array("?=source" => $da));
+$mikbilHRtot = count($mikbilHR);
+for ($i=0; $i<$mikbilHRtot; $i++){
+$mikmosData = $mikbilHR[$i];
+$mikmoslits = explode("-|-",$mikmosData['name']);
+$bilHR += $mikmoslits[3];
+}
+$API->disconnect();
+return $bilHR;
+}
+function mikBillingBL($da){
+include('./inc/config.php');
+include('./inc/ip_mk/'.$_ROUTER.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikbilHR = $API->comm("/system/script/print", array("?=owner" => $da));
+$mikbilHRtot = count($mikbilHR);
+for ($i=0; $i<$mikbilHRtot; $i++){
+$mikmosData = $mikbilHR[$i];
+$mikmoslits = explode("-|-",$mikmosData['name']);
+$bilHR += $mikmoslits[3];
+}
+$API->disconnect();
+return $bilHR;
+}
+function mikBillingALL(){
+include('./inc/config.php');
+include('./inc/ip_mk/'.$_ROUTER.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikbilHR = $API->comm("/system/script/print");
+$mikbilHRtot = count($mikbilHR);
+for ($i=0; $i<$mikbilHRtot; $i++){
+$mikmosData = $mikbilHR[$i];
+$mikmoslits = explode("-|-",$mikmosData['name']);
+$bilHR += $mikmoslits[3];
+}
+$API->disconnect();
+return $bilHR;
+}
+
 function ini_lokal() {
 $whitelist = array( '127.0.0.1', '::1' );
 if( in_array( $_SERVER['REMOTE_ADDR'], $whitelist) )
 return true;
 }
 function _Get_Pre($num = 0) {
-if($num == 0){ return '_premium/'; }
+if($num == 0){ return ''; }
 }
 function _Mikmos_Web($num = 0) {
 if($num == 0){ return 'https://mikmos.my.id/';}
@@ -225,6 +280,7 @@ preg_match( '|<mikmos>(.*)<\/mikmos>|ims', $contents, $kmikmos );
 preg_match( '|<klien>(.*)<\/klien>|ims', $contents, $kklien );
 preg_match( '|<mulai>(.*)<\/mulai>|ims', $contents, $kmulai );
 preg_match( '|<akhir>(.*)<\/akhir>|ims', $contents, $kakhir );
+preg_match( '|<paket>(.*)<\/paket>|ims', $contents, $kpaket );
 $GMT = (0 * 3600);
 $hari_ini=date("d/m/Y – H:i:s", time() + $GMT);
 $start = $hari_ini;
@@ -248,19 +304,26 @@ $hasil_awal = $hw;
 $hasil_akhir = $hw;
 $jumlah_harix = ((($hasil_akhir-$hasil_awal) / 86400)-1);
 if($jumlah_harix < 1){$jumlah_hari = "<script>alert('Mikmos Online Sudah Expired!');window.location.replace('./?index=logout');</script>" ;}else{$jumlah_hari = $jumlah_harix;}
+if($kpaket[1]==0){$paket1 = 'Demo | Mikmos Online';}
+if($kpaket[1]==1){$paket1 = '1 Bulan | Mikmos Online';}
+if($kpaket[1]==2){$paket1 = '3 Bulan | Mikmos Online';}
+if($kpaket[1]==3){$paket1 = '6 Bulan | Mikmos Online';}
+if($kpaket[1]==4){$paket1 = '1 Bulan | Mikmos Online + SRSTunnel';}
+if($kpaket[1]==5){$paket1 = '3 Bulan | Mikmos Online + SRSTunnel';}
+if($kpaket[1]==6){$paket1 = '6 Bulan | Mikmos Online + SRSTunnel';}
 $content .= "
 <table class='table table-striped'>
 <tr><td colspan='2'>Terimakasih Bos Ku, salam hangat</td></tr>
-<tr><td>Klien</td><td>".$kklien[1]."</td></tr>
-<tr><td>Mulai</td><td>".$kmulai[1]."</td></tr>
-<tr><td>Akhir</td><td>".$kakhir[1]."</td></tr>
-<tr><td>Sisa</td><td>".$jumlah_hari." Hari lagi</td></tr>
+<tr><td width='40%'>Klien</td><td>".$kklien[1]."</td></tr>
+<tr><td>Paket</td><td>".$paket1."</td></tr>
+<tr><td>Mulai</td><td>".$kmulai[1]." s.d. ".$kakhir[1]."</td></tr>
+<tr><td>Sisa</td><td><strong class='blink_me'>".$jumlah_hari." Hari lagi</strong></td></tr>
 </table>
 ";
 }
 $contentx = "
 <table class='table table-striped'>
-<tr><td colspan='2' style='text-align:center;'>Terima kasih sudah menggunakan MIKMOS, Jika Bos ku ingin berlangganan MIKMOS ONLINE bisa <a title='Mikmos Online' href='"._Mikmos_Web(1)."' target='_blank'><b>KLIK DISINI</b></a><br/><br/>- MIKMOS -</td></tr>
+<tr><td colspan='2' style='text-align:center;'>Terima kasih sudah menggunakan MIKMOS, Jika Bos ku ingin berlangganan MIKMOS ONLINE bisa <a title='Mikmos Online' href='"._Mikmos_Web(1)."' target='_blank'><strong class='blink_me'>KLIK DISINI</strong></a><br/><br/>- MIKMOS -</td></tr>
 </table>";
 $contentz = "
 <table class='table table-striped'>
@@ -277,11 +340,11 @@ return $contentz;
 return $contentx;
 }
 }
+
 function get(){
-$urlon = _Mikmos_Web(2);
+$urlon = _Mikmos_Web(0);
 $folder = "versi/";
 $klien = $_SERVER['SERVER_NAME'];
-$klien1 = 'demo.mikmos.my.id';
 $file =  $folder.$klien.".xml";
 $contents = get_content($urlon.$file);
 if(!$contents){

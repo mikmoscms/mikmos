@@ -25,7 +25,7 @@
 </li>
 <li><a href="./?load=users_active" class=""><i class="fa fa-smile-o"></i> <?php _e(__USERS_ACTIVE);?></a></li>
 <li><a href="./?load=hosts" class=""><i class="fa fa-road"></i> <?php _e(__HOSTS);?></a></li>
-<li><a href="./?load=ipbinding" class=""><i class="fa fa-shield"></i> <?php _e(__BINDING);?></a></li>
+<li><a href="./?load=ipbinding" class=""><i class="fa fa-code-fork"></i> <?php _e(__BINDING);?></a></li>
 <li><a href="./?load=walled_garden" class=""><i class="fa fa-random"></i> <?php _e(__WALLED_GARDEN);?></a></li>
 <li><a href="./?load=cookies" class=""><i class="fa fa-retweet"></i> <?php _e(__COOKIES);?></a></li>
 </ul>
@@ -60,8 +60,14 @@
 <li><a href="./settings.php?index=update" class=""><i class="fa fa-upload"></i> <?php _e(__UPDATE);?> Manual</a></li>
 </ul>
 </li>
+<li>
+<a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-medium"></i><span class="hide-menu"><?php _e(__MIKMOS_ONLINE);?></span></a>
+<ul aria-expanded="false" class="collapse">
+<li><a href="./settings.php?index=srstunnel" class=""><i class="fa fa-shield"></i> <?php _e(__SRSTUNNEL);?></a></li>
+<li><a href="./settings.php?index=premium" class=""><i class="fa fa-download"></i> <?php _e(__DOWNLOAD);?></a></li>
+</ul>
+</li>
 <li><a href="./?load=about" class=""><i class="fa fa-code"></i> <span class="hide-menu"><?php _e(__ABOUTS);?></span></a></li>
-<li><a href="./?load=disqus" class=""><i class="fa fa-comments"></i> <span class="hide-menu"><?php _e(__DISQUS);?></span></a></li>
 </ul>
 </nav>
 </div>

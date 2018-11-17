@@ -327,17 +327,17 @@ $end = $mikmosListSc['next-run'];
 //$valy = $mikmosListSc['interval'];
 // share WhatsApp
 if($getvalid != ""){
-$WA_valid = "Validity : *".$getvalid."* %0A";
+$WA_valid = "Tenggang : *".$getvalid."* %0A";
 }else{
 $WA_valid = "";
 }
 if ($gettlimit != "") {
-$WA_tlimit = "TimeLimit : *".$gettlimit."* %0A";
+$WA_tlimit = "Aktif : *".$gettlimit."* %0A";
 }else{
 $WA_tlimit = "";
 }
 if ($udatalimit != "") {
-$WA_dlimit = "DataLimit : *".$udatalimitx."".$MG."* %0A";
+$WA_dlimit = "Data : *".$udatalimitx."".$MG."* %0A";
 }else{
 $WA_dlimit = "";
 }
@@ -830,15 +830,15 @@ if(!is_dir($file)){?>
 <?php }}}}
 ?>
  </select>
- <input class="form-control" name="pilihan" value="vc" type="hidden">
  </td>
  </tr>
  <tr>
- <td class="align-middle">QRcode</td><td>
- <select class="form-control" name="qrcode" required="1">
-<option style="text-transform:uppercase" value="qr">Tampil</option>
-<option style="text-transform:uppercase" value="noqr">Tidak</option>
+ <td class="align-middle">Pilihan</td><td>
+ <select class="form-control" name="pilihan" required="1">
+<option style="text-transform:uppercase" value="up">Username & Password</option>
+<option style="text-transform:uppercase" value="vc">Username = Password</option>
  </select>
+ <input class="form-control" name="qrcode" value="qr" type="hidden">
  </td>
  </tr>
  <tr>

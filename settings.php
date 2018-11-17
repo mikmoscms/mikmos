@@ -25,6 +25,8 @@ switch($_GET['index']){
 default:
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
+
+
 ?>
 <div class="row">
 <div class="col-sm-12">
@@ -32,6 +34,7 @@ include("load/t_menu_adm.php");
 <header class="panel-heading">
 <strong><?php echo __WELLCOME;?>, <?php echo $_SESSION['username'];?></strong>
 <span class="tools pull-right">
+
 </span>
 </header>
 <div class="panel-body">
@@ -90,12 +93,8 @@ include("load/t_menu_adm.php");
 </div>
 </div>
 <div class="col-md-6">
-<?php
-
-
-?>
 <table class="table table-striped" style="font-weight:600">
-<tr><td>MIKMOS Versi</td><td> <?php echo versi_off('versi');?></td></tr>
+<tr><td width='30%'>MIKMOS Versi</td><td> <?php echo versi_off('versi');?></td></tr>
 <tr><td>Update</td><td><?php echo versi_off('tanggal');?></td></tr>
 <tr><td>Seri</td><td><?php echo versi_off('seri');?></td></tr>
 </table>
@@ -351,6 +350,7 @@ Kontak WA: 081802161315
 $_ROUTER 	= "'.$_ipmk.'";
 $_LANG 		= "'.$_LANG.'";
 $_TIMER		= "'.$_TIMER.'";
+$_THEMES	= "'.$_THEMES.'";
 ?>';
 fwrite($handleconfig, $dataconfig);
 chmod($mconfig,0644);
@@ -366,7 +366,7 @@ include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $API = new RouterosAPI();
 $API->debug = false;
-if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+if ($API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
 $_SESSION['connect'] = 'connect';
 _e('<script>window.location.replace("./settings.php?index");</script>');
 }else{
@@ -419,6 +419,7 @@ load_router($_ROUTER, "./inc/ip_mk/", "off");
 <tr><td>Status Router</td><td style="color:#fa8564"> <?php if($_SESSION['connect']=='connect'){ ?>Terhubung<?php }else{ ?>Tidak Terhubung<?php } ?></td></tr>
 <tr><td>Router</td><td><?php echo $_ROUTER;?></td></tr>
 <tr><td>IP/URL</td><td><?php echo $_IPMK;?></td></tr>
+<tr><td>Port</td><td><?php if(empty($_POMK)) { echo '8728 (default)';}else{ ?><?php echo $_POMK;?><?php } ?></td></tr>
 <tr><td>Username</td><td><?php echo $_USMK;?></td></tr>
 <tr><td>Password</td><td>&bull;&bull;&bull;&bull;&bull;&bull;</td></tr>
 <tr><td>Nama Perusahaan</td><td><?php echo $_RPER;?></td></tr>
@@ -439,6 +440,7 @@ $router1 = $_GET['id'];
 include('./inc/ip_mk/'.$router1.'.php');
 $_ROUTER1 = $_ROUTER;
 $_IPMK1 = $_IPMK;
+$_POMK1 = $_POMK;
 $_USMK1 = $_USMK;
 $_PSMK1 = $_PSMK;
 $_RPER1 = $_RPER;
@@ -454,13 +456,14 @@ if(isset($_POST['cek']))
 {
 $router1 = strtoupper(ganti_spasi($_POST['router']));
 $ip1 = $_POST['ip'];
+$port1 = $_POST['port'];
 $user1 = $_POST['user'];
 $pass1 = $_POST['pass'];
 require_once('./lib/routeros_api.class.php');  
 $API = new RouterosAPI();
 $API->debug = false;
-$API->connect($ip1, $user1, $pass1);
-if($API->connect($ip1, $user1, $pass1)){
+$API->connect($ip1, $port1, $user1, $pass1);
+if($API->connect($ip1, $port1, $user1, $pass1)){
 $konek = __CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__CONNECT.'</span>';
 }else{
 $konek = __NO_CONNECT;$konek1 = '&rarr; <span class="text-danger mk_blink">'.__NO_CONNECT.'</span>';
@@ -471,6 +474,7 @@ if(isset($_POST['save']))
 {
 $router = strtoupper(ganti_spasi($_POST['router']));
 $ip = $_POST['ip'];
+$port = $_POST['port'];
 $user = $_POST['user'];
 $pass = _en($_POST['pass']);
 $per = $_POST['per'];
@@ -495,6 +499,7 @@ Kontak WA: 081802161315
 **/
 $_ROUTER 	= "'.$router.'";
 $_IPMK 		= "'.$ip.'";
+$_POMK 		= "'.$port.'";
 $_USMK 		= "'.$user.'";
 $_PSMK 		= "'.__CMS.'_'.$pass.'";
 $_RPER 		= "'.$per.'";
@@ -515,12 +520,12 @@ Kontak WA: 081802161315
 $_ROUTER 	= "'.$router.'";
 $_LANG 		= "id";
 $_TIMER		= "1200";
+$_THEMES	= "'.$_THEMES.'";
 ?>';
 fwrite($handle1, $data1);
-chmod($my_file1,0644);
 $API = new RouterosAPI();
 $API->debug = false;
-if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+if ($API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
 $_SESSION['connect'] = 'connect';
 _e('<script>window.location.replace("./settings.php?index=mikrotik");</script>');
 $API->disconnect();
@@ -532,6 +537,7 @@ if(isset($_POST['edit']))
 $router1 = $_ROUTER;
 $router = strtoupper(ganti_spasi($router1));
 $ip = $_POST['ip'];
+$port = $_POST['port'];
 $user = $_POST['user'];
 $pass = _en($_POST['pass']);
 $per = $_POST['per'];
@@ -567,6 +573,7 @@ Kontak WA: 081802161315
 **/
 $_ROUTER 	= "'.$router.'";
 $_IPMK 		= "'.$ip.'";
+$_POMK 		= "'.$port.'";
 $_USMK 		= "'.$user.'";
 $_PSMK 		= "'.__CMS.'_'.$pass.'";
 $_RPER 		= "'.$per.'";
@@ -581,7 +588,7 @@ chmod($my_file,0644);
 
 $API = new RouterosAPI();
 $API->debug = false;
-if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+if ($API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
 $_SESSION['connect'] = 'connect';
 _e('<script>window.location.replace("./settings.php?index=mikrotik");</script>');
 $API->disconnect();
@@ -620,6 +627,10 @@ $API->disconnect();
 </tr>
 <tr>
 <td class="align-middle">IP</td><td><input placeholder="IP / Domain" autocomplete="off" class="form-control" type="text" name="ip" value="<?php if(isset($_POST['cek'])) { echo $ip1;}else{ ?><?php echo $_IPMK1;?><?php } ?>" required="1"/></td>
+</tr>
+<tr>
+<td class="align-middle">Port</td><td><input placeholder="Port (default: 8728)" autocomplete="off" class="form-control" type="text" name="port" value="<?php if(isset($_POST['cek'])) { echo $port1;}else{ ?>
+<?php if(empty($_POMK)) { echo '8728';}else{ ?><?php echo $_POMK;?><?php }} ?>" required="1"/></td>
 </tr>
 <tr>
 <td class="align-middle">Username</td><td><input placeholder="Username Mikrotik" autocomplete="off" class="form-control" type="text" name="user" value="<?php if(isset($_POST['cek'])) { echo $user1;}else{ ?><?php echo $_USMK1;?><?php } ?>" required="1"/></td>
@@ -781,16 +792,61 @@ _e('<script>window.location.replace("./settings.php?index");</script>');
 <?php
 include("load/t_bawah.php");
 break;
-case'dis':
+case'srstunnel':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $API = new RouterosAPI();
 $API->debug = false;
-$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
-$idget = $_GET['id'];
-$dget = $_GET['d'];
-$API->comm("/ip/hotspot/user/set", array(".id"=> "$idget","disabled"=> "$dget"));
-_e('<script>window.location.replace("./?load=users");</script>');
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+
+$mikmosLoad = $API->comm("/ip/service/print");
+$mikmosTot = count($mikmosLoad);
+
+if(isset($_POST['edit'])){
+$name = ($_POST['name']);
+$port = ($_POST['port']);
+
+if($mikmosData['name']=='www'){ 
+$API->comm("/ip/service/set", array(
+  "name" => "$name",
+  "port" => "$port",
+));
+}
+if($mikmosData['name']=='winbox'){ 
+$API->comm("/ip/service/set", array(
+  ".id" => "*8",
+  "name" => "$name",
+  "port" => "$port",
+));
+}
+echo "<script>window.location='./settings.php?index=srstunnel'</script>";
+  }
+?>
+<div class="row">
+<div class="col-sm-12">
+<div class="panel">
+<header class="panel-heading">
+<strong><?php echo __SRSTUNNEL;?></strong>
+<span class="tools pull-right">
+</span>
+</header>
+<div class="panel-body">
+<hr>
+<div class="row">
+<div class="col-md-12">
+<div class="text-center">
+<span class="color-white"><i class="fa fa-lock f-s-40"></i></span>
+<h3 class="text-uppercase">SRS Tunnel Lock </h3>
+<p class="text-muted m-t-30 m-b-30">Maaf, ini hanya untuk yang berlangganan Paket Mikmos Online + SRS Tunnel</p>
+<a target="_blank" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40" href="https://mikmos.online/">Langganan</a>  
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<?php
 include("load/t_bawah.php");
 break;
 case'reboot':
@@ -799,7 +855,7 @@ include("load/t_menu_adm.php");
 if(isset($_POST['reboot'])){
 $API = new RouterosAPI();
 $API->debug = false;
-if ($API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+if ($API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
 	$API->write('/system/reboot');
 	$API->read();
 }
@@ -844,17 +900,46 @@ include("load/t_menu_adm.php");
 </header>
 <div class="panel-body">
 <hr>
-<div class="table-responsive">
-<div class="adv-table">
-<iframe style="border:none;color:#fff!important;" height="450" width="100%" src="<?php _e(_Mikmos_Web(0));?><?php _e(_Get_Pre(0));?>?index=premium&klien=<?php _e(get());?>"></iframe>
+
+<div class="row">
+<div class="col-md-12">
+<div class="text-center">
+<span class="color-white"><i class="fa fa-lock f-s-40"></i></span>
+<h3 class="text-uppercase"><?php echo __PREMIUM;?> <?php echo __DOWNLOAD;?> Lock </h3>
+<p class="text-muted m-t-30 m-b-30">Maaf, ini hanya untuk yang berlangganan Paket Online</p>
+<a target="_blank" class="btn btn-info btn-rounded waves-effect waves-light m-b-40" href="https://mikmos.online/">Langganan</a>  
 </div>
 </div>
+</div>
+
+
 </div>
 </div>
 </div>
 </div>
 <?php
 include("load/t_bawah.php");
+break;
+case'themecss_login':
+$_SESSION['css'] = $_GET['css'];
+
+$my_file1 = 'inc/config.php';
+$handle1 = fopen($my_file1, 'w') or die('Cannot open file:  '.$my_file1);
+$data1 = '<?php
+/** 
+Yedin Abu Shafa 
+Kontak WA: 081802161315
+**/
+$_ROUTER 	= "'.$_ROUTER.'";
+$_LANG 		= "'.$_LANG.'";
+$_TIMER		= "'.$_TIMER.'";
+$_THEMES	= "'.$_SESSION['css'].'";
+?>';
+fwrite($handle1, $data1);
+
+_e('<script>window.history.go(-1)</script>');
+?>
+<?php
 break;
 case'themecss':
 $_SESSION['css'] = $_GET['css'];

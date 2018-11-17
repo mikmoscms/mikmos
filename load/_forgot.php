@@ -96,9 +96,14 @@ x.type = 'password';
 </div>
 <script src="assets/js/lib/jquery/jquery.min.js"></script>
 <script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/sidebarmenu.js"></script>
-<script src="assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-<script src="assets/js/mikmos_script.js"></script>
+<script>
+
+ $(function() {
+"use strict";
+$(function() {
+$(".preloader").fadeOut();
+})
+});
+ </script>
 </body>
 </html>

@@ -32,7 +32,7 @@ include('../inc/ip_mk/'.$_ROUTER.'.php');
 include('../inc/lang/'.$_LANG.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
-$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 $getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?.id" => "$id"));
 $profiledetalis = $getprofile[0];
 $pid = $profiledetalis['.id'];

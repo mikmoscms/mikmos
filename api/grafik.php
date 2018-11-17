@@ -11,7 +11,7 @@ include_once('../inc/ip_mk/'.$_ROUTER.'.php');
 $interface = $_GET["interface"];
 $API = new RouterosAPI();
 $API->debug = false;
-$KONEK = $API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$KONEK = $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 	if ($KONEK) {
 		$rows = array(); 
 		$rows2 = array();	

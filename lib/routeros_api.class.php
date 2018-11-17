@@ -83,14 +83,15 @@ class RouterosAPI
      *
      * @return boolean                If we are connected or not
      */
-    public function connect($ip, $login, $password)
+    public function connect($ip, $po, $login, $password)
     {
         for ($ATTEMPT = 1; $ATTEMPT <= $this->attempts; $ATTEMPT++) {
+			if(empty($po)){$mikport = $this->port;}else{$mikport = $po;}
             $this->connected = false;
             $PROTOCOL = ($this->ssl ? 'ssl://' : '' );
             $context = stream_context_create(array('ssl' => array('ciphers' => 'ADH:ALL', 'verify_peer' => false, 'verify_peer_name' => false)));
-            $this->debug('Connection attempt #' . $ATTEMPT . ' to ' . $PROTOCOL . $ip . ':' . $this->port . '...');
-            $this->socket = @stream_socket_client($PROTOCOL . $ip.':'. $this->port, $this->error_no, $this->error_str, $this->timeout, STREAM_CLIENT_CONNECT,$context);
+            $this->debug('Connection attempt #' . $ATTEMPT . ' to ' . $PROTOCOL . $ip . ':' . $mikport . '...');
+            $this->socket = @stream_socket_client($PROTOCOL . $ip.':'. $mikport, $this->error_no, $this->error_str, $this->timeout, STREAM_CLIENT_CONNECT,$context);
             if ($this->socket) {
                 socket_set_timeout($this->socket, $this->timeout);
                 $this->write('/login');

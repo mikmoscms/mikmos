@@ -192,7 +192,7 @@ if($ucomment !== $vuser[$i-1]['comment']){echo '<option style="text-transform:up
  </td>
  </tr>
  <tr>
- <td class="align-middle">Voucher</td><td>
+ <td class="align-middle">Style Voucher</td><td>
  <select class="form-control" name="styles" required="1">
  <?php
 $rep=opendir('./vouchers/styles/');
@@ -200,7 +200,7 @@ while ($file = readdir($rep)) {
 if($file != '..' && $file !='.' && $file !=''){
 if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
 if(!is_dir($file)){?>
-<option style="text-transform:uppercase" value="<?php echo substr($file,0, -4);?>">Voucher <?php echo substr($file, 0, -4);?></option>
+<option style="text-transform:uppercase" value="<?php echo substr($file,0, -4);?>"><?php echo substr($file, 0, -4);?></option>
 <?php }}}}
 ?>
  </select>
@@ -212,14 +212,7 @@ if(!is_dir($file)){?>
 <option style="text-transform:uppercase" value="up">Username & Password</option>
 <option style="text-transform:uppercase" value="vc">Username = Password</option>
  </select>
- </td>
- </tr>
- <tr>
- <td class="align-middle">QRcode</td><td>
- <select class="form-control" name="qrcode" required="1">
-<option style="text-transform:uppercase" value="qr">Tampil</option>
-<option style="text-transform:uppercase" value="noqr">Tidak</option>
- </select>
+ <input class="form-control" name="qrcode" value="qr" type="hidden">
  </td>
  </tr>
  <tr>

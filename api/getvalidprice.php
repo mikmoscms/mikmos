@@ -9,7 +9,7 @@ include_once('../inc/ip_mk/'.$_ROUTER.'.php');
 
 $API = new RouterosAPI();
 $API->debug = false;
-$KONEK_MK=$API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$KONEK_MK=$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 
 $uprofname = $_GET['name'];
 if($uprofname != ""){
@@ -55,7 +55,7 @@ if($uprofname != ""){
   }
   echo '
   <table width="100%">
-  '.$timelim.''.$validasi.''.$tenggang.''.$price.'
+  '.$timelim.''.$validasi.''.$tenggang.''.$price.''.$lockUs.'
   </table>';
   echo $timelimx;
 }

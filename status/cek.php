@@ -15,7 +15,7 @@ include('../inc/ip_mk/'.$_GET['router'].'.php');
 }
 $API = new RouterosAPI();
 $API->debug = false;
-$konek = $API->connect($_IPMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$konek = $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
 if($_LANG=="id"){
 $s = "";
 }else{$s = "s";}
