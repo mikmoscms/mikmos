@@ -24,6 +24,9 @@ x.type = 'text';
 x.type = 'password';
 }}
 </script>
+<style>
+body {background-color: transparent!important;}html {background-image: url("assets/images/seri.jpg");height: 100%;background-position: center;background-repeat: no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;}
+</style>
 </head>
 <body class="fix-header fix-sidebar">
 <div class="preloader">

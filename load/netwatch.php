@@ -62,11 +62,6 @@ for ($i=0; $i<$mikmosTot; $i++){
 </div>
 </div>
 </div>
-<script type="text/javascript">
-setTimeout(function(){
- window.location.reload(1);
-}, 50000);
-</script>
 <?php
 break;
 case'ae':

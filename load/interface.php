@@ -8,7 +8,7 @@ $mikmosTot = count($mikmosLoad);
 
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong><?php echo __INTERFACE;?></strong>
 <span class="tools pull-right"> </span>
@@ -70,7 +70,7 @@ for ($i=0; $i<$mikmosTot; $i++){
 </div>
 </div>
 </div>
-</section>
+</div>
 </div>
 </div>
 </div>
@@ -92,7 +92,7 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 ?>
 <div class="row">
 <div class="col-sm-12">
-<section class="panel">
+<div class="panel">
 <header class="panel-heading">
 <strong>Monitoring <?php echo __INTERFACE;?>  <?php _e($mikmosLoadx[0]['name']);?></strong>
 <span class="tools pull-right"> </span>
@@ -140,7 +140,7 @@ for ($i=0; $i<$mikmosTot; $i++){
 </div>
 </div>
 </div>
-</section>
+</div>
 </div>
 </div>
 </div>

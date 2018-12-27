@@ -44,9 +44,6 @@ Jika sudah di Setting di Profile Users dan Report Kosong, mungkin sebelumnya men
 <div class="col-sm-7">
 <div class="adv-table">
 <div class="table-responsive">
-<!--
-<button class="btn btn-danger" onclick="myFunction()">SHOW/HIDE GRAFIK</button>
--->
 <div id="myDIV">
 <div id="trafiknya" style="margin:0;padding:0!important;width:100%;height:300px;"></div>
 </div>
@@ -62,7 +59,8 @@ Jika sudah di Setting di Profile Users dan Report Kosong, mungkin sebelumnya men
 <span class="color-white"><i class="fa fa-money f-s-60"></i></span>
 </div>
 <div class="media-body media-text-right">
-<h2 class="color-white">Pendapatan</h2>
+<h3 class="color-white">Pendapatan</h3>
+<small class="color-white"><?php _e(date('d M Y'));?></small><br/>
 <strong class="color-white">Hari ini <?php echo rupiah($bilHR);?></strong><br/>
 <strong class="color-white"><?php echo date('F');?> <?php echo rupiah($bilBLN);?></strong>
 </div>
@@ -126,8 +124,14 @@ for ($i=1; $i<$datesnya; $i++){
 $tgl_leng=strlen($i); 
 if ($tgl_leng==1) $ix="0".$i;else $ix=$i;
 $mikHRini = strtolower(date('M')).'/'.$ix.'/'.date('Y');
+$pendptan = mikBillingHR($mikHRini);
+if(!empty($pendptan)){
+	$dpthari = $pendptan;
+}else{
+	$dpthari = 0;
+}
 ?>
-	['Tanggal <?php echo $ix;?>', <?php echo mikBillingHR($mikHRini);?>],
+	['Tanggal <?php echo $ix;?>', <?php echo $dpthari;?>],
 <?php } ?>
 	]
   }],
@@ -227,6 +231,7 @@ else{$totolbil = rupiah(mikBillingALL());}
 <header class="panel-heading">
 <strong>Report <?php _e(__BILLING);?> </strong>
 </header>
+<p>Disarankan untuk menghapus report perbulannya.</p>
 <div class="panel-body"><hr>
 <p class="text-muted">
 <div style=""> 
@@ -253,7 +258,7 @@ $nbulanan=array(1=>'01','02','03','04','05','06','07','08','09','10','11','12');
 $nthn=date("Y");
 $tglnya = explode("/",$pilhr);
 $ibln =array(1=>"Januari","Februari","Maret","April","Mei", "Juni","Juli","Agustus","September","Oktober", "November","Desember"); 
-$ibln1 =array(1=>"jan","feb","mar","apr","may", "jun","jul","aug","sep","okt", "nov","des"); 
+$ibln1 =array(1=>"jan","feb","mar","apr","may", "jun","jul","aug","sep","oct", "nov","dec"); 
 echo '<select style="padding:7.5px;" id="sday">
 <option value="" selected="selected">Semua</option>'; 
 for($itgl=1; $itgl<=31; $itgl++){ 

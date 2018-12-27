@@ -94,7 +94,7 @@ $mikmosLoadS = $API->comm("/ip/hotspot/print");
 if(substr($id_get,0,1) == "*"){
 $id_get = $id_get;
 }elseif(substr($id_get,0,1) != ""){
-$getuser = $API->comm("/ip/hotspot/active/print", array("?name"=> "$id_get",));
+$getuser = $API->comm("/ip/hotspot/active/print", array("?.id"=> "$id_get",));
 $id_get =$getuser[0]['.id'];
 //if($id_get == ""){echo "<b>Hotspot User not found</b>";}
 }
@@ -137,7 +137,7 @@ x.type = 'password';
  </span>
 </header>
 <div class="panel-body"><hr>
-<?php// print_r($getuser);?>
+<?php //print_r($getuser);?>
 <div class="row">
 <div class="col-md-7">
 <p class="text-muted">
@@ -181,24 +181,105 @@ x.type = 'password';
 <td class="align-middle">Packet Out/In</td><td><?php if($upacketsout == 0){echo'0';}else{echo formatBytes($upacketsout,2);}?> / <?php if($upacketsin == 0){echo'0';}else{echo formatBytes($upacketsin,2);}?></td>
 </tr>
 <tr>
-<td class="align-middle">Radius</td><td><?php echo $uradius;?></td>
-</tr>
-<tr>
 <td class="align-middle">Comment</td><td><?php echo $ucomment;?></td>
 </tr>
 </table>
 </div>
 
 <div class="col-md-5">
+<div class="table-responsive">
+<div class="adv-table">
+<div class="table-responsive">
+
+<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+<input hidden name="id" id="id" type="text" value="<?php _e($uid);?>" />
+<div id="trafiknya"></div>
+</div>
+</div>
+</div>
+</div>
+
 
 </div>
+</div>
+</div>
+</div>
+</div>
 
+<script type="text/javascript" src="assets/js/lib/highcharts/highcharts.js"></script>
+<script> 
+	var chart;
+	function requestDatta(id) {
+		$.ajax({
+			url: 'api/user_aktif.php?id='+id,
+			datatype: "json",
+			success: function(data) {
+				var midata = JSON.parse(data);
+				if( midata.length > 0 ) {
+					var TX=parseInt(midata[0].data);
+					var RX=parseInt(midata[1].data);
+					var x = (new Date()).getTime(); 
+					shift=chart.series[0].data.length > 19;
+					chart.series[0].addPoint([x, TX], true, shift);
+					chart.series[1].addPoint([x, RX], true, shift);
+					//document.getElementById("trafiknya").innerHTML=TX + " / " + RX;
+				}else{
+					//document.getElementById("trafiknya").innerHTML="- / -";
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) { 
+				console.error("Status: " + textStatus + " request: " + XMLHttpRequest); console.error("Error: " + errorThrown); 
+			}       
+		});
+	}	
 
-</div>
-</div>
-</div>
-</div>
-</div>
+	$(document).ready(function() {
+			Highcharts.setOptions({
+				global: {
+					useUTC: false
+				}
+			});
+	
+
+           chart = new Highcharts.Chart({
+			   chart: {
+				renderTo: 'container',
+				animation: Highcharts.svg,
+				type: 'spline',
+				events: {
+					load: function () {
+						setInterval(function () {
+							requestDatta(document.getElementById("id").value);
+						}, 5000);
+					}				
+			}
+		 },
+		 title: {
+			text: 'Grafik Byte in/out'
+		 },
+		 xAxis: {
+			type: 'datetime',
+				tickPixelInterval: 150,
+				maxZoom: 20 * 1000
+		 },
+		 yAxis: {
+			minPadding: 0.2,
+				maxPadding: 0.2,
+				title: {
+					text: 'Trafik',
+					margin: 10
+				}
+		 },
+            series: [{
+                name: 'byte-in',
+                data: []
+            }, {
+                name: 'byte-out',
+                data: []
+            }]
+	  });
+  });
+</script>
 <?php
 break;
 case'del':

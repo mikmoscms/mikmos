@@ -40,9 +40,9 @@ include("load/t_menu_adm.php");
 <div class="panel-body">
 <p class="text-muted">
 <?php if($_SESSION['connect']=='connect'){ ?> 
-<a class="btn btn-danger" href="./?load=home"> <i class="fa fa-dashboard"></i> <?php echo __DASHBOARD;?></a>
+<a data-toggle="tooltip" data-placement="top" title="<?php echo __DASHBOARD;?>" class="btn btn-danger" href="./?load=home"> <i class="fa fa-dashboard"></i> <?php echo __DASHBOARD;?></a>
 <?php }else{ ?>
-<a class="btn btn-danger" href="./settings.php?index=mikrotik"> <i class="fa fa-close"></i> Ganti Router</a>
+<a data-toggle="tooltip" data-placement="top" title="Ganti Router Mikrotik" class="btn btn-danger" href="./settings.php?index=mikrotik"> <i class="fa fa-close"></i> Ganti Router</a>
 <?php } ?>
 </p>
 <hr>
@@ -51,7 +51,7 @@ include("load/t_menu_adm.php");
 
 <div class="row">
 <div class="col-md-6">
-<a class="color-white" href="./?index=backup" title="BACKUP">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="./?index=backup" title="BACKUP">
 <div class="card p-20" style="background-color:#20B2AA"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-file-zip-o f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">BACKUP</h2>
@@ -61,7 +61,7 @@ include("load/t_menu_adm.php");
 </a>
 </div>
 <div class="col-md-6">
-<a class="color-white" href="./settings.php?index=administrator" title="ADMIN">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="./settings.php?index=administrator" title="ADMIN">
 <div class="card p-20" style="background-color:#34a853"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-users f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">ADMIN</h2>
@@ -71,7 +71,7 @@ include("load/t_menu_adm.php");
 </a>
 </div>
 <div class="col-md-6">
-<a class="color-white" href="./settings.php?index=mikrotik" title="ROUTER">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="./settings.php?index=mikrotik" title="ROUTER">
 <div class="card p-20" style="background-color:#fa8564"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">ROUTER</h2>
@@ -81,7 +81,7 @@ include("load/t_menu_adm.php");
 </a>
 </div>
 <div class="col-md-6">
-<a class="color-white" href="./settings.php?index=telegram" title="BACKUP">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="./settings.php?index=telegram" title="TELEGRAM">
 <div class="card p-20" style="background-color:#0088cc"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-telegram f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">TELEGRAM</h2>
@@ -949,3 +949,10 @@ _e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
