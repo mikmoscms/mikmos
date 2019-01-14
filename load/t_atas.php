@@ -10,15 +10,7 @@
 <title><?php _e(__WEBTITLLE);?></title>
 <link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/helper.css" rel="stylesheet">
-<?php if(empty($_SESSION['css'])){ ?>
-<?php if(empty($_THEMES)){ ?>
 <link href="assets/css/mikmos_style.css" rel="stylesheet">
-<?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css" rel="stylesheet">
-<?php } ?>
-<?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css" rel="stylesheet">
-<?php } ?>
 <script src="assets/js/lib/jquery/jquery.min.js"></script>
 <script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
