@@ -1,16 +1,13 @@
 # MIKMOS cms
 
 Description of MIKMOS cms
-- @author Yedin Abu Shafa mikmoscms@gmail.com <http://mikmos.my.id>
-- @copyright Copyright (c) 2018, MIKMOS Team.
+- @author [@Yedin Abu Shafa](https://fb.me/yedin.mikmos.3) - mikmoscms@gmail.com <http://mikmos.my.id>
+- @copyright (c) 2018, MIKMOS Team.
 - @license https://opensource.org/licenses/gpl-license GNU Public License
 - @for AllFiles MIKMOScms
 
 ----
 ![MIKMOScms](https://image.ibb.co/hJxZDA/Screenshot-2018-10-19-MIKMOS-CMS-Mikrotik-Monitoring-System-2.png)
-
-----
-Aplikasi ini dikelola oleh [@Yedin](https://fb.me/yedin.mikmos.3)
 
 ---- 
 Fitur:
@@ -20,17 +17,20 @@ Fitur:
 - Multi Router Mikrotik
 - Generate voucher & print
 - Style Template Voucher
+- Kirim Notif Telegram
+- Backup Mikrotik Kirim ke Email
+- Multi Bahasa (Google Translate)
 
 ----
 Sistem yang dibutuhkan
 ----
 Requirements
-- Linux or Windows OS
+- OS Linux/Windows
 - PHP Version 5.6 atau lebih
-- PHP-CURL
-- PHP-ZIP
+  - PHP-CURL
+  - PHP-ZIP
 
 ----
 MIKMOS Online
 ----
-hubungi Yedin di [facebook](https://facebook.com/yedin.mikmos.3)
+Aplikasi ini dikelola oleh  [@Yedin di [facebook](https://fb.me/yedin.mikmos.3)

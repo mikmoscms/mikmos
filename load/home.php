@@ -1,11 +1,6 @@
 <?php
-session_start();
 error_reporting(0);
-include_once('../inc/config.php');
-include_once('../lib/fungsi.php');
-include_once('../lib/routeros_api.class.php');
-include_once('../inc/lang/id.php');
-include_once('../inc/ip_mk/'.$_ROUTER.'.php');
+@session_start();
 $interface = $_GET["interface"];
 $mikmosLoadJ = $API->comm("/system/clock/print");
 $mikmosJ = $mikmosLoadJ[0];

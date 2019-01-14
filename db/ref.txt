@@ -11,5 +11,6 @@
 008|Sticky-kit v1.1.3 |https://leafo.net
 009|DataTables 1.10.13|https://datatables.net
 010|Highcharts JS v6.1.4 |https://highcharts.com
-011|Mikhmon App V.2|#
-012|Mikman App|#
+011|Google Translate |https://translate.google.com
+012|Mikhmon App V.2|#
+013|Mikman App|#

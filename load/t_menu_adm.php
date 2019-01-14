@@ -30,10 +30,11 @@
 <li><a href="./?load=cookies" class=""><i class="fa fa-retweet"></i> <?php _e(__COOKIES);?></a></li>
 </ul>
 </li>
-<li><a href="./?load=vouchers" class=""><i class="fa fa-ticket"></i> <?php _e(__VOUCHERS);?></a></li>
-<li><a href="./?load=billing" class=""><i class="fa fa-money"></i> <?php _e(__BILLING);?></a></li>
-<li><a href="./?load=users_logs" class=""><i class="fa fa-history"></i> <?php _e(__LOG_ACTIVITY);?></a></li>
-<li><a href="./?load=interface" class=""><i class="fa fa-area-chart"></i> <?php _e(__INTERFACE);?></a></li>
+
+<li><a href="./?load=vouchers" class=""><i class="fa fa-ticket"></i><span class="hide-menu"> <?php _e(__VOUCHERS);?></span></a></li>
+<li><a href="./?load=billing" class=""><i class="fa fa-money"></i><span class="hide-menu"> <?php _e(__BILLING);?></span></a></li>
+<li><a href="./?load=users_logs" class=""><i class="fa fa-history"></i><span class="hide-menu"> <?php _e(__LOG_ACTIVITY);?></span></a></li>
+<li><a href="./?load=interface" class=""><i class="fa fa-area-chart"></i><span class="hide-menu"> <?php _e(__INTERFACE);?></span></a></li>
 <li>
 <a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-sitemap"></i><span class="hide-menu"><?php _e(__SYSTEM);?></span></a>
 <ul aria-expanded="false" class="collapse">
@@ -64,7 +65,7 @@
 <a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-medium"></i><span class="hide-menu"><?php _e(__MIKMOS_ONLINE);?></span></a>
 <ul aria-expanded="false" class="collapse">
 <li><a href="./settings.php?index=srstunnel" class=""><i class="fa fa-shield"></i> <?php _e(__SRSTUNNEL);?></a></li>
-<li><a href="./settings.php?index=premium" class=""><i class="fa fa-download"></i> <?php _e(__DOWNLOAD);?></a></li>
+<li><a href="./settings.php?index=premium" class=""><i class="fa fa-download"></i> <?php _e(__PREMIUM);?></a></li>
 </ul>
 </li>
 <li><a href="./?load=about" class=""><i class="fa fa-code"></i> <span class="hide-menu"><?php _e(__ABOUTS);?></span></a></li>

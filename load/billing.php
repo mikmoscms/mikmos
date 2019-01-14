@@ -187,7 +187,7 @@ $API->write('/system/script/remove', false);
 $API->write('=.id=' . $MIKREM[$i]['.id']);
 $READ = $API->read();
 }}}
-echo Loading('./?load=billing','0');
+_e('<script>window.history.go(-1)</script>');
 }
 if(strlen($pilhr) > "0"){
 if($_SESSION['connect']=='connect') {
@@ -352,7 +352,7 @@ downloadLink.click();
 }
 function exportTableToCSV(filename) {
 var csv = [];
-var rows = document.querySelectorAll("#billing tr");
+var rows = document.querySelectorAll("#mikmos-tbl-desc tr");
 
  for (var i = 0; i < rows.length; i++) {
 var row = [], cols = rows[i].querySelectorAll("td, th");
