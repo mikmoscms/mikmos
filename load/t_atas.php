@@ -35,18 +35,8 @@ echo cek_update();
 <nav class="navbar top-navbar navbar-expand-md navbar-light">
 <div class="navbar-header">
 <a class="navbar-brand" href="?load=home">
-<?php if(empty($_SESSION['css'])){ ?>
-<?php if(empty($_THEMES)){ ?>
 <b><img src="assets/images/logo.png"/></b>
 <span><img src="assets/images/logo-text.png"/></span>
-<?php }else{ ?>
-<b><img src="assets/css/styles/<?php _e($_THEMES);?>/logo.png"/></b>
-<span><img src="assets/css/styles/<?php _e($_THEMES);?>/logo-text.png"/></span>
-<?php } ?>
-<?php }else{ ?>
-<b><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo.png"/></b>
-<span><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo-text.png"/></span>
-<?php } ?>
 </a>
 </div>
 <div class="navbar-collapse">
