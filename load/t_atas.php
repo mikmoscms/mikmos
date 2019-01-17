@@ -116,23 +116,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><div class="form-control" id="pesan"></div></a>
 </li>
 <li class="nav-item dropdown">
-<?php if(empty($_SESSION['css'])){ ?>
-<?php }else{ ?>
-<?php } ?>
-
-
-
-<?php if(empty($_SESSION['css'])){ ?>
-<?php if(empty($_THEMES)){ ?>
 <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
-<?php }else{ ?>
-<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/css/styles/<?php _e($_THEMES);?>/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
-<?php } ?>
-<?php }else{ ?>
-<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
-<?php } ?>
-
-
 <div class="dropdown-menu dropdown-menu-right animated zoomIn">
 <ul class="dropdown-user">
 <li><a href="./?index=logout"><i class="fa fa-power-off"></i> <?php _e(__LOGOUT);?></a></li>
