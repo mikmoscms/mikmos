@@ -50,20 +50,6 @@ include("load/t_menu_adm.php");
 <div class="row">
 <div class="col-md-6">
 <div class="row">
-<?php
-if($_SERVER['HTTP_X_REQUESTED_WITH'] !== "mikmos.online") {
-?>
-<div class="col-md-6 hidden-md-up">
-<a data-toggle="tooltip" data-placement="top" class="color-white" href="https://mikmos.my.id/apk/<?php echo $_SERVER['HTTP_HOST'];?>.apk" title="APP ANDROID">
-<div class="card p-20" style="background-color:#FF99CC"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-android f-s-40"></i></span></div>
-<div class="media-body media-text-right">
-<h2 class="color-white">APP ANDROID</h2>
-</div>
-</div> 
-</div>
-</a>
-</div>
-<?php } ?>
 <div class="col-md-6">
 <a data-toggle="tooltip" data-placement="top" class="color-white" href="./?index=backup" title="BACKUP">
 <div class="card p-20" style="background-color:#20B2AA"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-file-zip-o f-s-40"></i></span></div>
