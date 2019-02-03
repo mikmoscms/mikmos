@@ -1,10 +1,11 @@
 </div>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/sidebarmenu.js"></script>
-<script src="assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-<script src="assets/js/lib/datatables/datatables.min.js"></script>
-<script src="assets/js/lib/datatables/datatables-init.js"></script>
-<script src="assets/js/mikmos_script.js"></script>	
+</div>
+<script src="assets/js/jquery.slimscroll.js?v=20190203"></script>
+<script src="assets/js/sidebarmenu.js?v=20190203"></script>
+<script src="assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js?v=20190203"></script>
+<script src="assets/js/lib/datatables/datatables.min.js?v=20190203"></script>
+<script src="assets/js/lib/datatables/datatables-init.js?v=20190203"></script>
+<script src="assets/js/mikmos_script.js?v=20190203"></script>	
 <script>
 var url = "./?index=logout"; 
 var count = <?php echo $_TIMER;?>; 

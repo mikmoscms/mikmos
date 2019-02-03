@@ -2,17 +2,30 @@
 <html lang="<?php _e($_LANG);?>">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="<?php _e(__WEBDESC);?>">
 <meta name="author" content="<?php _e(__CMS);?>">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
 <title><?php _e(__WEBTITLLE);?></title>
-<link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link href="assets/css/helper.css" rel="stylesheet">
-<link href="assets/css/mikmos_style.css" rel="stylesheet">
-<script src="assets/js/lib/jquery/jquery.min.js"></script>
-<script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<link href="assets/css/lib/bootstrap/bootstrap.min.css?v=20190203" rel="stylesheet">
+<link href="assets/css/helper.css?v=20190203" rel="stylesheet">
+<?php if(empty($_SESSION['css'])){ ?>
+<?php if(empty($_THEMES)){ ?>
+<link href="assets/css/mikmos_style.css?v=20190203" rel="stylesheet">
+<?php }else{ ?>
+<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css?v=20190203" rel="stylesheet">
+<?php } ?>
+<?php }else{ ?>
+<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css?v=20190203" rel="stylesheet">
+<?php } ?>
+<script src="assets/js/lib/jquery/jquery.min.js?v=20190203"></script>
+<script src="assets/js/lib/bootstrap/js/bootstrap.min.js?v=20190203"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128579565-1"></script>
 <script>
@@ -35,8 +48,18 @@ echo cek_update();
 <nav class="navbar top-navbar navbar-expand-md navbar-light">
 <div class="navbar-header">
 <a class="navbar-brand" href="?load=home">
+<?php if(empty($_SESSION['css'])){ ?>
+<?php if(empty($_THEMES)){ ?>
 <b><img src="assets/images/logo.png"/></b>
 <span><img src="assets/images/logo-text.png"/></span>
+<?php }else{ ?>
+<b><img src="assets/css/styles/<?php _e($_THEMES);?>/logo.png"/></b>
+<span><img src="assets/css/styles/<?php _e($_THEMES);?>/logo-text.png"/></span>
+<?php } ?>
+<?php }else{ ?>
+<b><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo.png"/></b>
+<span><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/logo-text.png"/></span>
+<?php } ?>
 </a>
 </div>
 <div class="navbar-collapse">
@@ -91,6 +114,27 @@ if(!is_dir($file)){
 </li>
 
 <li class="nav-item dropdown">
+<a title="Ganti Warna Theme" class="nav-link dropdown-toggle text-muted  " href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-th-large"></i></a>
+<div class="dropdown-menu animated zoomIn" style="text-transform: uppercase;">
+<?php
+$rep=opendir('./assets/css/styles/');
+while ($file = readdir($rep)) {
+if($file != '..' && $file !='.' && $file !=''){
+if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
+if(!is_dir($file)){
+?>
+<?php if($_SESSION['css']==$file){ ?> 
+<a class="dropdown-item" href="./settings.php?index=themecss_login&css=<?php _e($file);?>"><?php _e($file);?> <i class="fa fa-check"></i> </a>
+<?php } ?>
+<?php if($_SESSION['css']!==$file){ ?> 
+
+<a class="dropdown-item" href="./settings.php?index=themecss_login&css=<?php _e($file);?>"><?php _e($file);?></a>
+<?php } ?>
+<?php }}}} ?>
+</div>
+</li>
+
+<li class="nav-item dropdown">
 <a title="<?php echo __LANGS;?>" class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-list"></i></a>
 <div class="dropdown-menu animated zoomIn">
 <a class="dropdown-item" href="#id" onclick="doGTranslate('id|id');return false;" title="Indonesian">ID</a>
@@ -116,7 +160,23 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><div class="form-control" id="pesan"></div></a>
 </li>
 <li class="nav-item dropdown">
+<?php if(empty($_SESSION['css'])){ ?>
+<?php }else{ ?>
+<?php } ?>
+
+
+
+<?php if(empty($_SESSION['css'])){ ?>
+<?php if(empty($_THEMES)){ ?>
 <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
+<?php }else{ ?>
+<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/css/styles/<?php _e($_THEMES);?>/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
+<?php } ?>
+<?php }else{ ?>
+<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/css/styles/<?php _e($_SESSION['css']);?>/user.png" alt="<?php _e($_SESSION['username']);?>" title="<?php _e($_SESSION['username']);?>" class="profile-pic" /></a>
+<?php } ?>
+
+
 <div class="dropdown-menu dropdown-menu-right animated zoomIn">
 <ul class="dropdown-user">
 <li><a href="./?index=logout"><i class="fa fa-power-off"></i> <?php _e(__LOGOUT);?></a></li>

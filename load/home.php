@@ -11,6 +11,24 @@ $mikmosRB = $mikmosLoadRB[0];
 $mikmosLoadActive = $API->comm("/ip/hotspot/active/print", array( "count-only" => "")); if($mikmosLoadActive < 2 ){$hunit = "item"; }elseif($mikmosLoadActive > 1){ $hunit = "items"; }
 $mikmosTotUs = $API->comm("/ip/hotspot/user/print", array( "count-only" => "")); if($mikmosTotUs < 2 ){$uunit = "item"; }elseif($mikmosTotUs > 1){ $uunit = "items";}
 $bg_array = array("#CEED9D","#ECED9D","#EDCF9D","#EC9CA7","#fdd752","#a48ad4","#aec785","#1fb5ac","#fa8564");
+
+$mikHRini = strtolower(date('M')).'/'.date('d').'/'.date('Y');
+$mikBLini = strtolower(date('M')).''.date('Y');
+//$mikbilBLN = $API->comm("/system/script/print");
+$mikbilBLN = $API->comm("/system/script/print", array("?=owner" => $mikBLini));
+$mikbilBLNtot = count($mikbilBLN);
+for ($i=0; $i<$mikbilBLNtot; $i++){
+$mikmosData = $mikbilBLN[$i];
+$mikmoslits = explode("-|-",$mikmosData['name']);
+$bilBLN += $mikmoslits[3];
+}
+$mikbilHR = $API->comm("/system/script/print", array("?=source" => $mikHRini));
+$mikbilHRtot = count($mikbilHR);
+for ($i=0; $i<$mikbilHRtot; $i++){
+$mikmosData = $mikbilHR[$i];
+$mikmoslits = explode("-|-",$mikmosData['name']);
+$bilHR += $mikmoslits[3];
+}
 ?>
 <div id="reloadHomex">
 <div class="row">
@@ -200,12 +218,28 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 </div>
 </div>
 <div class="col-lg-6">
+
+<div class="p-20 m-b-10" style="background-color:#fa8564;margin-top:10px;">
+<div class="media widget-ten">
+<div class="media-left meida media-middle">
+<span class="color-white"><i class="fa fa-money f-s-60"></i></span>
+</div>
+<div class="media-body media-text-right">
+<h3 class="color-white">Pendapatan</h3>
+<small class="color-white"><?php _e(date('d M Y'));?></small><br/>
+<strong class="color-white">Hari ini <?php echo rupiah($bilHR);?></strong><br/>
+<strong class="color-white"><?php echo date('F');?> <?php echo rupiah($bilBLN);?></strong>
+</div>
+</div>
+</div>
+
+
 <div class="card">
 <div class="card-title">
 <h4><?php _e(__LOG_ACTIVITY);?></h4>
 </div>
 <div class="card-body">
-<div style="height:360px;overflow:auto;">
+<div style="height:205px;overflow:auto;">
 <table class="table table-hover" style="font-size:80%;">
 <?php
 $mikmosLoad = $API->comm("/log/print", array("?topics" => "hotspot,info,debug"));

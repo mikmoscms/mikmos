@@ -98,7 +98,7 @@ $uptime = formatDTM($getuser[0]['uptime']);
 $getbyteo = $getuser[0]['bytes-out'];
 $byteo = formatBytes2($getbyteo, 2);
 $limitup = $getuser[0]['limit-uptime'];
-$limitbyte = $getuser[0]['limit-bytes-out'];
+$limitbyte = $getuser[0]['limit-bytes-total'];
 if($limitbyte == ""){$dataleft = "Unlimited";}else{$dataleft = formatBytes2($limitbyte-$getbyteo,2);}
 }
 if($user == "" || $exp == ""){

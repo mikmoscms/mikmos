@@ -6,6 +6,9 @@ include_once('../lib/fungsi.php');
 include_once('../lib/routeros_api.class.php');
 include_once('../inc/lang/id.php');
 include_once('../inc/ip_mk/'.$_ROUTER.'.php');
+if(empty($_SESSION['username'])) {
+_e('<script>window.location.replace("./?index=login");</script>');
+}
 ?>
 <?php
 $interface = $_GET["interface"];

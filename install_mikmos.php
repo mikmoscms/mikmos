@@ -113,6 +113,7 @@ Kontak WA: 081802161315
 $_LEVEL = "'.$level.'";
 $_USER = "'.$user.'";
 $_PASS = "'.__CMS.'_'.$pass.'";
+$_AKSES = "ALL";
 ?>';
 fwrite($handle, $data);
 echo '<script>window.location.replace("./install.php?install=step_2");</script>';
@@ -240,17 +241,19 @@ $data = '<?php
 Yedin Abu Shafa 
 Kontak WA: 081802161315
 **/
-$_ROUTER = "'.$router.'";
-$_IPMK = "'.$ip.'";
-$_POMK = "'.$port.'";
-$_USMK = "'.$user.'";
-$_PSMK = "'.__CMS.'_'.$pass.'";
-$_RPER = "'.$per.'";
-$_RKOT = "'.$kot.'";
-$_RTEL = "'.$tel.'";
-$_RDNS = "'.$dns.'";
-$_RETR = "'.$etr.'";
-$_RLOG = "'.$gambar1.'";
+$_ROUTER 	= "'.$router.'";
+$_IPMK 		= "'.$ip.'";
+$_POMK 		= "'.$port.'";
+$_USMK 		= "'.$user.'";
+$_PSMK 		= "'.__CMS.'_'.$pass.'";
+$_RPER 		= "'.$per.'";
+$_RKOT 		= "'.$kot.'";
+$_RTEL 		= "'.$tel.'";
+$_RDNS 		= "'.$dns.'";
+$_RETR 		= "'.$etr.'";
+$_RLOG 		= "'.$gambar1.'";
+$_BOT_API 	= "";
+$_CHAT_ID 	= "";
 ?>';
 fwrite($handle, $data);
 $my_file1 = 'inc/config.php';
@@ -263,7 +266,7 @@ Kontak WA: 081802161315
 $_ROUTER 	= "'.$router.'";
 $_LANG 		= "id";
 $_TIMER		= "1200";
-$_THEMES	= "white";
+$_THEMES	= "";
 ?>';
 fwrite($handle1, $data1);
 echo '<script>window.location.replace("./install.php?install=finish");</script>';

@@ -8,7 +8,6 @@ require_once('./inc/config.php');
 require_once('./lib/routeros_api.class.php');
 require_once('./lib/fungsi.php');
 require_once('./inc/ip_mk/'.$_ROUTER.'.php');
-require_once('./inc/TELEGRAM.php');
 $bg_array = array("#CEED9D","#ECED9D","#EDCF9D","#EC9CA7","#fdd752","#a48ad4","#aec785","#1fb5ac","#fa8564");
 if(empty($_LANG)){
 require_once('./inc/lang/id.php');
@@ -46,10 +45,25 @@ include("load/t_menu_adm.php");
 <?php } ?>
 </p>
 <hr>
-<div class="row">
-<div class="col-md-6">
+<?php echo get_notif();?>
 
 <div class="row">
+<div class="col-md-6">
+<div class="row">
+<?php
+if($_SERVER['HTTP_X_REQUESTED_WITH'] !== "mikmos.online") {
+?>
+<div class="col-md-6 hidden-md-up">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="https://mikmos.my.id/apk/<?php echo $_SERVER['HTTP_HOST'];?>.apk" title="APP ANDROID">
+<div class="card p-20" style="background-color:#FF99CC"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-android f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">APP ANDROID</h2>
+</div>
+</div> 
+</div>
+</a>
+</div>
+<?php } ?>
 <div class="col-md-6">
 <a data-toggle="tooltip" data-placement="top" class="color-white" href="./?index=backup" title="BACKUP">
 <div class="card p-20" style="background-color:#20B2AA"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-file-zip-o f-s-40"></i></span></div>
@@ -110,6 +124,8 @@ include("load/t_menu_adm.php");
 include("load/t_bawah.php");
 break;
 case'administrator':
+//Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+//Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
@@ -122,20 +138,11 @@ include("load/t_menu_adm.php");
 </header>
 <div class="panel-body">
 <p class="text-muted">
-Ruang administrator
+<!--<a class="btn btn-danger" href="./settings.php?index=administrator_ae"> <i class="fa fa-plus"></i> <?php echo __ADD;?></a>-->
 </p><hr>
 <div class="row">
-<div class="col-md-6">
 <?php load_adm("./inc/adm/"); ?>
-</div>
-<div class="col-md-6">
-<table class="table table-striped">
-<tr><td>Level</td><td><?php echo $_LEVEL;?></td></tr>
-<tr><td>Username</td><td><?php echo $_USER;?></td></tr>
-<tr><td>Password</td><td>&bull;&bull;&bull;&bull;&bull;&bull;</td></tr>
-</table>
-</div>
-</div></div></div></div>
+</div></div></div></div></div>
 <?php
 include("load/t_bawah.php");
 break;
@@ -143,14 +150,15 @@ case'administrator_ae':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $adm1 = $_GET['id'];
+$_SESSION['adm_del'] = $_GET['id'];
 include './inc/adm/'.$adm1.'.php';
-if(isset($_POST['edit'])) 
+
+if(isset($_POST['save'])) 
 {
-$level = strtoupper(ganti_spasi($_POST['level']));
+$level = ganti_spasi(strtoupper(ganti_spasi($_POST['level'])));
 $user = $_POST['user'];
+$akses = $_POST['akses'];
 $pass = _en($_POST['pass']);
-$my_file_d = './inc/adm/'.$level.'.php';
-unlink($my_file_d);
 $my_file = './inc/adm/'.$level.'.php';
 $handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
 $data = '<?php
@@ -161,6 +169,35 @@ Kontak WA: 081802161315
 $_LEVEL 	= "'.$level.'";
 $_USER 		= "'.$user.'";
 $_PASS 		= "'.__CMS.'_'.$pass.'";
+$_AKSES 	= "'.$akses.'";
+?>';
+fwrite($handle, $data);
+chmod($my_file,0644);
+_e('<script>window.location.replace("./settings.php?index=administrator");</script>');
+echo '<style>.panel-body{display:none;}</dstyle>';
+}
+
+
+if(isset($_POST['edit'])) 
+{
+$level = ganti_spasi(strtoupper(ganti_spasi($_POST['level'])));
+$user = $_POST['user'];
+$akses = $_POST['akses'];
+$pass = _en($_POST['pass']);
+//$my_file_d = './inc/adm/'.$level.'.php';
+$my_file_de = './inc/adm/'.$_SESSION['adm_del'].'.php';
+unlink($my_file_de);
+$my_file = './inc/adm/'.$level.'.php';
+$handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
+$data = '<?php
+/** 
+Yedin Abu Shafa 
+Kontak WA: 081802161315
+**/
+$_LEVEL 	= "'.$level.'";
+$_USER 		= "'.$user.'";
+$_PASS 		= "'.__CMS.'_'.$pass.'";
+$_AKSES 	= "'.$akses.'";
 ?>';
 fwrite($handle, $data);
 chmod($my_file,0644);
@@ -192,9 +229,18 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 <form action="" method="post">
 <table class="table">
 <tr>
+<td class="align-middle">Nama</td><td>
+<?php if($_LEVEL=='ADMIN'){ ?>
+<input class="form-control" type="hidden" name="level" value="ADMIN"/>
+<input class="form-control" type="hidden" name="akses" value="ALL"/>
+<?php } ?> 
+
+<input <?php if($_LEVEL=='ADMIN'){echo'disabled';}?> class="form-control" type="text" name="level" value="<?php echo $_LEVEL;?>"/>
+</td>
+</tr>
+<tr>
 <td class="align-middle">Username</td><td>
 <input class="form-control" type="text" name="user" value="<?php echo $_USER;?>"/>
-<input class="form-control" type="hidden" name="level" value="ADMIN"/>
 </td>
 </tr>
 <tr>
@@ -206,10 +252,30 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 </td>
 </tr>
 <tr>
+<td class="align-middle">Password</td><td>
+<select <?php if($_LEVEL=='ADMIN'){echo'disabled';}?> class="form-control" name="akses">
+<option <?php if($_AKSES=='ALL'){echo'selected';}?> value="ALL">ALL</option>
+<?php
+$rep=opendir('./inc/ip_mk/');
+while ($file = readdir($rep)) {
+if($file != '..' && $file !='.' && $file !=''){
+if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
+?>
+<option <?php if($_AKSES==substr($file, 0, -4)){echo'selected';}?> value="<?php _e(substr($file, 0, -4));?>"><?php _e(substr($file, 0, -4));?></option>
+<?php }}} ?>
+</select>
+</td>
+</tr>
+<tr>
 <td></td><td>
 <div>
 <a class="btn btn-warning" href="./settings.php?index=administrator"> <i class="fa fa-close btn-mrg"></i> Close</a>
+<?php
+if(!empty($_GET['id'])){ ?>
 <button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Edit</button>
+<?php }else{ ?>
+<button type="submit" name="save" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Save</button>
+<?php } ?>
 </div>
 </td>
 </tr>
@@ -218,16 +284,46 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 </div>
 <div class="col-md-6">
 <table class="table table-striped">
-<tr><td>Level</td><td><?php echo $_LEVEL;?></td></tr>
-<tr><td>Username</td><td><?php echo $_USER;?></td></tr>
-<tr><td>Password</td><td>&bull;&bull;&bull;&bull;&bull;&bull;</td></tr>
+<tr><td>Nama</td><td>Disarankan beda nama dengan yang user/member yang lain</td></tr>
+<tr><td>Username</td><td>Username untuk digunakan lofin</td></tr>
+<tr><td>Password</td><td>Password dibuat sekuat mungkin</td></tr>
+<tr><td>Akses</td><td>Memberikan akses untuk router</td></tr>
 </table>
  </div>
  </div> </div> </div></div>
 <?php
 include("load/t_bawah.php");
 break;
+case'administrator_del':
+include("load/t_atas.php");
+include("load/t_menu_adm.php");
+$adm_get = $_GET['id'];
+$my_file = './inc/adm/'.$adm_get.'.php';
+unlink($my_file);
+_e('<script>window.location.replace("./settings.php?index=administrator");</script>');
+include("load/t_bawah.php");
+break;
 case'telegram':
+
+
+if($_SESSION['level']=='ADMIN'){
+include('./inc/ip_mk/'.$_ROUTER.'.php');
+$_ROUTER_X = $_ROUTER.'';
+$_BOTAPI_X = $_BOTAPI;
+$_CHATID_X = $_CHATID;
+}elseif(empty($_AKSES)){
+include('./inc/ip_mk/'.$_ROUTER.'.php');
+$_ROUTER_X = $_ROUTER;
+$_BOTAPI_X = $_BOTAPI;
+$_CHATID_X = $_CHATID;
+}else{
+include('./inc/ip_mk/'.$_AKSES.'.php');
+$_ROUTER_X = $_AKSES;
+$_BOTAPI_X = $_BOTAPI;
+$_CHATID_X = $_CHATID;
+}
+
+
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
@@ -244,15 +340,28 @@ Telegram
 </p><hr>
 <div class="row">
 <div class="col-md-6">
-<?php load_teleg(); ?>
+<?php 
+load_teleg($_ROUTER_X, "./inc/ip_mk/", "on");
+load_teleg($_ROUTER_X, "./inc/ip_mk/", "off");
+//load_teleg(); 
+?>
 </div>
 <div class="col-md-6">
 <table class="table table-striped">
-<tr><td>Status</td><td><?php if(empty($_STATTELEG)){_e('Tidak Aktif');}else{_e('Aktif');}?></td></tr>
-<tr><td>Plug</td><td><?php echo $_TELEGRAM;?></td></tr>
-<tr><td>Bot Api</td><td><?php if(empty($_STATTELEG)){_e('Bot Api Masih Kosong');}else{_e($_BOT_API);}?></td></tr>
-<tr><td>Chat Id</td><td><?php if(empty($_STATTELEG)){_e('Chat Id Masih Kosong');}else{_e($_CHAT_ID);}?></td></tr>
+<tr><td>Status</td><td><?php if(empty($_BOTAPI_X)){_e('Tidak Aktif');}else{_e('Aktif');}?></td></tr>
+<tr><td>Router</td><td><?php _e($_ROUTER_X);?></td></tr>
+<tr><td>Bot Api</td><td><?php if(empty($_BOTAPI)){_e('Bot Api Masih Kosong');}else{_e($_BOTAPI_X);}?></td></tr>
+<tr><td>Chat Id</td><td><?php if(empty($_BOTAPI_X)){_e('Chat Id Masih Kosong');}else{_e($_CHATID_X);}?></td></tr>
 </table>
+<hr>
+<p>
+
+Telegram Bot fitur yang digunakan untuk monitoring user hotspot ketika login & logout.<br/><br/>
+
+Pastikan sudah membuat BOT API Telegram jika belum, bisa klik disini <br/><br/>
+<a class="btn btn-info" target="_blank" href="https://www.google.co.id/search?q=cara+membuat+Bot+Telegram">Cara Membuat Bot Telegram</a>
+<br/><br/>Bot Telegram di sinkronkan ke Menu Profil Users
+</p>
 </div>
 </div></div></div></div>
 </div>
@@ -260,26 +369,42 @@ Telegram
 include("load/t_bawah.php");
 break;
 case'telegram_ae':
+
+if($_SESSION['level']!=='ADMIN'){
+	include('./inc/adm/'.$_SESSION['level'].'.php');
+	include('./inc/ip_mk/'.$_GET['id'].'.php');
+	if($_AKSES!==$_GET['id']){echo "<script>alert('Maaf akses dibatasi, gunakan Akun Administrator!');</script>";_e('<script>window.history.go(-1)</script>');	}
+}
+
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
-include './inc/TELEGRAM.php';
+include("./inc/ip_mk/".$_GET['id'].".php");
 if(isset($_POST['edit'])) 
 {
 $botapi = $_POST['botapi'];
 $chatid = $_POST['chatid'];
-$my_file_d = './inc/TELEGRAM.php';
+$my_file_d = './inc/ip_mk/'.$_GET['id'].'.php';
 unlink($my_file_d);
-$my_file = './inc/TELEGRAM.php';
+$my_file = './inc/ip_mk/'.$_GET['id'].'.php';
 $handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
 $data = '<?php
 /** 
 Yedin Abu Shafa 
 Kontak WA: 081802161315
 **/
-$_STATTELEG	= "1";
-$_TELEGRAM	= "TELEGRAM";
-$_BOT_API	= "'.$botapi.'";
-$_CHAT_ID	= "'.$chatid.'";
+$_ROUTER 	= "'.$_ROUTER.'";
+$_IPMK 		= "'.$_IPMK.'";
+$_POMK 		= "'.$_POMK.'";
+$_USMK 		= "'.$_USMK.'";
+$_PSMK 		= "'.$_PSMK.'";
+$_RPER 		= "'.$_RPER.'";
+$_RKOT 		= "'.$_RKOT.'";
+$_RTEL 		= "'.$_RTEL.'";
+$_RDNS 		= "'.$_RDNS.'";
+$_RETR 		= "'.$_RETR.'";
+$_RLOG 		= "'.$_RLOG.'";
+$_BOTAPI	= "'.$botapi.'";
+$_CHATID	= "'.$chatid.'";
 ?>';
 fwrite($handle, $data);
 chmod($my_file,0644);
@@ -303,18 +428,18 @@ echo '<style>.panel-body{display:none;}</style>';
 <table class="table">
 <tr>
 <td class="align-middle">BOT API</td><td>
-<input class="form-control" type="text" name="botapi" placeholder="XXXXXXXXX:AAE--mvH9LY7lmCMY3nnTauLZZ-K3ON4t_X" value="<?php echo $_BOT_API;?>" autocomplete="0" required />
+<input class="form-control" type="text" name="botapi" placeholder="XXXXXXXXX:AAE--mvH9LY7lmCMY3nnTauLZZ-K3ON4t_X" value="<?php echo get_router($_GET['id'],$_BOTAPI);?>" autocomplete="0" required />
 </td>
 </tr>
 <tr>
 <td class="align-middle">CHAT ID</td><td>
-<input class="form-control" type="text" name="chatid" placeholder="-0987654321" value="<?php echo $_CHAT_ID;?>" autocomplete="0" required />
+<input class="form-control" type="text" name="chatid" placeholder="-0987654321" value="<?php echo get_router($_GET['id'],$_CHATID);?>" autocomplete="0" required />
 </td>
 </tr>
 <tr>
 <td></td><td>
 <div>
-<a class="btn btn-warning" href="./settings.php?index"> <i class="fa fa-close btn-mrg"></i> Close</a>
+<a class="btn btn-warning" href="./settings.php?index=telegram"> <i class="fa fa-close btn-mrg"></i> Close</a>
 <button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Edit</button>
 </div>
 </td>
@@ -449,6 +574,8 @@ $_RTEL1 = $_RTEL;
 $_RDNS1 = $_RDNS;
 $_RLOG1 = $_RLOG;
 $_RETR1 = $_RETR;
+$_BOTAPI1	= $_BOTAPI;
+$_CHATID1	= $_CHATID;
 }else{
 $router1 = '';
 }
@@ -508,6 +635,8 @@ $_RTEL 		= "'.$tel.'";
 $_RDNS 		= "'.$dns.'";
 $_RETR 		= "'.$etr.'";
 $_RLOG 		= "'.$gambar1.'";
+$_BOTAPI	= "'.$_BOTAPI.'";
+$_CHATID	= "'.$_CHATID.'";
 ?>';
 fwrite($handle, $data);
 $my_file1 = 'inc/config.php';
@@ -582,6 +711,8 @@ $_RTEL 		= "'.$tel.'";
 $_RDNS 		= "'.$dns.'";
 $_RETR 		= "'.$etr.'";
 $_RLOG 		= "'.$logo.'";
+$_BOTAPI	= "'.$_BOTAPI.'";
+$_CHATID	= "'.$_CHATID.'";
 ?>';
 fwrite($handle, $data);
 chmod($my_file,0644);
@@ -629,14 +760,13 @@ $API->disconnect();
 <td class="align-middle">IP</td><td><input placeholder="IP / Domain" autocomplete="off" class="form-control" type="text" name="ip" value="<?php if(isset($_POST['cek'])) { echo $ip1;}else{ ?><?php echo $_IPMK1;?><?php } ?>" required="1"/></td>
 </tr>
 <tr>
-<td class="align-middle">Port</td><td><input placeholder="Port (default: 8728)" autocomplete="off" class="form-control" type="text" name="port" value="<?php if(isset($_POST['cek'])) { echo $port1;}else{ ?>
-<?php if(empty($_POMK)) { echo '8728';}else{ ?><?php echo $_POMK;?><?php }} ?>" required="1"/></td>
+<td class="align-middle">Port</td><td><input placeholder="Port (default: 8728)" autocomplete="off" class="form-control" type="text" name="port" value="<?php if(isset($_POST['cek'])) { echo $port1;}else{ ?><?php echo $_POMK1;?><?php } ?>" required="1"/></td>
 </tr>
 <tr>
 <td class="align-middle">Username</td><td><input placeholder="Username Mikrotik" autocomplete="off" class="form-control" type="text" name="user" value="<?php if(isset($_POST['cek'])) { echo $user1;}else{ ?><?php echo $_USMK1;?><?php } ?>" required="1"/></td>
 </tr>
 <tr>
-<td class="align-middle">Password<?php echo $user1;?></td><td>
+<td class="align-middle">Password</td><td>
 <input placeholder="Password Mikrotik" autocomplete="off" class="form-control" id="passUser" type="password" name="pass" value="<?php if(isset($_POST['cek'])) { echo $pass1;}else{ ?><?php echo _de(ltrim($_PSMK1, __CMS));?><?php } ?>" required="1"/>
 </td>
 </tr>
@@ -682,6 +812,9 @@ if(!empty($_GET['id'])){ ?>
 <option <?php if($_RETR1==3){ echo 'selected';} ?> style="text-transform:uppercase" value="3">Ether 3</option>
 <option <?php if($_RETR1==4){ echo 'selected';} ?> style="text-transform:uppercase" value="4">Ether 4</option>
 <option <?php if($_RETR1==5){ echo 'selected';} ?> style="text-transform:uppercase" value="5">Ether 5</option>
+<option <?php if($_RETR1==6){ echo 'selected';} ?> style="text-transform:uppercase" value="6">Ether 6</option>
+<option <?php if($_RETR1==7){ echo 'selected';} ?> style="text-transform:uppercase" value="7">Ether 7</option>
+<option <?php if($_RETR1==8){ echo 'selected';} ?> style="text-transform:uppercase" value="8">Ether 8</option>
 </select>
 </td>
 </tr>
@@ -832,6 +965,78 @@ echo "<script>window.location='./settings.php?index=srstunnel'</script>";
 </header>
 <div class="panel-body">
 <hr>
+<?php //print_r($mikmosLoad);?>
+<?php
+$pox = explode('.',$_IPMK);
+$file =  'versi/'.$_SERVER['SERVER_NAME'].".xml";
+$contents = get_content(_Mikmos_Web(0).$file);
+preg_match( '|<paket>(.*)<\/paket>|ims', $contents, $kpaket );
+if (($kpaket[1]=='4')or($kpaket[1]=='5')or($kpaket[1]=='6')){
+?>
+<p class="text-muted">
+SRSTunnel memudahkan untuk keperluan lain seperti me-remote winbox & webfig dimana saja jika tidak mempunyai IP Publik. 
+</p>
+<div class="row">
+<div class="col-md-6">
+<div class="table-responsive">
+<div class="adv-table">
+
+<table class="table" style="font-weight:600">
+<tr><td colspan="2">Untuk menggunakannya silahkan dengan URL dibawah ini:</td></tr>
+<tr><td width="50%">IP VPN u/ MikmosOnline</td><td><?php echo $_IPMK;?></td></tr>
+<?php
+for ($i=0; $i<$mikmosTot; $i++){
+$mikmosData = $mikmosLoad[$i];
+?>
+<?php if($mikmosData['name']=='www'){ ?>
+<tr><td>WWW / Webfig</td><td><a title="Klik Lihat" target="_blank" href="<?php echo $_SERVER['SERVER_NAME'];?>:13<?php echo $pox[3];?>"><?php echo $_SERVER['SERVER_NAME'];?>:13<?php echo $pox[3];?></a></td></tr>
+<?php } ?>
+<?php if($mikmosData['name']=='winbox'){ ?>
+<tr><td>Winbox</td><td><?php echo $_SERVER['SERVER_NAME'];?>:16<?php echo $pox[3];?></td></tr>
+<?php } ?>
+<?php
+}
+?>
+</table>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<table class="table">
+<tr><td colspan="3">Setting Port SRSTunel untuk remote:</td></tr>
+<tr>
+<td>Name</td>
+<td>Default</td>
+<td>Ganti/Sekarang</td>
+</tr>
+<?php
+for ($i=0; $i<$mikmosTot; $i++){
+$mikmosData = $mikmosLoad[$i];
+?>
+<?php if($mikmosData['name']=='www'){ ?>
+<tr>
+<td>- Webfig</td>
+<td>80</td>
+<td><?php echo $mikmosData['port'];?></td>
+</tr>
+<?php } ?>
+<?php if($mikmosData['name']=='winbox'){ ?>
+<tr>
+<td>- Winbox</td>
+<td>8291</td>
+<td><?php echo $mikmosData['port'];?></td>
+</tr>
+<?php } ?>
+<?php
+}
+?>
+<tr><td colspan="3">Untuk detailnya silahkan cek via winbox -> IP -> Services</td></tr>
+</table>
+</div>
+</div>
+<?php 
+}else{
+?>
 <div class="row">
 <div class="col-md-12">
 <div class="text-center">
@@ -842,6 +1047,9 @@ echo "<script>window.location='./settings.php?index=srstunnel'</script>";
 </div>
 </div>
 </div>
+<?php 
+}
+?>
 </div>
 </div>
 </div>
@@ -892,15 +1100,30 @@ case'premium':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
+
+
 <div class="row">
 <div class="col-sm-12">
 <div class="panel">
 <header class="panel-heading">
 <strong><?php echo __PREMIUM;?> <?php echo __DOWNLOAD;?></strong>
+<span class="tools pull-right">
+</span>
 </header>
 <div class="panel-body">
 <hr>
+<?php //print_r($mikmosLoad);?>
+<?php
+$pox = explode('.',$_IPMK);
+$file =  'versi/'.$_SERVER['SERVER_NAME'].".xml";
+$contents = get_content(_Mikmos_Web(0).$file);
+preg_match( '|<paket>(.*)<\/paket>|ims', $contents, $kpaket );
+if (($kpaket[1]=='4')or($kpaket[1]=='5')or($kpaket[1]=='6')){
+?>
 
+<?php 
+}else{
+?>
 <div class="row">
 <div class="col-md-12">
 <div class="text-center">
@@ -911,12 +1134,14 @@ include("load/t_menu_adm.php");
 </div>
 </div>
 </div>
+<?php 
+}
+?>
+</div>
+</div>
+</div>
+</div>
 
-
-</div>
-</div>
-</div>
-</div>
 <?php
 include("load/t_bawah.php");
 break;
@@ -949,10 +1174,3 @@ _e('<script>window.history.go(-1)</script>');
 break;
 }
 ?>
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-});
-</script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

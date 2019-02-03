@@ -13,3 +13,8 @@ $(document).ready(function() {
         "order": [[ 1, "desc" ]]
     } );
 } );
+$(document).ready(function() {
+    $('#mikmos-tbl-desc1').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );

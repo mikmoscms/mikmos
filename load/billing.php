@@ -24,24 +24,13 @@ $bilHR += $mikmoslits[3];
 <div class="col-sm-12">
 <div class="panel">
 <header class="panel-heading">
-<strong>Report <?php _e(__BILLING);?></strong>
+<strong>Grafik <?php _e(__BILLING);?></strong>
 
-<span class="pull-right">
-
-<a class="btn bg-danger" href="./?load=billing&get=migreport" onclick="return confirm('Serius Mau Migrasi?...')" title="Migrasi sisa Report"><i class="fa fa-retweet"></i> Migrasi Billing Report</a>
-</span>
 </header>
 <div class="panel-body">
 <hr>
-<p>
-Jika ingin mendapatkan Repot Penjualan, maka di Setting di Profile Users -> Mode Expired -> Remove Record / Notice Record
-</p>
-<p>
-Jika sudah di Setting di Profile Users dan Report Kosong, mungkin sebelumnya menggunakan aplikasi lain, silahkan klik tombol MIGRASI BILLING REPORT untuk menampilkannya.
-</p>
-<hr>
 <div class="row">
-<div class="col-sm-7">
+<div class="col-sm-8">
 <div class="adv-table">
 <div class="table-responsive">
 <div id="myDIV">
@@ -51,7 +40,7 @@ Jika sudah di Setting di Profile Users dan Report Kosong, mungkin sebelumnya men
 </div>
 </div>
 </div>
-<div class="col-sm-5">
+<div class="col-sm-4">
 
 <div class="p-20 m-b-10" style="background-color:#fa8564">
 <div class="media widget-ten">
@@ -67,7 +56,6 @@ Jika sudah di Setting di Profile Users dan Report Kosong, mungkin sebelumnya men
 </div>
 </div>
 
-<a class="btn btn-primary" href="./?load=billing&get=listen"> Lihat Billing List <i class="fa fa-arrow-right"></i></a>
 </div>
 </div>
 
@@ -124,7 +112,7 @@ for ($i=1; $i<$datesnya; $i++){
 $tgl_leng=strlen($i); 
 if ($tgl_leng==1) $ix="0".$i;else $ix=$i;
 $mikHRini = strtolower(date('M')).'/'.$ix.'/'.date('Y');
-$pendptan = mikBillingHR($mikHRini);
+$pendptan = mikBillingHR($mikHRini,'all');
 if(!empty($pendptan)){
 	$dpthari = $pendptan;
 }else{
@@ -163,6 +151,7 @@ case'listen':
 
 $pilhr = $_GET['pilhr'];
 $pilbl = $_GET['pilbl'];
+$getcomment = $_GET['comment'];
 $mikhapus = ($_POST['mikhapus']);
 if(isset($mikhapus)){
 if(strlen($pilhr) > "0"){
@@ -190,63 +179,59 @@ $READ = $API->read();
 _e('<script>window.history.go(-1)</script>');
 }
 if(strlen($pilhr) > "0"){
-if($_SESSION['connect']=='connect') {
-$API->write('/system/script/print', false);
-$API->write('?=source='.$pilhr.'');
-$ARRAY = $API->read();
-$API->disconnect();
-}
+$mikLoadbill = $API->comm("/system/script/print", array("?source" => "$pilhr"));
+$mikTotbill = count($mikLoadbill);
 $mikDL = $pilhr;
+$linknya = 'pilhr='.$pilhr.'&comment='.$getcomment;
 $shf = "hidden";
 $shd = "inline-block";
 }elseif(strlen($pilbl) > "0"){
-if($_SESSION['connect']=='connect') {
-$API->write('/system/script/print', false);
-$API->write('?=owner='.$pilbl.'');
-$ARRAY = $API->read();
-$API->disconnect();
-}
+$mikLoadbill = $API->comm("/system/script/print", array("?owner" => "$pilbl"));
+$mikTotbill = count($mikLoadbill);
 $mikDL = $pilbl;
+$linknya = 'pilbl='.$pilbl.'&comment='.$getcomment;
 $shf = "hidden";
 $shd = "inline-block";
-}elseif($pilhr == "" || $pilbl == ""){
-if($_SESSION['connect']=='connect') {
-$API->write('/system/script/print', false);
-$API->write('?=comment=MIKMOScms');
-$ARRAY = $API->read();
-$API->disconnect();
-}
+}elseif($pilhr == "" || $pilbl == "" || $getcomment == ""){
+$mikLoadbill = $API->comm("/system/script/print", array("?comment" => "MIKMOScms"));
+$mikTotbill = count($mikLoadbill);
 $mikDL = "all";
 $shf = "text";
 $shd = "none";
 }
-if($pilhr){$totolbil = rupiah(mikBillingHR($pilhr));}
-elseif($pilbl){$totolbil = rupiah(mikBillingBL($pilbl));}
-else{$totolbil = rupiah(mikBillingALL());}
+if($pilhr){$totolbil = rupiah(mikBillingHR($pilhr,$getcomment));}
+elseif($pilbl){$totolbil = rupiah(mikBillingBL($pilbl,$getcomment));}
+else{$totolbil = rupiah(mikBillingALL($getcomment));}
 ?>
 
 <div class="row">
 <div class="col-sm-12">
 <section class="panel">
 <header class="panel-heading">
-<strong>Report <?php _e(__BILLING);?> </strong>
+<strong>Tabel <?php _e(__BILLING);?> </strong>
+<span class="pull-right">
+<a class="btn bg-danger" href="./?load=billing&get=migreport" onclick="return confirm('Serius Mau Migrasi?...')" title="Migrasi Report Penjualan sebelumnya menggunakan Aplikasi mikh***"><i class="fa fa-retweet"></i> Migrasi Billing Report</a>
+</span>
 </header>
+
+<div class="panel-body">
+<hr>
+<p>
+Jika ingin mendapatkan Repot Penjualan, maka di Setting di Profile Users -> Mode Expired -> Remove Record / Notice Record
+</p>
+
 <p>Disarankan untuk menghapus report perbulannya.</p>
-<div class="panel-body"><hr>
+<hr>
 <p class="text-muted">
 <div style=""> 
 
-<a class="btn bg-danger" href="./?load=billing"><i class="fa fa-arrow-left"></i> Billing</a>
+<button style="display: <?php _e($shd);?>;" class="btn bg-primary" onclick="location.href='./?load=billing&get=listen';" title="Reload all data"><i class="fa fa-search"></i>Reload ALL</button>
 
-<button class="btn bg-primary" onclick="exportTableToCSV('report-mikmos-<?php _e($mikDL);?>.csv')" title="Download selling report"><i class="fa fa-download"></i> CSV</button>
-
-<button class="btn bg-primary" onclick="location.href='./?load=billing&get=listen';" title="Reload all data"><i class="fa fa-search"></i>Reload ALL</button>
-
-
+<a class="btn bg-primary text-white" style="cursor:pointer;display: <?php _e($shd);?>;" onclick="window.open('./api/export_pdf.php?<?php _e($linknya);?>', 'newwindow', 'width=800,height=600'); return false;" title="Lihat PDF <?php _e($mikDL);?>"><i class="fa fa-file-pdf-o"></i> PDF  <?php _e($mikDL);?> </i>
+</a>
 <form style="display: <?php _e($shd);?>;" autocomplete="off" method="post" action="">
 <center>
-
-<button style="display: <?php _e($shd);?>;" name="mikhapus" class="btn bg-danger" onclick="return confirm('Anda yakin untuk menhapusnya ?...')" title="Delete Data <?php _e($mikDL);?>"><i class="fa fa-remove"></i> Delete data <?php _e($mikDL);?></button>
+<button style="display: <?php _e($shd);?>;" name="mikhapus" class="btn bg-danger" onclick="return confirm('Anda yakin untuk menhapusnya ?...')" title="Hapus Data <?php _e($mikDL);?>"><i class="fa fa-remove"></i> Hapus data <?php _e($mikDL);?></button>
 </center>
 </form>
 
@@ -284,8 +269,18 @@ if($ithn==$nthn){ echo '<option value="'.$ithn.'" selected="selected">'.$ithn.'<
 }
 echo '</select> ';
 ?>
-<input class="btn bg-primary" type="button" value=" Cari " name="sbutton" onclick="javascript:var x = $('#sday').val();var y = $('#smonth').val();var z = $('#syear').val(); if (x && y && z){document.location = '?load=billing&get=listen&pilhr='+y+'/'+x+'/'+z;}else{document.location = '?load=billing&get=listen&pilbl='+y+''+z;}"/>
 
+
+ <select style="padding:7.5px;" id="comment" name="comment" required="1">
+<option style="text-transform:uppercase" value="all">Semua Voucher</option> 
+ </select>
+ 
+ 
+<input class="btn bg-success" type="button" value=" LIHAT " name="sbutton" onclick="javascript:var x = $('#sday').val();var y = $('#smonth').val();var z = $('#syear').val();var c = $('#comment').val(); if (x && y && z && c){document.location = '?load=billing&get=listen&pilhr='+y+'/'+x+'/'+z+'&comment='+c;}else{document.location = '?load=billing&get=listen&pilbl='+y+''+z+'&comment='+c;}"/>
+
+
+ 
+ 
 </div>
 </div>
 
@@ -294,7 +289,7 @@ echo '</select> ';
 <div class="table-responsive">
 <div class="">
 
- <table class="table table-bordered table-hover text-nowrap" id="mikmos-tbl-desc">
+ <table class="table table-bordered table-hover text-nowrap" id="mikmos-tbl-desc1">
 <thead>
 <tr>
 <th colspan="2">Billing report <?php _e($mikDL);?><b style="font-size:0;">,</b></th>
@@ -303,16 +298,15 @@ echo '</select> ';
 </tr>
 <tr>
 <th>Waktu</th>
-<th>Tanggal</th>
 <th class="no-sort">Username / Vouchers</th>
 <th class="no-sort" style="text-align:right;">Penjualan</th>
+<th class="no-sort" style="text-align:right;">Comment</th>
 </tr>
 </thead>
 <tbody>
 <?php
-$TotalReg = count($ARRAY);
-for ($i=0; $i<$TotalReg; $i++){
-$regtable = $ARRAY[$i];
+for ($i=0; $i<$mikTotbill; $i++){
+$regtable = $mikLoadbill[$i];
 $getname = explode("-|-",$regtable['name']);
 $getowner = $regtable['owner'];
 $tgl = $getname[0];
@@ -322,13 +316,29 @@ $dy = $m."/".$getdy[1]."/".$getdy[2];
 $ltime = $getname[1];
 $username = $getname[2];
 $price = $getname[3];
+if($getcomment==$getname[7]){
 ?>
 <tr>
-<td><?php _e($ltime);?></td>
-<td><?php _e($dy);?></td>
+<td><?php _e($dy);?> <?php _e($ltime);?></td>
 <td><?php _e($username);?></td>
 <td style='text-align:right;'><?php _e(rupiah($price));?></td>
+<td style='text-align:right;'><?php _e($getname[7]);?></td>
 </tr>
+<?php }elseif($getcomment=='all'){ ?>
+<tr>
+<td><?php _e($dy);?> <?php _e($ltime);?></td>
+<td><?php _e($username);?></td>
+<td style='text-align:right;'><?php _e(rupiah($price));?></td>
+<td style='text-align:right;'><?php _e($getname[7]);?></td>
+</tr>
+<?php }elseif($getcomment==''){ ?>
+<tr>
+<td><?php _e($dy);?> <?php _e($ltime);?></td>
+<td><?php _e($username);?></td>
+<td style='text-align:right;'><?php _e(rupiah($price));?></td>
+<td style='text-align:right;'><?php _e($getname[7]);?></td>
+</tr>
+<?php }  ?>
 <?php } ?>
 </tbody>
 </table>
@@ -338,31 +348,33 @@ $price = $getname[3];
 </section>
 </div>
 </div>
-<script>
-function downloadCSV(csv, filename) {
-var csvFile;
-var downloadLink;
-csvFile = new Blob([csv], {type: "text/csv"});
-downloadLink = document.createElement("a");
-downloadLink.download = filename;
-downloadLink.href = window.URL.createObjectURL(csvFile);
-downloadLink.style.display = "none";
-document.body.appendChild(downloadLink);
-downloadLink.click();
-}
-function exportTableToCSV(filename) {
-var csv = [];
-var rows = document.querySelectorAll("#mikmos-tbl-desc tr");
+<?php
+break;
+case'x':
+?>
+ <select class="form-control" id="comment" name="vouchers" required="1">
+<option style="text-transform:uppercase" value="all">Semua Voucher <?php echo $mikmosView['name'];?></option> 
 
- for (var i = 0; i < rows.length; i++) {
-var row = [], cols = rows[i].querySelectorAll("td, th");
- for (var j = 0; j < cols.length; j++)
-row.push(cols[j].innerText);
-csv.push(row.join(","));
+ <?php 
+$mikmosLoad = $API->comm("/ip/hotspot/user/print");
+$mikmosTot = count($mikmosLoad);
+for ($i=0; $i<$mikmosTot; $i++){
+ $userdetails = $mikmosLoad[$i];
+ $ucomment = $userdetails['comment'];
+$counts = count($ucomment);
+if($counts==1){
+if($ucomment !== $mikmosLoad[$i-1]['comment']){echo '<option style="text-transform:uppercase" value="'.$ucomment.'">Voucher => '.$ucomment.'</option>';}
 }
-downloadCSV(csv.join("\n"), filename);
-}
-</script>
+ }
+?>
+
+ </select>
+ 
+ 
+ 
+
+
+
 
 <?php
 break;

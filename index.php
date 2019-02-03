@@ -27,6 +27,12 @@ require_once('./inc/ip_mk/'.$_ROUTER.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+
+if(empty($_BOTAPI)){
+include './inc/TELEGRAM.php';
+$_BOTAPI = $_BOT_APPI;
+$_CHATID = $_CHAT_ID;
+}
 }
 switch($_GET['index']){
 default:

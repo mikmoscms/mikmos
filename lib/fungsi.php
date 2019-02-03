@@ -1,10 +1,11 @@
 <?php
+
 function rupiah($angka){
-$hasil_rupiah = "Rp " . number_format($angka,2,',','.').".-";
-return $hasil_rupiah;
+	$hasil_rupiah = "Rp " . number_format($angka,2,',','.').".-";
+	return $hasil_rupiah;
 }
 
-function mikBillingHR($da){
+function mikBillingHR($da,$co){
 include('./inc/config.php');
 include('./inc/ip_mk/'.$_ROUTER.'.php');
 $API = new RouterosAPI();
@@ -15,12 +16,16 @@ $mikbilHRtot = count($mikbilHR);
 for ($i=0; $i<$mikbilHRtot; $i++){
 $mikmosData = $mikbilHR[$i];
 $mikmoslits = explode("-|-",$mikmosData['name']);
+if($co==$mikmoslits[7]){
 $bilHR += $mikmoslits[3];
+}elseif($co=='all'){ 
+$bilHR += $mikmoslits[3];
+}
 }
 $API->disconnect();
 return $bilHR;
 }
-function mikBillingBL($da){
+function mikBillingBL($da,$co){
 include('./inc/config.php');
 include('./inc/ip_mk/'.$_ROUTER.'.php');
 $API = new RouterosAPI();
@@ -31,23 +36,33 @@ $mikbilHRtot = count($mikbilHR);
 for ($i=0; $i<$mikbilHRtot; $i++){
 $mikmosData = $mikbilHR[$i];
 $mikmoslits = explode("-|-",$mikmosData['name']);
+if($co==$mikmoslits[7]){
 $bilHR += $mikmoslits[3];
+}elseif($co=='all'){ 
+$bilHR += $mikmoslits[3];
+}
 }
 $API->disconnect();
 return $bilHR;
 }
-function mikBillingALL(){
+function mikBillingALL($co){
 include('./inc/config.php');
 include('./inc/ip_mk/'.$_ROUTER.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
-$mikbilHR = $API->comm("/system/script/print");
+$mikbilHR = $API->comm("/system/script/print", array("?comment" => "MIKMOScms"));
 $mikbilHRtot = count($mikbilHR);
 for ($i=0; $i<$mikbilHRtot; $i++){
 $mikmosData = $mikbilHR[$i];
 $mikmoslits = explode("-|-",$mikmosData['name']);
+if($co==$mikmoslits[7]){
 $bilHR += $mikmoslits[3];
+}elseif($co=='all'){ 
+$bilHR += $mikmoslits[3];
+}elseif($co==''){ 
+$bilHR += $mikmoslits[3];
+}
 }
 $API->disconnect();
 return $bilHR;
@@ -179,23 +194,76 @@ while ($file = readdir($rep)) {
  if($file != '..' && $file !='.' && $file !=''){
  if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
  if(!is_dir($file)){
-echo '<div class="card p-20" style="background-color:#34a853"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-users f-s-40"></i></span></div>
+include($dir.substr($file, 0, -4).'.php');
+
+if(substr($file,0,-4)=="ADMIN"){
+echo '
+<div class="col-md-4"><div class="card p-20" style="background-color:#34a853"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-users f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">'.substr($file, 0, -4).'</h2>
+<p class="m-b-0 color-white">Username: '.$_USER.' <i class="fa fa-user"></i></p>
 <p class="m-b-0 color-white"><a class="color-white" href="./settings.php?index=administrator_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
+<p class="m-b-0 color-white">Akses Router: ALL <i class="fa fa-server"></i></p>
+<p class="m-b-0 color-white"><a class="color-white" href="#">'.__DEL.' <i class="fa fa-trash"></i> </a></p>
 </div>
 </div>
-</div>';
+</div></div>';
+}
+if(substr($file,0,-4)!=="ADMIN"){
+echo '
+<div class="col-md-4"><div class="card p-20" style="background-color:#34a853"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-users f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">'.substr($file, 0, -4).'</h2>
+<p class="m-b-0 color-white">Username: '.$_USER.' <i class="fa fa-user"></i></p>
+<p class="m-b-0 color-white"><a class="color-white" href="./settings.php?index=administrator_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
+<p class="m-b-0 color-white">Akses Router: '.$_AKSES.' <i class="fa fa-server"></i></p>
+<p class="m-b-0 color-white"><a onclick="return confirm(\'Anda yakin untuk menghapusnya?\')" class="color-white" href="./settings.php?index=administrator_del&id='.substr($file, 0, -4).'" title="'.__DEL.' Akun '.substr($file, 0, -4).'">'.__DEL.' <i class="fa fa-trash"></i> </a></p>
+</div>
+</div>
+</div></div>';
+	
+}
 }}}}}
-function load_teleg(){
-include './inc/TELEGRAM.php';
-echo '<div class="card p-20" style="background-color:#0088cc"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-telegram f-s-40"></i></span></div>
+
+function load_teleg($router, $dir, $on){
+$rep=opendir($dir);
+while ($file = readdir($rep)) {
+if($file != '..' && $file !='.' && $file !=''){
+if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
+if(!is_dir($file)){
+include('./inc/ip_mk/'.substr($file, 0, -4).'.php');
+if(empty($_BOTAPI)){$rt='Tidak Aktif';}else{$rt='Aktif';}
+if($on=='on'){
+if ($router==substr($file, 0, -4)){ 
+echo '<div class="card p-20" style="background-color:#0088cc"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">TELEGRAM</h2>
-<p class="m-b-0 color-white"><a class="color-white" href="./settings.php?index=telegram_ae" title="'.__EDIT.' TELEGRAM">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
+<p class="m-b-0 color-white">Router '.substr($file, 0, -4).' <i class="fa fa-server"></i></p>
+<p class="m-b-0 color-white">'.$rt.' <i class="fa fa-check"></i></p>
+<p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=telegram_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
 </div>
 </div>
 </div>';
+}}
+if($on=='off'){
+if ($router!==substr($file, 0, -4)){ 
+echo '<div class="card p-20" style="background-color:#20B2AA"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">TELEGRAM</h2>
+<p class="m-b-0 color-white">Router '.substr($file, 0, -4).' <i class="fa fa-server"></i></p>
+<p class="m-b-0 color-white">'.$rt.' <i class="fa fa-check"></i></p>
+<p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=telegram_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
+</div>
+</div>
+</div>';
+}}}}}}}
+function get_router($id,$check){
+	
+require_once('./inc/ip_mk/'.$id.'.php');
+
+$expl1 = explode('.',$versi);
+
+echo $check;
 }
 function _e($echo){
 echo $echo;
@@ -352,6 +420,14 @@ $content .="";
 preg_match( '|<klien>(.*)<\/klien>|ims', $contents, $kklien );
 echo $kklien[1];
 }
+}
+function get_notif(){
+$urlon = _Mikmos_Web(0);
+$folder = "versi/klien/notif.txt";
+$klien = $_SERVER['SERVER_NAME'];
+$file =  $folder;
+$contents = get_content($urlon.$file);
+echo $contents;
 }
 function get_content($url)
 {
