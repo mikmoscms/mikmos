@@ -265,7 +265,7 @@ echo "<script>window.location='./?load=profile'</script>";
 </td>
   </tr>
 
-<?php if($_STATTELEG==0){?>
+<?php if(!empty($_BOTAPI)){?>
   <tr>
 <td>Telegram</td><td>Bot Telegram belum diaktfikan<br/> Untuk mengaktifkan Bot Telegram, input Bot telegram <br/>di Menu -> Administrator -> Telegram
 </td>
@@ -526,7 +526,7 @@ echo "<script>window.location='./?load=profile'</script>";
   </select>
 </td>
   </tr>
-<?php if($_STATTELEG==0){?>
+<?php if(!empty($_BOTAPI)){?>
   <tr>
 <td>Telegram</td><td>Bot Telegram belum diaktfikan<br/> Untuk mengaktifkan Bot Telegram, input Bot telegram <br/>di Menu -> Administrator -> Telegram
 </td>
@@ -606,11 +606,6 @@ Mode Expired adalah kontrol untuk user hotspot
 </div>
 </div>
 </div>
-
-
-
-
-
 <?php
 break;
 case'del':
