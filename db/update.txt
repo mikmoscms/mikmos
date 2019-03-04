@@ -1,5 +1,6 @@
 
-020|03/02/19|Klepon|0.1.9|[!]Profile Users Update [!]Billing Update [!]Telegram Update pindah penyimpanan Data [!]Admin Users Update (Proses Transisi Multi Users [!]JqueryTable Update [!]Status Cek User utk Login Hotspot [!]Menu Billing Jadi Sub Grafik Billing & Table Billing [+]Theme Dark (free) [+]Report Billing Export PDF (Opsi per Comment [Online]) [+]Library FPDF [+]Load Export PDF [-]Report Billing Export CSV (-)Netwatch
+021|04/03/19|Pancong|0.2.0|[+]Upload Logo Voucher [+]Netwatch diaktifkan lagi [+]Multi Users Login Mikmos Tested (Mikmos Online) [-]TELEGRAM.php file delete [!]Telegram Fixed [!]System Updated
+020|03/02/19|Klepon|0.1.9|[!]Profile Users Update [!]Billing Update [!]Telegram Update pindah penyimpanan Data [!]Admin Users Update (Proses Transisi Multi Users [!]JqueryTable Update [!]Status Cek User utk Login Hotspot [!]Menu Billing Jadi Sub Grafik Billing & Table Billing [+]Theme Dark (free) [+]Report Billing Export PDF [+]Library FPDF [+]Load Export PDF [-]Report Billing Export CSV [-]Netwatch
 019|14/01/19|Kemplang|0.1.8|[!]Perbaikan Billing loading delete [!]Perbaikan Billing Expor csv [+]Multi Bahasa (Google Translate)
 018|03/12/18|Cucur|0.1.7|[!]User Aktif Grafik [!]Billing Grafik & Tanggal [+]User Aktif Load
 017|12/11/18|GetukLindri|0.1.6|[!]Profile (inlcude kostum Telegram) [!]Users [!]Telegram (kostum Telegram by Riza Luky Aditia) [!]Vouchers [!]Lupa Kata Sandi (input no.hp) [!]Billing [+]Billing Grafik Penjualan [+]SRSTunnel (Online) [+]Download (Online) [+]Input Manual Port API Mikrotik (Kostum)

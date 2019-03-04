@@ -14,6 +14,7 @@
 <li><a href="./?load=users" class=""><i class="fa fa-list"></i> List <?php _e(__USERS);?></a></li>
 <li><a href="./?load=users&get=add" class=""><i class="fa fa-plus-square"></i> <?php _e(__USERS);?></a></li>
 <li><a href="./?load=users&get=generate" class=""><i class="fa fa-plus-square"></i> <?php _e(__GENERATE);?></a></li>
+<li><a href="./?load=users_import" class=""><i class="fa fa-file-excel-o"></i> <?php _e(__IMPORT);?> Excel</a></li>
 </ul>
 </li>
 <li>
@@ -47,6 +48,12 @@
 <li><a href="./?load=dhcp_lease" class=""><i class="fa fa-random"></i> <?php _e(__DHCPLEASE);?></a></li>
 <li><a href="./?load=scheduler" class=""><i class="fa fa-calendar"></i> <?php _e(__SCHEDULER);?></a></li>
 <li><a href="./settings.php?index=reboot" class=""><i class="fa fa-power-off"></i> <?php _e(__REBOOT);?></a></li>
+</ul>
+</li>
+<li>
+<a class="has-arrow  " href="javascript:void(0)" aria-expanded="false"><i class="fa fa-sliders"></i><span class="hide-menu"><?php _e(__TOOLS);?></span></a>
+<ul aria-expanded="false" class="collapse">
+<li><a href="./?load=netwatch" class=""><i class="fa fa-laptop"></i> <?php _e(__NETWATCH);?></a></li>
 </ul>
 </li>
 <li>

@@ -13,19 +13,19 @@
 <meta name="author" content="<?php _e(__CMS);?>">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
 <title><?php _e(__WEBTITLLE);?></title>
-<link href="assets/css/lib/bootstrap/bootstrap.min.css?v=20190203" rel="stylesheet">
-<link href="assets/css/helper.css?v=20190203" rel="stylesheet">
+<link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/helper.css" rel="stylesheet">
 <?php if(empty($_SESSION['css'])){ ?>
 <?php if(empty($_THEMES)){ ?>
-<link href="assets/css/mikmos_style.css?v=20190203" rel="stylesheet">
+<link href="assets/css/mikmos_style.css" rel="stylesheet">
 <?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css?v=20190203" rel="stylesheet">
+<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css" rel="stylesheet">
 <?php } ?>
 <?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css?v=20190203" rel="stylesheet">
+<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css" rel="stylesheet">
 <?php } ?>
-<script src="assets/js/lib/jquery/jquery.min.js?v=20190203"></script>
-<script src="assets/js/lib/bootstrap/js/bootstrap.min.js?v=20190203"></script>
+<script src="assets/js/lib/jquery/jquery.min.js"></script>
+<script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128579565-1"></script>
 <script>
@@ -83,8 +83,10 @@ while ($file = readdir($rep)) {
 if($file != '..' && $file !='.' && $file !=''){
 if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
 if(!is_dir($file)){
+	
+
 ?>
-<?php if($_ROUTER==substr($file, 0, -4)){ ?> 
+<?php if($_SESSION['router']==substr($file, 0, -4)){ ?> 
 <a title="Status Aktif" class="alert alert-success clearfix" href="./settings.php?index=change&get=<?php _e(substr($file, 0, -4));?>">
 <div class="btn btn-info btn-circle m-r-10"><i class="fa fa-check"></i></div>
 <div class="mail-contnet">
@@ -92,7 +94,7 @@ if(!is_dir($file)){
 </div>
 </a>
 <?php } ?>
-<?php if($_ROUTER!==substr($file, 0, -4)){ ?> 
+<?php if($_SESSION['router']!==substr($file, 0, -4)){ ?> 
 
 <a title="Aktifkan" class="alert alert-warning clearfix" href="./settings.php?index=change&get=<?php _e(substr($file, 0, -4));?>">
 <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-minus"></i></div>
@@ -103,7 +105,7 @@ if(!is_dir($file)){
 <?php } ?>
 <?php }}}} ?>
 
-
+<?php echo $_SESSION['router'];?>
 </div>
 </li>
 <li>

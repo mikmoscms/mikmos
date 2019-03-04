@@ -1,5 +1,25 @@
 <?php
 
+function Load_Batas_Sesi($sesi_user,$sesi_lvl,$_sesi_router){
+include('./inc/config.php');
+include('./inc/adm/'.$sesi_lvl.'.php');
+if($sesi_lvl=='ADMIN'){
+include('./inc/ip_mk/'.$_sesi_router.'.php');
+$_ROUTER_X = $_sesi_router;
+}elseif(empty($_AKSES)){
+include('./inc/ip_mk/'.$_sesi_router.'.php');
+$_ROUTER_X = $_sesi_router;
+}else{
+include('./inc/ip_mk/'.$_AKSES.'.php');
+$_ROUTER_X = $_AKSES;
+}
+}
+function Batas($sesi_lvl){
+if($_SESSION['level']!=='ADMIN'){
+echo "<script>alert('Maaf akses dibatasi, gunakan Akun Administrator!');</script>";
+_e('<script>window.history.go(-1)</script>');
+}
+}
 function rupiah($angka){
 	$hasil_rupiah = "Rp " . number_format($angka,2,',','.').".-";
 	return $hasil_rupiah;
@@ -171,6 +191,7 @@ echo '<div class="card p-20" style="background-color:#fa8564"><div class="media 
 <div class="media-body media-text-right">
 <h2 class="color-white">'.substr($file, 0, -4).'</h2>
 <p class="m-b-0 color-white"><a class=" color-white" href="#" title="'.__ENABLE.' Router '.substr($file, 0, -4).'">'.__ENABLE.' <i class="fa fa-unlock"></i> </a></p>
+<p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=logovoucher_ae&id='.substr($file, 0, -4).'" title="Ganti Logo Voucher - Router '.substr($file, 0, -4).'">Logo Voucher <i class="fa fa-image"></i> </a></p>
 <p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=mikrotik_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
 </div>
 </div>
@@ -181,7 +202,8 @@ if ($router!==substr($file, 0, -4)){
 echo '<div class="card p-20" style="background-color:#fa8564"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">'.substr($file, 0, -4).'</h2>
-<p class="m-b-0 color-white"><a class=" color-white" href="#" title="'.__ENABLE.' Router '.substr($file, 0, -4).'">'.__DISABLE.' <i class="fa fa-lock"></i> </a></p>
+<p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=change&get='.substr($file, 0, -4).'" title="'.__ENABLE.' Router '.substr($file, 0, -4).'">'.__DISABLE.' <i class="fa fa-lock"></i> </a></p>
+<p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=logovoucher_ae&id='.substr($file, 0, -4).'" title="Ganti Logo Voucher - Router '.substr($file, 0, -4).'">Logo Voucher <i class="fa fa-image"></i> </a></p>
 <p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=mikrotik_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
 <p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=mikrotik_del&id='.substr($file, 0, -4).'" title="Remove Router '.substr($file, 0, -4).'">'.__DEL.' <i class="fa fa-trash"></i> </a></p>
 </div>
@@ -232,14 +254,14 @@ if($file != '..' && $file !='.' && $file !=''){
 if ($file !='index.php' && $file !='index.html' && $file !='.htaccess'){
 if(!is_dir($file)){
 include('./inc/ip_mk/'.substr($file, 0, -4).'.php');
-if(empty($_BOTAPI)){$rt='Tidak Aktif';}else{$rt='Aktif';}
+if(empty($_BOTAPI)){$rt='Tidak Aktif <i class="fa fa-close"></i>';}else{$rt='Aktif <i class="fa fa-check"></i>';}
 if($on=='on'){
 if ($router==substr($file, 0, -4)){ 
 echo '<div class="card p-20" style="background-color:#0088cc"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-server f-s-40"></i></span></div>
 <div class="media-body media-text-right">
 <h2 class="color-white">TELEGRAM</h2>
 <p class="m-b-0 color-white">Router '.substr($file, 0, -4).' <i class="fa fa-server"></i></p>
-<p class="m-b-0 color-white">'.$rt.' <i class="fa fa-check"></i></p>
+<p class="m-b-0 color-white">'.$rt.'</p>
 <p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=telegram_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
 </div>
 </div>
@@ -251,7 +273,7 @@ echo '<div class="card p-20" style="background-color:#20B2AA"><div class="media 
 <div class="media-body media-text-right">
 <h2 class="color-white">TELEGRAM</h2>
 <p class="m-b-0 color-white">Router '.substr($file, 0, -4).' <i class="fa fa-server"></i></p>
-<p class="m-b-0 color-white">'.$rt.' <i class="fa fa-check"></i></p>
+<p class="m-b-0 color-white">'.$rt.'</p>
 <p class="m-b-0 color-white"><a class=" color-white" href="./settings.php?index=telegram_ae&id='.substr($file, 0, -4).'" title="'.__EDIT.' Router '.substr($file, 0, -4).'">'.__EDIT.' <i class="fa fa-edit"></i> </a></p>
 </div>
 </div>

@@ -154,6 +154,13 @@ var url = "./api/getvalidprice.php?name=";
 var getvalidprice = url+prof
 $("#GetValidPrice").load(getvalidprice);
 }
+// get valid $ price
+function LoadNetwatch(){
+var prof = document.getElementById('loadteleg').value;
+var url = "./api/load_netwatch_telegram.php?load=";
+var getvalidprice = url+prof
+$("#LoadTelegram").load(getvalidprice);
+}
 
 
 
