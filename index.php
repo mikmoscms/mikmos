@@ -21,18 +21,19 @@ rename ("./install.php", "./install_mikmos.php");
 }
 if(!empty($_SESSION['username'])) {
 require_once('./inc/adm/'.$_SESSION['level'].'.php');
-}
-if($_SESSION['connect']=='connect') {
+if($_SESSION['level']=='ADMIN'){
 require_once('./inc/ip_mk/'.$_ROUTER.'.php');
+$_ROUTER_X = $_ROUTER;
+}else{
+require_once('./inc/ip_mk/'.$_AKSES.'.php');
+$_ROUTER_X = $_AKSES;
+}
+//}
+//if($_SESSION['connect']=='connect') {
+//require_once('./inc/ip_mk/'.$_ROUTER.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
-
-if(empty($_BOTAPI)){
-include './inc/TELEGRAM.php';
-$_BOTAPI = $_BOT_APPI;
-$_CHATID = $_CHAT_ID;
-}
 }
 switch($_GET['index']){
 default:
@@ -82,7 +83,12 @@ if($_POST['username'] == $_USER && $_POST['password'] == _de(ltrim($_PASS, __CMS
 $_SESSION['username'] = $_POST['username'];
 $_SESSION['password'] = $_POST['password'];
 $_SESSION['level']   = $_POST['level'];
-_e('<meta http-equiv="refresh" content="0; url=./settings.php?index=connect"/>');
+if($_SESSION['level']!=='ADMIN'){
+_e('<meta http-equiv="refresh" content="0; url=./settings.php?index=change&get='.$_AKSES.'"/>');
+}else{
+_e('<meta http-equiv="refresh" content="0; url=./settings.php?index=connect&get='.$_ROUTER.'"/>');
+	
+}
 $_ceklog = '<div style="position:absolute;right:10%;top:10%;width:30%;z-index:1111" class="alert alert-warning alert-dismissible" role="alert"><i class="fa fa-warning"></i> Tunggu Sedang Mendeteksi...</div>';
 } elseif($_POST['username'] !== $_USER && $_POST['password'] == _de(ltrim($_PASS, __CMS)) && $_POST['level'] == $_LEVEL) {
 $_ceklog = '<div style="position:absolute;right:10%;top:10%;width:30%;z-index:1111" class="alert alert-danger alert-dismissible" role="alert"><i class="fa fa-times-circle"></i> Gagal!, username Salah...</div>';

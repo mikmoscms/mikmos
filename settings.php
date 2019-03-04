@@ -7,15 +7,14 @@ error_reporting(0);
 require_once('./inc/config.php');
 require_once('./lib/routeros_api.class.php');
 require_once('./lib/fungsi.php');
-require_once('./inc/ip_mk/'.$_ROUTER.'.php');
+
+
+//require_once('./inc/TELEGRAM.php');
 $bg_array = array("#CEED9D","#ECED9D","#EDCF9D","#EC9CA7","#fdd752","#a48ad4","#aec785","#1fb5ac","#fa8564");
 if(empty($_LANG)){
 require_once('./inc/lang/id.php');
 }else{
 require_once('./inc/lang/'.$_LANG.'.php');
-}
-if(!empty($_SESSION['username'])) {
-require_once('./inc/adm/'.$_SESSION['level'].'.php');
 }
 if(empty($_SESSION['username'])) {
 _e('<script>window.location.replace("./?index=login");</script>');
@@ -45,11 +44,24 @@ include("load/t_menu_adm.php");
 <?php } ?>
 </p>
 <hr>
-<?php echo get_notif();?>
-
 <div class="row">
 <div class="col-md-6">
+
 <div class="row">
+<?php
+if($_SERVER['HTTP_X_REQUESTED_WITH'] !== "mikmos.online") {
+?>
+<div class="col-md-6 hidden-md-up">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="https://mikmos.my.id/apk/<?php echo $_SERVER['HTTP_HOST'];?>.apk" title="APP ANDROID">
+<div class="card p-20" style="background-color:#FF99CC"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-android f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">APP ANDROID</h2>
+</div>
+</div> 
+</div>
+</a>
+</div>
+<?php } ?>
 <div class="col-md-6">
 <a data-toggle="tooltip" data-placement="top" class="color-white" href="./?index=backup" title="BACKUP">
 <div class="card p-20" style="background-color:#20B2AA"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-file-zip-o f-s-40"></i></span></div>
@@ -110,8 +122,8 @@ include("load/t_menu_adm.php");
 include("load/t_bawah.php");
 break;
 case'administrator':
-//Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
-//Batas($_SESSION['level']);
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
@@ -124,7 +136,7 @@ include("load/t_menu_adm.php");
 </header>
 <div class="panel-body">
 <p class="text-muted">
-<!--<a class="btn btn-danger" href="./settings.php?index=administrator_ae"> <i class="fa fa-plus"></i> <?php echo __ADD;?></a>-->
+<a class="btn btn-danger" href="./settings.php?index=administrator_ae"> <i class="fa fa-plus"></i> <?php echo __ADD;?></a>
 </p><hr>
 <div class="row">
 <?php load_adm("./inc/adm/"); ?>
@@ -133,11 +145,16 @@ include("load/t_menu_adm.php");
 include("load/t_bawah.php");
 break;
 case'administrator_ae':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $adm1 = $_GET['id'];
 $_SESSION['adm_del'] = $_GET['id'];
 include './inc/adm/'.$adm1.'.php';
+
+
+
 
 if(isset($_POST['save'])) 
 {
@@ -238,7 +255,7 @@ echo '<style>.panel-body{display:none;}</dstyle>';
 </td>
 </tr>
 <tr>
-<td class="align-middle">Password</td><td>
+<td class="align-middle">Level Akses</td><td>
 <select <?php if($_LEVEL=='ADMIN'){echo'disabled';}?> class="form-control" name="akses">
 <option <?php if($_AKSES=='ALL'){echo'selected';}?> value="ALL">ALL</option>
 <?php
@@ -281,6 +298,8 @@ if(!empty($_GET['id'])){ ?>
 include("load/t_bawah.php");
 break;
 case'administrator_del':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $adm_get = $_GET['id'];
@@ -291,6 +310,7 @@ include("load/t_bawah.php");
 break;
 case'telegram':
 
+include('./inc/adm/'.$_SESSION['level'].'.php');
 
 if($_SESSION['level']=='ADMIN'){
 include('./inc/ip_mk/'.$_ROUTER.'.php');
@@ -308,8 +328,8 @@ $_ROUTER_X = $_AKSES;
 $_BOTAPI_X = $_BOTAPI;
 $_CHATID_X = $_CHATID;
 }
-
-
+	
+	
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
@@ -449,8 +469,13 @@ case'change':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 if(isset($_SESSION['username'])) {
+//echo 'ss';
 $url = $_SERVER['REQUEST_URI'];
-$_ipmk = $_GET['get'];
+$_SESSION['router'] = $_GET['get'];
+require_once('./inc/adm/'.$_SESSION['level'].'.php');	
+if($_AKSES==$_SESSION['router']) {
+_e('<script>window.location.replace("./settings.php?index=connect&get='.$_AKSES.'");</script>');
+}elseif($_SESSION['level']=='ADMIN'){
 $mconfig = './inc/config.php';
 $handleconfig = fopen($mconfig, 'w') or die('Cannot open file:  '.$mconfig);
 $dataconfig = '<?php 
@@ -458,7 +483,7 @@ $dataconfig = '<?php
 Yedin Abu Shafa 
 Kontak WA: 081802161315
 **/
-$_ROUTER 	= "'.$_ipmk.'";
+$_ROUTER 	= "'.$_SESSION['router'].'";
 $_LANG 		= "'.$_LANG.'";
 $_TIMER		= "'.$_TIMER.'";
 $_THEMES	= "'.$_THEMES.'";
@@ -466,13 +491,22 @@ $_THEMES	= "'.$_THEMES.'";
 fwrite($handleconfig, $dataconfig);
 chmod($mconfig,0644);
 
-$_SESSION['router'] = $_ipmk;
+$_SESSION['router'] = $_SESSION['router'];
 $_SESSION['urlasal'] = $_SERVER['REQUEST_URI'];
-_e('<script>window.location.replace("./settings.php?index=connect");</script>');
+_e('<script>window.location.replace("./settings.php?index=connect&get='.$_SESSION['router'].'");</script>');
+}else{
+echo "<script>alert('Maaf akses Router ".$_SESSION['router'] ." dibatasi!');</script>";
+_e('<script>window.history.go(-1)</script>');
+}
 }
 include("load/t_bawah.php");
 break;
 case'connect':
+
+$_SESSION['router'] = $_GET['get'];
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+include('./inc/ip_mk/'.$_SESSION['router'].'.php');
+
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $API = new RouterosAPI();
@@ -503,6 +537,9 @@ include("load/t_menu_adm.php");
 include("load/t_bawah.php");
 break;
 case'mikrotik':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+include('./inc/ip_mk/'.$_SESSION['router'].'.php');
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
@@ -521,14 +558,15 @@ include("load/t_menu_adm.php");
 <div class="row">
 <div class="col-md-6">
 <?php
-load_router($_ROUTER, "./inc/ip_mk/", "on");
-load_router($_ROUTER, "./inc/ip_mk/", "off");
+load_router($_SESSION['router'], "./inc/ip_mk/", "on");
+load_router($_SESSION['router'], "./inc/ip_mk/", "off");
 ?>
 </div>
 <div class="col-md-6">
 <table class="table table-striped">
+<tr><td colspan="2"><b>INFORMASI</b></td></td></tr>
 <tr><td>Status Router</td><td style="color:#fa8564"> <?php if($_SESSION['connect']=='connect'){ ?>Terhubung<?php }else{ ?>Tidak Terhubung<?php } ?></td></tr>
-<tr><td>Router</td><td><?php echo $_ROUTER;?></td></tr>
+<tr><td>Router</td><td><?php echo $_SESSION['router'];?></td></tr>
 <tr><td>IP/URL</td><td><?php echo $_IPMK;?></td></tr>
 <tr><td>Port</td><td><?php if(empty($_POMK)) { echo '8728 (default)';}else{ ?><?php echo $_POMK;?><?php } ?></td></tr>
 <tr><td>Username</td><td><?php echo $_USMK;?></td></tr>
@@ -537,6 +575,13 @@ load_router($_ROUTER, "./inc/ip_mk/", "off");
 <tr><td>Kota</td><td><?php echo $_RKOT;?></td></tr>
 <tr><td>Kontak</td><td><?php echo $_RTEL;?></td></tr>
 <tr><td>Logo Voucher</td><td><img height="50" src="./vouchers/images/<?php echo $_RLOG;?>"/></td></tr>
+<br/>
+<table class="table table-striped">
+<tr><td colspan="2"><b>TELEGRAM</b></td></td></tr>
+<tr><td>BOT API</td><td><?php echo $_BOTAPI;?></td></tr>
+<tr><td>CLIENT ID</td><td><?php echo $_CHATID;?></td></tr>
+
+</table>
 </table>
  </div>
  </div> </div> </div></div>
@@ -544,6 +589,8 @@ load_router($_ROUTER, "./inc/ip_mk/", "off");
 include("load/t_bawah.php");
 break;
 case'mikrotik_ae':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 if(!empty($_GET['id'])){
@@ -595,6 +642,8 @@ $kot = $_POST['kot'];
 $tel = $_POST['tel'];
 $dns = $_POST['dns'];
 $etr = $_POST['etr'];
+$botapi	= $_POST['botapi'];
+$chatid	= $_POST['chatid'];
 $_SESSION['router'] = $router;
 $namafolder="./vouchers/images/"; 
 $jenis_gambar=$_FILES['Filegambar']['type'];
@@ -660,6 +709,8 @@ $kot = $_POST['kot'];
 $tel = $_POST['tel'];
 $dns = $_POST['dns'];
 $etr = $_POST['etr'];
+$botapi	= $_POST['botapi'];
+$chatid	= $_POST['chatid'];
 $log1 = $_POST['log1'];
 $log = $_FILES["Filegambar"]["tmp_name"];
 if(empty($log)){
@@ -702,6 +753,7 @@ $_CHATID	= "'.$_CHATID.'";
 ?>';
 fwrite($handle, $data);
 chmod($my_file,0644);
+//unlink('./inc/TELEGRAM.php');
 
 $API = new RouterosAPI();
 $API->debug = false;
@@ -734,7 +786,10 @@ $API->disconnect();
 <div class="col-md-6">
 <table class="table table-striped">
 <tr>
-<td class="align-middle">Router</td><td>
+<td colspan="2"><b>ROUTER</b></td></td>
+</tr>
+<tr>
+<td class="align-middle">Nama Router</td><td>
 <?php if(empty($_GET['id'])){ ?>
 <input autocomplete="off" placeholder="Router" class="form-control" type="text" name="router" value="<?php echo $router1;?>" required="1"/>
 <?php }else{ ?>
@@ -778,6 +833,9 @@ if(!empty($_GET['id'])){ ?>
 <?php if($konek==__CONNECT){?>
 <table class="table table-striped">
 <tr>
+<td colspan="2"><b>INFORMASI</b></td></td>
+</tr>
+<tr>
 <td style="width:120px;">Perusahaan</td><td><input placeholder="Perusahaan Hotspot" class="form-control" type="text" autocomplete="off" name="per" value="<?php echo $_RPER1;?>" required="1"></td>
 </tr>
 <tr>
@@ -798,9 +856,6 @@ if(!empty($_GET['id'])){ ?>
 <option <?php if($_RETR1==3){ echo 'selected';} ?> style="text-transform:uppercase" value="3">Ether 3</option>
 <option <?php if($_RETR1==4){ echo 'selected';} ?> style="text-transform:uppercase" value="4">Ether 4</option>
 <option <?php if($_RETR1==5){ echo 'selected';} ?> style="text-transform:uppercase" value="5">Ether 5</option>
-<option <?php if($_RETR1==6){ echo 'selected';} ?> style="text-transform:uppercase" value="6">Ether 6</option>
-<option <?php if($_RETR1==7){ echo 'selected';} ?> style="text-transform:uppercase" value="7">Ether 7</option>
-<option <?php if($_RETR1==8){ echo 'selected';} ?> style="text-transform:uppercase" value="8">Ether 8</option>
 </select>
 </td>
 </tr>
@@ -822,7 +877,131 @@ if(!empty($_GET['id'])){ ?>
 <?php
 include("load/t_bawah.php");
 break;
+case'logovoucher_ae':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
+include("load/t_atas.php");
+include("load/t_menu_adm.php");
+if(!empty($_GET['id'])){
+$router1 = $_GET['id'];
+include('./inc/ip_mk/'.$router1.'.php');
+$_ROUTER1 = $_ROUTER;
+$_IPMK1 = $_IPMK;
+$_POMK1 = $_POMK;
+$_USMK1 = $_USMK;
+$_PSMK1 = $_PSMK;
+$_RPER1 = $_RPER;
+$_RKOT1 = $_RKOT;
+$_RTEL1 = $_RTEL;
+$_RDNS1 = $_RDNS;
+$_RLOG1 = $_RLOG;
+$_RETR1 = $_RETR;
+$_BOTAPI1	= $_BOTAPI;
+$_CHATID1	= $_CHATID;
+}else{
+$router1 = '';
+}
+if(isset($_POST['edit'])) 
+{
+$router = $_GET['id'];
+$log1 = $_POST['log1'];
+$log = $_FILES["Filegambar"]["tmp_name"];
+if(empty($log)){
+$logo = $log1;
+}else{
+$namafolder="./vouchers/images/"; 
+$jenis_gambar=$_FILES['Filegambar']['type'];
+if($jenis_gambar!=="image/jpeg" || $jenis_gambar!=="image/jpg" || $jenis_gambar!=="image/gif" || $jenis_gambar!=="image/png")
+{  echo "Jenis gambar yang anda kirim salah. Harus .jpg .gif .png";} 
+$gambar = $namafolder . basename($router."_".$_FILES['Filegambar']['name']);   
+if (move_uploaded_file($_FILES['Filegambar']['tmp_name'], $gambar)) {
+$gambar1 = basename($router."_".$_FILES['Filegambar']['name']); 
+}
+$logo = $gambar1; 
+unlink('./vouchers/images/'.$log1.'');
+}
+$my_file_d = './inc/ip_mk/'.$router1.'.php';
+unlink($my_file_d);
+$namafolder="./vouchers/images/";  
+$my_file = './inc/ip_mk/'.$router.'.php';
+$handle = fopen($my_file, 'w') or die('Cannot open file: '.$my_file);
+$data = '<?php
+/** 
+Yedin Abu Shafa 
+Kontak WA: 081802161315
+**/
+$_ROUTER 	= "'.$_ROUTER.'";
+$_IPMK 		= "'.$_IPMK.'";
+$_POMK 		= "'.$_POMK.'";
+$_USMK 		= "'.$_USMK.'";
+$_PSMK 		= "'.$_PSMK.'";
+$_RPER 		= "'.$_RPER.'";
+$_RKOT 		= "'.$_RKOT.'";
+$_RTEL 		= "'.$_RTEL.'";
+$_RDNS 		= "'.$_RDNS.'";
+$_RETR 		= "'.$_RETR.'";
+$_RLOG 		= "'.$logo.'";
+$_BOTAPI	= "'.$_BOTAPI.'";
+$_CHATID	= "'.$_CHATID.'";
+?>';
+fwrite($handle, $data);
+chmod($my_file,0644);
+
+$API = new RouterosAPI();
+$API->debug = false;
+if ($API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
+$_SESSION['connect'] = 'connect';
+_e('<script>window.location.replace("./settings.php?index=mikrotik");</script>');
+$API->disconnect();
+}
+
+}
+?>
+<div class="row">
+<div class="col-sm-12">
+<div class="panel">
+<header class="panel-heading">
+<strong>Logo Voucher</strong>
+</header>
+<form action="" method="post" enctype="multipart/form-data">
+<div class="panel-body">
+<div class="row">
+<div class="col-md-12">
+<table class="table table-striped">
+<tr>
+<td colspan="2"><b>INFORMASI</b></td></td>
+</tr>
+<tr>
+<td>Logo Voucher</td><td>
+<?php if(!empty($_GET['id'])){ ?><input class="form-control" type="hidden" autocomplete="off" name="log1" value="<?php echo $_RLOG1;?>"><img height="50" src="./vouchers/images/<?php echo $_RLOG1;?>"/><?php } ?>  <br/>
+<input type="file" name="Filegambar" id="Filegambar">
+</td>
+</tr>
+<tr>
+<td></td><td>
+<?php
+if(!empty($_GET['id'])){ ?>
+<button type="submit" name="edit" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Edit</button>
+<?php }else{ ?>
+<button type="submit" name="save" class="btn btn-primary btn-mrg" ><i class="fa fa-save btn-mrg"></i> Save</button>
+<?php } ?>
+<a class="btn btn-warning" href="./settings.php?index=mikrotik"> <i class="fa fa-close btn-mrg"></i> Close</a>
+</td>
+</tr>
+</table>
+</div>
+</div> 
+</div>
+</form>
+</div>
+</div>
+</div>
+<?php
+include("load/t_bawah.php");
+break;
 case'mikrotik_del':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 $router1 = $_GET['id'];
@@ -832,6 +1011,8 @@ _e('<script>window.location.replace("./settings.php?index=mikrotik");</script>')
 include("load/t_bawah.php");
 break;
 case'update':
+Load_Batas_Sesi($_SESSION['username'],$_SESSION['level'],$_SESSION['router']);
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 if($_FILES["zip_file"]["name"]) {
@@ -1086,27 +1267,26 @@ case'premium':
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>
-
-
 <div class="row">
 <div class="col-sm-12">
 <div class="panel">
 <header class="panel-heading">
 <strong><?php echo __PREMIUM;?> <?php echo __DOWNLOAD;?></strong>
-<span class="tools pull-right">
-</span>
 </header>
 <div class="panel-body">
 <hr>
-<?php //print_r($mikmosLoad);?>
 <?php
-$pox = explode('.',$_IPMK);
-$file =  'versi/'.$_SERVER['SERVER_NAME'].".xml";
-$contents = get_content(_Mikmos_Web(0).$file);
-preg_match( '|<paket>(.*)<\/paket>|ims', $contents, $kpaket );
-if (($kpaket[1]=='4')or($kpaket[1]=='5')or($kpaket[1]=='6')){
+if (($kpaket[1]!=='0')){
 ?>
+<p class="text-muted">
 
+</p>
+
+<div class="table-responsive">
+<div class="adv-table">
+<iframe style="border:none;color:#fff!important;" height="450" width="100%" src="<?php _e(_Mikmos_Web(0));?><?php _e(_Get_Pre(0));?>?index=premium&klien=<?php _e(get());?>"></iframe>
+</div>
+</div>
 <?php 
 }else{
 ?>
@@ -1123,11 +1303,11 @@ if (($kpaket[1]=='4')or($kpaket[1]=='5')or($kpaket[1]=='6')){
 <?php 
 }
 ?>
-</div>
-</div>
-</div>
-</div>
 
+</div>
+</div>
+</div>
+</div>
 <?php
 include("load/t_bawah.php");
 break;

@@ -252,8 +252,8 @@ $_RTEL 		= "'.$tel.'";
 $_RDNS 		= "'.$dns.'";
 $_RETR 		= "'.$etr.'";
 $_RLOG 		= "'.$gambar1.'";
-$_BOT_API 	= "";
-$_CHAT_ID 	= "";
+$_BOTAPI 	= "";
+$_CHATID 	= "";
 ?>';
 fwrite($handle, $data);
 $my_file1 = 'inc/config.php';
@@ -370,7 +370,7 @@ Step 2 - Membuat Akses Router
 </td>
 </tr>
 <tr>
-<td>Logo Voucher</td><td><input type="file" name="Filegambar" id="Filegambar" required="1"></td>
+<td>Logo Voucher</td><td><input type="file" name="Filegambar" id="Filegambar" required="0"></td>
 </tr>
 <tr>
 <td></td><td>

@@ -13,16 +13,13 @@ Description of MIKMOS cms
 Fitur:
 ----
 - Installasi mudah
-- Hotspot Monitoring
+- Hotspot
 - Multi Router Mikrotik
 - Generate voucher & print
 - Style Template Voucher
 - Kirim Notif Telegram
 - Backup Mikrotik Kirim ke Email
 - Multi Bahasa (Google Translate)
-- Multi Themes (Pilihan Tema Mikmos)
-- Import vouchers dengan excel (Export dari userman/manual excel)
-- Auto Update Online/Offline (manual)
 
 ----
 Sistem yang dibutuhkan
