@@ -2,16 +2,17 @@
 001|Wiki Mikrotik|https://wiki.mikrotik.com/wiki/
 002|Nginx Web Server For Windows-1.15.2|http://nginx.org/en/download.html
 003|PHP Version 7.2 (Tested on VPS Ubuntu 18.10)|https://www.ubuntu.com/
-003|PHP Version 5.6.36 (XAMPP Tested on Windows 7)|https://www.apachefriends.org/download.html
-003|Tested on Termux Android|https://termux.com/
-004|Template Ela Admin Free|https://colorlib.com/
-005|jQuery v3.2.0 |https://jquery.com/
-006|jQuery UI - v1.11.4|https://jqueryui.com
-007|Bootstrap v4.0.0|https://getbootstrap.com
-008|Sticky-kit v1.1.3 |https://leafo.net
-009|DataTables 1.10.13|https://datatables.net
-010|Highcharts JS v6.1.4 |https://highcharts.com
-011|Google Translate |https://translate.google.com
-012|FPDF V.1.81 (Olivier PLATHEY)|#
-013|Mikhmon App V.2|#
-014|Mikman App|#
+004|PHP Version 5.6.36 (XAMPP Tested on Windows 7)|https://www.apachefriends.org/download.html
+005|Tested on Termux Android|https://termux.com/
+006|Template Ela Admin Free|https://colorlib.com/
+007|jQuery v3.2.0 |https://jquery.com/
+008|jQuery UI - v1.11.4|https://jqueryui.com
+009|Bootstrap v4.0.0|https://getbootstrap.com
+010|Sticky-kit v1.1.3 |https://leafo.net
+011|DataTables 1.10.13|https://datatables.net
+012|Highcharts JS v6.1.4 |https://highcharts.com
+013|Google Translate |https://translate.google.com
+014|Chosen V.1.1.0 |http://getharvest.com
+015|FPDF V.1.81 (Olivier PLATHEY)|#
+016|Mikho App V.2|#
+017|Mikman App|#

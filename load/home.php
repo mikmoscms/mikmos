@@ -8,13 +8,12 @@ $mikmosLoadResource = $API->comm("/system/resource/print");
 $mikmosResource = $mikmosLoadResource[0];
 $mikmosLoadRB = $API->comm("/system/routerboard/print");
 $mikmosRB = $mikmosLoadRB[0];
-$mikmosLoadActive = $API->comm("/ip/hotspot/active/print", array( "count-only" => "")); if($mikmosLoadActive < 2 ){$hunit = "item"; }elseif($mikmosLoadActive > 1){ $hunit = "items"; }
+$mikmosLoadActive = $API->comm("/ip/hotspot/active/print", array( "count-only" => "")); if($mikmosLoadActive < 2 ){$hunit = "item"; }elseif($mikmosLoadActive > 1){$hunit = "items";}
 $mikmosTotUs = $API->comm("/ip/hotspot/user/print", array( "count-only" => "")); if($mikmosTotUs < 2 ){$uunit = "item"; }elseif($mikmosTotUs > 1){ $uunit = "items";}
 $bg_array = array("#CEED9D","#ECED9D","#EDCF9D","#EC9CA7","#fdd752","#a48ad4","#aec785","#1fb5ac","#fa8564");
 
 $mikHRini = strtolower(date('M')).'/'.date('d').'/'.date('Y');
 $mikBLini = strtolower(date('M')).''.date('Y');
-//$mikbilBLN = $API->comm("/system/script/print");
 $mikbilBLN = $API->comm("/system/script/print", array("?=owner" => $mikBLini));
 $mikbilBLNtot = count($mikbilBLN);
 for ($i=0; $i<$mikbilBLNtot; $i++){
@@ -45,7 +44,7 @@ $bilHR += $mikmoslits[3];
 </div>
 </div></a>
 </div>
-<div class="col-md-3 col-sm-6"><a title="<?php _e($mikmosTotUs);?> <?php _e(__USERS);?>" href="./?load=users">
+<div class="col-md-3 col-sm-6"><a title="<?php _e($mikmosTotUs);?> <?php _e(__USERS);?> / <?php _e(__VOUCHERS);?>" href="./?load=users">
 <div class="card p-20" style="background-color:<?php _e($bg_array[rand(0,8)]);?>">
 <div class="media widget-ten">
 <div class="media-left meida media-middle">
@@ -53,7 +52,7 @@ $bilHR += $mikmoslits[3];
 </div>
 <div class="media-body media-text-right">
 <h2 class="color-white"><?php _e($mikmosTotUs);?></h2>
-<p class="m-b-0 color-white"><?php _e(__USERS);?></p>
+<p class="m-b-0 color-white"><?php _e(__USERS);?> / <?php _e(__VOUCHERS);?></p>
 </div>
 </div>
 </div></a>
@@ -226,9 +225,9 @@ if(empty($_SESSION['loncat'])){$timerloncat = '3000';}else{$timerloncat = $_SESS
 </div>
 <div class="media-body media-text-right">
 <h3 class="color-white">Pendapatan</h3>
-<small class="color-white"><?php _e(date('d M Y'));?></small><br/>
-<strong class="color-white">Hari ini <?php echo rupiah($bilHR);?></strong><br/>
-<strong class="color-white"><?php echo date('F');?> <?php echo rupiah($bilBLN);?></strong>
+<small class="color-white">Tanggal <?php _e(date('d'));?> <?php _e(bulan(date('n')));?> <?php _e(date('Y'));?></small><br/>
+<strong class="color-white">Hari ini <?php echo rupiah($bilHR);?></strong><small class="color-white"> | <?php echo mikBillingVCHR($_SESSION['router'],$mikHRini);?> VCR</small><br/>
+<strong class="color-white">Bulan <?php echo bulan(date('n'));?> <?php echo rupiah($bilBLN);?></strong><small class="color-white"> | <?php echo mikBillingVCBL($_SESSION['router'],$mikBLini);?> VCR</small>
 </div>
 </div>
 </div>

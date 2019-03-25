@@ -91,6 +91,7 @@ define("__ADMINISTRATOR","Administrator");
 define("__ADM","Admin");
 define("__MK","Mikrotik");
 define("__BACKUP","Backup");
+define("__BLOK","Blok Situs");
 define("__EMAIL","Email");
 define("__MAIL","Mail");
 define("__PREMIUM","Premium");

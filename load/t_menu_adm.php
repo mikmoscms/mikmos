@@ -61,6 +61,7 @@
 <ul aria-expanded="false" class="collapse">
 <li><a href="./settings.php?index" class=""><i class="fa fa-gear"></i> <?php _e(__SETTINGS);?></a></li>
 <li><a href="./?index=backup" class=""><i class="fa fa-file-zip-o"></i> <?php _e(__BACKUP);?></a></li>
+<li><a href="./?load=blok" class=""><i class="fa fa-ban"></i> <?php _e(__BLOK);?></a></li>
 <li><a href="./settings.php?index=administrator" class=""><i class="fa fa-key"></i> <?php _e(__ADMIN);?></a></li>
 <li><a href="./settings.php?index=mikrotik" class=""><i class="fa fa-signal"></i> <?php _e(__ROUTER);?></a></li>
 <li><a href="./settings.php?index=telegram" class=""><i class="fa fa-telegram"></i> <?php _e(__TELEGRAM);?></a></li>

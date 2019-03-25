@@ -102,6 +102,16 @@ if($_SERVER['HTTP_X_REQUESTED_WITH'] !== "mikmos.online") {
 </div>
 </a>
 </div>
+<div class="col-md-6">
+<a data-toggle="tooltip" data-placement="top" class="color-white" href="./?load=blok" title="BLOK SITUS">
+<div class="card p-20" style="background-color:#ef5350"><div class="media widget-ten"><div class="media-left meida media-middle"><span class="color-white"><i class="fa fa-ban f-s-40"></i></span></div>
+<div class="media-body media-text-right">
+<h2 class="color-white">BLOK SITUS</h2>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 </div>
 <div class="col-md-6">
@@ -288,7 +298,7 @@ if(!empty($_GET['id'])){ ?>
 <div class="col-md-6">
 <table class="table table-striped">
 <tr><td>Nama</td><td>Disarankan beda nama dengan yang user/member yang lain</td></tr>
-<tr><td>Username</td><td>Username untuk digunakan lofin</td></tr>
+<tr><td>Username</td><td>Username untuk digunakan Login</td></tr>
 <tr><td>Password</td><td>Password dibuat sekuat mungkin</td></tr>
 <tr><td>Akses</td><td>Memberikan akses untuk router</td></tr>
 </table>
@@ -1093,8 +1103,10 @@ _e('<script>window.location.replace("./settings.php?index");</script>');
 include("load/t_bawah.php");
 break;
 case'srstunnel':
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
+include('./inc/ip_mk/'.$_SESSION['router'].'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
@@ -1156,10 +1168,10 @@ for ($i=0; $i<$mikmosTot; $i++){
 $mikmosData = $mikmosLoad[$i];
 ?>
 <?php if($mikmosData['name']=='www'){ ?>
-<tr><td>WWW / Webfig</td><td><a title="Klik Lihat" target="_blank" href="<?php echo $_SERVER['SERVER_NAME'];?>:13<?php echo $pox[3];?>"><?php echo $_SERVER['SERVER_NAME'];?>:13<?php echo $pox[3];?></a></td></tr>
+<tr><td>WWW / Webfig</td><td><a title="Klik Lihat" target="_blank" href="<?php echo $_SERVER['SERVER_NAME'];?>:13<?php echo $pox[3];?>"><?php echo $_SERVER['SERVER_NAME'];?>:10<?php echo $pox[3];?></a></td></tr>
 <?php } ?>
 <?php if($mikmosData['name']=='winbox'){ ?>
-<tr><td>Winbox</td><td><?php echo $_SERVER['SERVER_NAME'];?>:16<?php echo $pox[3];?></td></tr>
+<tr><td>Winbox</td><td><?php echo $_SERVER['SERVER_NAME'];?>:13<?php echo $pox[3];?></td></tr>
 <?php } ?>
 <?php
 }
@@ -1208,8 +1220,8 @@ $mikmosData = $mikmosLoad[$i];
 <div class="col-md-12">
 <div class="text-center">
 <span class="color-white"><i class="fa fa-lock f-s-40"></i></span>
-<h3 class="text-uppercase">SRS Tunnel Lock </h3>
-<p class="text-muted m-t-30 m-b-30">Maaf, ini hanya untuk yang berlangganan Paket Mikmos Online + SRS Tunnel</p>
+<h3 class="text-uppercase">SRSTunnel Lock</h3>
+<p class="text-muted m-t-30 m-b-30">Maaf, ini hanya untuk yang berlangganan Paket Mikmos Online + SRSTunnel</p>
 <a target="_blank" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40" href="https://mikmos.online/">Langganan</a>  
 </div>
 </div>
@@ -1225,14 +1237,16 @@ $mikmosData = $mikmosLoad[$i];
 include("load/t_bawah.php");
 break;
 case'reboot':
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
+include('./inc/ip_mk/'.$_SESSION['router'].'.php');
 if(isset($_POST['reboot'])){
 $API = new RouterosAPI();
 $API->debug = false;
 if ($API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)))) {
-	$API->write('/system/reboot');
-	$API->read();
+$API->write('/system/reboot');
+$API->read();
 }
 session_destroy();
 echo "<script>window.location='./?index=login'</script>";
@@ -1264,6 +1278,7 @@ echo "<script>window.location='./?index=login'</script>";
 include("load/t_bawah.php");
 break;
 case'premium':
+Batas($_SESSION['level']);
 include("load/t_atas.php");
 include("load/t_menu_adm.php");
 ?>

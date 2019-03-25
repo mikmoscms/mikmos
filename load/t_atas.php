@@ -13,19 +13,20 @@
 <meta name="author" content="<?php _e(__CMS);?>">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
 <title><?php _e(__WEBTITLLE);?></title>
-<link href="assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link href="assets/css/helper.css" rel="stylesheet">
+<link href="assets/css/lib/bootstrap/bootstrap.min.css?v=20190325" rel="stylesheet">
+<link href="assets/css/lib/chosen/chosen.css?v=20190325" rel="stylesheet">
+<link href="assets/css/helper.css?v=20190325" rel="stylesheet">
 <?php if(empty($_SESSION['css'])){ ?>
 <?php if(empty($_THEMES)){ ?>
-<link href="assets/css/mikmos_style.css" rel="stylesheet">
+<link href="assets/css/mikmos_style.css?v=20190325" rel="stylesheet">
 <?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css" rel="stylesheet">
+<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css?v=20190325" rel="stylesheet">
 <?php } ?>
 <?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css" rel="stylesheet">
+<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css?v=20190325" rel="stylesheet">
 <?php } ?>
-<script src="assets/js/lib/jquery/jquery.min.js"></script>
-<script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/lib/jquery/jquery.min.js?v=20190325"></script>
+<script src="assets/js/lib/bootstrap/js/bootstrap.min.js?v=20190325"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128579565-1"></script>
 <script>
@@ -105,7 +106,6 @@ if(!is_dir($file)){
 <?php } ?>
 <?php }}}} ?>
 
-<?php echo $_SESSION['router'];?>
 </div>
 </li>
 <li>

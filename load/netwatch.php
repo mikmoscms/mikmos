@@ -46,7 +46,7 @@ for ($i=0; $i<$mikmosTot; $i++){
 <td><?php echo $mikmosData['host'];?></td>
 <td class="text-center"><?php echo $mikmosData['interval'];?></td>
 <td class="text-center"><?php echo $mikmosData['timeout'];?></td>
-<td class="text-center"><?php echo $mikmosData['status'];?></td>
+<td class="text-center" title="<?php echo $mikmosData['status'];?>"><i style="<?php if($mikmosData['status']=="up"){echo 'color:green';}else{echo 'color:red';} ?>" class="fa fa-arrow-<?php echo $mikmosData['status'];?>"></i></td>
 <td><?php echo $mikmosData['since'];?></td>
 </tr>
 <?php

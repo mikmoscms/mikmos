@@ -12,16 +12,16 @@
 <meta name="author" content="<?php _e(__CMS);?>">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
 <title><?php _e(__WEBTITLLE);?></title>
-<link href="assets/css/lib/bootstrap/bootstrap.min.css?v=20190203" rel="stylesheet">
-<link href="assets/css/helper.css?v=20190203" rel="stylesheet">
+<link href="assets/css/lib/bootstrap/bootstrap.min.css?v=20190325" rel="stylesheet">
+<link href="assets/css/helper.css?v=20190325" rel="stylesheet">
 <?php if(empty($_SESSION['css'])){ ?>
 <?php if(empty($_THEMES)){ ?>
-<link href="assets/css/mikmos_style.css?v=20190203" rel="stylesheet">
+<link href="assets/css/mikmos_style.css?v=20190325" rel="stylesheet">
 <?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css?v=20190203" rel="stylesheet">
+<link href="assets/css/styles/<?php _e($_THEMES);?>/mikmos_style.css?v=20190325" rel="stylesheet">
 <?php } ?>
 <?php }else{ ?>
-<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css?v=20190203" rel="stylesheet">
+<link href="assets/css/styles/<?php _e($_SESSION['css']);?>/mikmos_style.css?v=20190325" rel="stylesheet">
 <?php } ?>
 <script>
   function PassUser(){
@@ -156,11 +156,11 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 </div>
 </div>
 </div>
-<script src="assets/js/lib/jquery/jquery.min.js"></script>
-<script src="assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/sidebarmenu.js"></script>
-<script src="assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-<script src="assets/js/mikmos_script.js"></script>
+<script src="assets/js/lib/jquery/jquery.min.js?v=20190325"></script>
+<script src="assets/js/lib/bootstrap/js/bootstrap.min.js?v=20190325"></script>
+<script src="assets/js/jquery.slimscroll.js?v=20190325"></script>
+<script src="assets/js/sidebarmenu.js?v=20190325"></script>
+<script src="assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js?v=20190325"></script>
+<script src="assets/js/mikmos_script.js?v=20190325"></script>
 </body>
 </html>

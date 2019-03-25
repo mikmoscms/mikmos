@@ -1,4 +1,5 @@
 
+022|25/03/19|Bika Ambon|0.2.1|[+]MBS - Mikmos Blok Situs [+]Total Voucher Terjual perBulan & perHari Home/Billing [!]Perbaikan Typo Human Error [!]Netwatch Kostum Up/Down [!]SRSTunnel Perbaikan (Online)
 021|04/03/19|Pancong|0.2.0|[+]Upload Logo Voucher [+]Netwatch diaktifkan lagi [+]Multi Users Login Mikmos Tested (Mikmos Online) [-]TELEGRAM.php file delete [!]Telegram Fixed [!]System Updated
 020|03/02/19|Klepon|0.1.9|[!]Profile Users Update [!]Billing Update [!]Telegram Update pindah penyimpanan Data [!]Admin Users Update (Proses Transisi Multi Users [!]JqueryTable Update [!]Status Cek User utk Login Hotspot [!]Menu Billing Jadi Sub Grafik Billing & Table Billing [+]Theme Dark (free) [+]Report Billing Export PDF [+]Library FPDF [+]Load Export PDF [-]Report Billing Export CSV [-]Netwatch
 019|14/01/19|Kemplang|0.1.8|[!]Perbaikan Billing loading delete [!]Perbaikan Billing Expor csv [+]Multi Bahasa (Google Translate)

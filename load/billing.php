@@ -50,8 +50,8 @@ $bilHR += $mikmoslits[3];
 <div class="media-body media-text-right">
 <h3 class="color-white">Pendapatan</h3>
 <small class="color-white"><?php _e(date('d M Y'));?></small><br/>
-<strong class="color-white">Hari ini <?php echo rupiah($bilHR);?></strong><br/>
-<strong class="color-white"><?php echo date('F');?> <?php echo rupiah($bilBLN);?></strong>
+<strong class="color-white">Hari ini <?php echo rupiah($bilHR);?></strong><small class="color-white"> | <?php echo mikBillingVCHR($_SESSION['router'],$mikHRini);?> VCR</small><br/>
+<strong class="color-white">Bulan <?php echo bulan(date('n'));?> <?php echo rupiah($bilBLN);?></strong><small class="color-white"> | <?php echo mikBillingVCBL($_SESSION['router'],$mikBLini);?> VCR</small>
 </div>
 </div>
 </div>
@@ -81,7 +81,7 @@ function myFunction() {
 Highcharts.chart('trafiknya', {
 
   title: {
-    text: 'Grafik Billing Bulan <?php echo date('F');?> '
+    text: 'Grafik Billing Bulan <?php echo bulan(date('n'));?> '
   },
 
   yAxis: {
@@ -112,7 +112,7 @@ for ($i=1; $i<$datesnya; $i++){
 $tgl_leng=strlen($i); 
 if ($tgl_leng==1) $ix="0".$i;else $ix=$i;
 $mikHRini = strtolower(date('M')).'/'.$ix.'/'.date('Y');
-$pendptan = mikBillingHR($mikHRini,'all');
+$pendptan = mikBillingHR($_SESSION['router'],$mikHRini,'all');
 if(!empty($pendptan)){
 	$dpthari = $pendptan;
 }else{
@@ -199,9 +199,9 @@ $mikDL = "all";
 $shf = "text";
 $shd = "none";
 }
-if($pilhr){$totolbil = rupiah(mikBillingHR($pilhr,$getcomment));}
-elseif($pilbl){$totolbil = rupiah(mikBillingBL($pilbl,$getcomment));}
-else{$totolbil = rupiah(mikBillingALL($getcomment));}
+if($pilhr){$totolbil = rupiah(mikBillingHR($_SESSION['router'],$pilhr,$getcomment));}
+elseif($pilbl){$totolbil = rupiah(mikBillingBL($_SESSION['router'],$pilbl,$getcomment));}
+else{$totolbil = rupiah(mikBillingALL($_SESSION['router'],$getcomment));}
 ?>
 
 <div class="row">
@@ -273,6 +273,28 @@ echo '</select> ';
 
  <select style="padding:7.5px;" id="comment" name="comment" required="1">
 <option style="text-transform:uppercase" value="all">Semua Voucher</option> 
+
+ <?php 
+$mikmosLoad = $API->comm("/ip/hotspot/user/print");
+$mikmosTot = count($mikmosLoad);
+for ($i=0; $i<$mikmosTot; $i++){
+$userdetails = $mikmosLoad[$i];
+$ucomment = $userdetails['comment'];
+$counts = count($ucomment);
+if($counts==1){
+if($ucomment !== $mikmosLoad[$i-1]['comment']){
+if($ucomment !== 'counters and limits for trial users'){
+if($getcomment==$ucomment){ 
+echo '<option selected style="text-transform:uppercase" value="'.$ucomment.'">'.$ucomment.'</option>';
+}else{
+echo '<option style="text-transform:uppercase" value="'.$ucomment.'">'.$ucomment.'</option>';
+}
+}
+}
+}
+}
+?>
+
  </select>
  
  

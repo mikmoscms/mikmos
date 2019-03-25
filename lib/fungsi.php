@@ -1,5 +1,109 @@
 <?php
 
+function MBS_gapunyaideya1($_ROUTERR,$id=''){
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+if(!empty($id)){
+$mikmosLoad = $API->comm("/ip/firewall/layer7-protocol/print", array("?comment" => "$id"));
+}else{
+$mikmosLoad=$API->comm("/ip/firewall/layer7-protocol/print");
+}
+$loadLyr7 = $mikmosLoad[0];
+$getRegExp = $loadLyr7['regexp'];
+$getRtypes = substr($getRegExp,4,-4);
+$getReg = explode("|",$getRtypes);
+$mikmosTotx = count($getReg);
+
+$TampungData = array();
+for ($i=0; $i<$mikmosTotx; $i++){
+$tags = explode('|',strtolower(trim($getReg[$i])));
+if(empty($getReg[$i])){echo'';}else{
+foreach($tags as $val) {
+$TampungData[] = $val;
+}
+}
+}
+$jumlah_tag = array_count_values($TampungData);
+ksort($jumlah_tag);
+$output = array();
+foreach($jumlah_tag as $key=>$val) {
+$output[] = '<a title="Lihat '.$key.' >> " href="http://'.$key.'" target="_blank"><span class="btn btn-danger btn-sm">'.$key.'</span></a>';
+}
+$tags= implode(' ',$output);
+return $tags;
+}
+
+
+function MBS_gapunyaideya2($_ROUTERR){
+include('./inc/config.php');
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikmosLoad=$API->comm("/ip/firewall/layer7-protocol/print", array("?.id" => "$id_net"));
+
+$loadLyr7 = $mikmosLoad[0];
+$getRegExp = $loadLyr7['regexp'];
+$getRtypes = substr($getRegExp,4,-4);
+$getReg = explode("|",$getRtypes);
+$mikmosTotx = count($getReg);
+
+$TampungData = array();
+for ($i=0; $i<$mikmosTotx; $i++){
+$tags = explode('|',strtolower(trim($getReg[$i])));
+if(empty($getReg[$i])){echo'';}else{
+foreach($tags as $val) {
+$TampungData[] = $val;
+}
+}
+}
+$jumlah_tag = array_count_values($TampungData);
+ksort($jumlah_tag);
+$output = array();
+foreach($jumlah_tag as $key=>$val) {
+$output[] = '<option selected value="'.$key.'">'.$key.'</option>';
+}
+$tags= implode(' ',$output);
+return $tags;
+}
+function MBS_gapunyaideya3($_ROUTERR,$id=''){
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+if(!empty($id)){
+$mikmosLoad=$API->comm("/ip/firewall/layer7-protocol/print", array("?.id" => "$id"));
+}else{
+$mikmosLoad=$API->comm("/ip/firewall/layer7-protocol/print");
+}
+$loadLyr7 = $mikmosLoad[0];
+$getRegExp = $loadLyr7['regexp'];
+$getRtypes = substr($getRegExp,4,-4);
+$getReg = explode("|",$getRtypes);
+$mikmosTotx = count($getReg);
+
+$TampungData = array();
+for ($i=0; $i<$mikmosTotx; $i++){
+$tags = explode('|',strtolower(trim($getReg[$i])));
+if(empty($getReg[$i])){echo'';}else{
+foreach($tags as $val) {
+$TampungData[] = $val;
+}
+}
+}
+$jumlah_tag = array_count_values($TampungData);
+ksort($jumlah_tag);
+$output = array();
+foreach($jumlah_tag as $key=>$val) {
+$output[] = '<option selected value="'.$key.'">'.$key.'</option>';
+}
+$tags= implode(' ',$output);
+return $tags;
+}
+
+
 function Load_Batas_Sesi($sesi_user,$sesi_lvl,$_sesi_router){
 include('./inc/config.php');
 include('./inc/adm/'.$sesi_lvl.'.php');
@@ -24,10 +128,13 @@ function rupiah($angka){
 	$hasil_rupiah = "Rp " . number_format($angka,2,',','.').".-";
 	return $hasil_rupiah;
 }
-
-function mikBillingHR($da,$co){
+function bulan($x) {
+$bulan = array ('','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
+return $bulan[$x];
+}
+function mikBillingHR($_ROUTERR,$da,$co){
 include('./inc/config.php');
-include('./inc/ip_mk/'.$_ROUTER.'.php');
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
@@ -45,9 +152,31 @@ $bilHR += $mikmoslits[3];
 $API->disconnect();
 return $bilHR;
 }
-function mikBillingBL($da,$co){
+function mikBillingVCHR($_ROUTERR,$da){
 include('./inc/config.php');
-include('./inc/ip_mk/'.$_ROUTER.'.php');
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikbilHR = $API->comm("/system/script/print", array("?=source" => $da));
+$mikbilHRtot = count($mikbilHR);
+$API->disconnect();
+return $mikbilHRtot;
+}
+function mikBillingVCBL($_ROUTERR,$da){
+include('./inc/config.php');
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
+$API = new RouterosAPI();
+$API->debug = false;
+$API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
+$mikbilHR = $API->comm("/system/script/print", array("?=owner" => $da));
+$mikbilHRtot = count($mikbilHR);
+$API->disconnect();
+return $mikbilHRtot;
+}
+function mikBillingBL($_ROUTERR,$da,$co){
+include('./inc/config.php');
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
@@ -65,9 +194,9 @@ $bilHR += $mikmoslits[3];
 $API->disconnect();
 return $bilHR;
 }
-function mikBillingALL($co){
+function mikBillingALL($_ROUTERR,$co){
 include('./inc/config.php');
-include('./inc/ip_mk/'.$_ROUTER.'.php');
+include('./inc/ip_mk/'.$_ROUTERR.'.php');
 $API = new RouterosAPI();
 $API->debug = false;
 $API->connect($_IPMK, $_POMK, $_USMK, _de(ltrim($_PSMK, __CMS)));
